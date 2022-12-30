@@ -1,0 +1,92 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\AboutController;
+use App\Http\Controllers\Front\ProjectController;
+use App\Http\Controllers\Front\TeamController;
+use App\Http\Controllers\Front\BlogController;
+use App\Http\Controllers\Front\ContactController;
+
+use App\Http\Controllers\Back\LoginController;
+use App\Http\Controllers\Back\DashboardController;
+use App\Http\Controllers\Back\WebProfileController;
+use App\Http\Controllers\Back\ArtikelController;
+use App\Http\Controllers\Back\ProjectBackController;
+use App\Http\Controllers\Back\ContactBackController;
+use App\Http\Controllers\Back\TeamBackController;
+use App\Http\Controllers\Back\UserController;
+use App\Http\Controllers\Back\ManajemenUserController;
+use App\Http\Livewire\ManajemenUserComponent;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+// Route::get('welcome', function() {
+//     $data['users'] = App\Models\User::latest()->paginate(3);
+//     return view('welcome', $data);
+// });
+
+// Route::get('welcome', ManajemenUserComponent::class);
+
+//Front
+Route::get('/', [HomeController::class, 'index']);
+Route::get('about', [AboutController::class, 'index']);
+Route::get('projects', [ProjectController::class, 'getProject']);
+Route::get('teams', [TeamController::class, 'getTeam']);
+Route::get('blog', [BlogController::class, 'getBlog']);
+Route::get('blog/{slug}', [BlogController::class, 'show']);
+Route::get('contact', [ContactController::class, 'index']);
+Route::post('contact/store', [ContactController::class, 'store']);
+
+
+// Back
+Route::group(['middleware' => ['guest']], function () {
+    Route::resource('admin-login', LoginController::class);
+    Route::get('admin/login', [LoginController::class, 'login'])->name('admin.login');
+});
+
+Route::get('admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::prefix('admin')->group(function () {
+        Route::resource('dashboard', DashboardController::class);
+
+        Route::resource('web-profile', WebProfileController::class);
+
+        Route::resource('artikel', ArtikelController::class);
+        Route::post('artikel/hapus', [ArtikelController::class, 'hapus'])->name('artikel.hapus');
+        Route::post('artikel/checkJudul', [ArtikelController::class, 'checkJudul'])->name('artikel.checkJudul');
+
+        Route::resource('project-back', ProjectBackController::class);
+        Route::post('project-back/hapus', [ProjectBackController::class, 'hapus'])->name('project-back.hapus');
+        Route::post('project-back/checkJudul', [ProjectBackController::class, 'checkJudul'])->name('project-back.checkJudul');
+        Route::post('project-back/check-project-name', [ProjectBackController::class, 'checkProjectName'])->name('checkProjectName');
+        Route::post('project-back/search-project', [ProjectBackController::class, 'searchProject'])->name('searchProject');
+        Route::post('project-back/pagination', [ProjectBackController::class, 'projectPagination'])->name('projectPagination');
+
+        Route::resource('contact-back', ContactBackController::class);
+        Route::post('contact-back/hapus', [ContactBackController::class, 'hapus'])->name('contact-back.hapus');
+
+        Route::resource('team-back', TeamBackController::class);
+        Route::post('team-back/hapus', [TeamBackController::class, 'hapus'])->name('team-back.hapus');
+
+        Route::get('user-livewire', ManajemenUserComponent::class);
+        Route::resource('manajemen-akun-user', UserController::class);
+        Route::get('manajemen-akun-user/edit-password/{id}', [UserController::class, 'edit_password'])->name('edit_password');
+        Route::post('manajemen-akun-user/update-password/{user}', [UserController::class, 'update_password'])->name('manajemen-akun.updatePassword');
+        Route::post('manajemen-akun-user/checkEmail', [UserController::class, 'checkEmail'])->name('manajemen-akun-user.checkEmail');
+        Route::get('user-setting', [ManajemenUserController::class, 'user_setting'])->name('user-setting');
+        Route::post('user-setting/update', [ManajemenUserController::class, 'update-account'])->name('user-setting.update');
+        
+    });
+});
+

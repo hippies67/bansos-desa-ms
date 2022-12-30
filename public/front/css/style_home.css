@@ -1,0 +1,533 @@
+/* ALL VERSION */
+
+h1,
+h2,
+h5,
+.card-text-teams {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+nav,
+h3,
+h4 {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  color: #000;
+  font-size: 50px;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+h4,
+h5 {
+  font-size: 24px;
+}
+
+p {
+  font-size: 20px;
+  color: #555555;
+  line-height: 35px !important;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+span {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+}
+
+span:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: -0.1em;
+  right: -0.1em;
+  bottom: 0;
+  background-color: #ffd800;
+}
+
+.navbar-toggler-icon:after {
+  background-color: #fff !important;
+}
+
+/* BUTTON */
+.btn {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 7px 45px;
+  border-radius: 50rem;
+  background-color: #ffd800;
+}
+
+.button-sosmed {
+  border-radius: 50px;
+  background-color: #ffd800;
+  width: 50px;
+  height: 50px;
+}
+
+.icon-sosmed-header {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-right: 13px;
+  background-color: #ffd800;
+  border-radius: 50px;
+  box-shadow: 2px 1px 0.1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.icon-sosmed-header img {
+  width: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(40%, 35%);
+}
+
+/* NAVBAR */
+nav {
+  font-size: 20px;
+}
+
+nav a:hover {
+  color: #ffd800 !important;
+}
+
+/* .navbar{
+  position: relative;
+  z-index: 1;
+} */
+
+/* HEADER */
+.header {
+  padding-top: 145px;
+  /* position: relative;
+  z-index: 1; */
+}
+
+.text h1 {
+  line-height: 135%;
+}
+
+.text p {
+  line-height: 150%;
+}
+
+.img-header,
+.img-about,
+.img-join-us {
+  display: none;
+}
+
+/* ABOUT */
+
+/* PROJECTS */
+.projects .card-text {
+  font-size: 15px;
+}
+
+/* Card */
+.project-card,
+.expertise-card {
+  margin: 30px 0;
+}
+
+.card {
+  position: relative;
+  margin: auto;
+  border-radius: 25px;
+  width: 300px;
+  height: 500px;
+  border: none;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+h4 {
+  font-weight: bold;
+}
+
+.card-text,
+h4 {
+  padding: 10px;
+  text-align: left;
+}
+
+.card img {
+  width: 250px;
+  height: auto;
+  margin: auto;
+  padding-top: 20px;
+}
+
+.card-body .card-text {
+  font-size: 17.5px;
+}
+
+/* ESXPERTISE */
+.expertise img {
+  width: 150px;
+  height: auto;
+}
+
+/* TEAMS */
+.teams h5 {
+  font-size: 24px;
+}
+
+.teams .card-text-teams {
+  font-size: 19px;
+}
+
+.teams img {
+  position: absolute;
+  z-index: 9;
+  width: 180px;
+  height: auto;
+  padding: 0;
+  bottom: 0;
+  transform: translate(-100%, 0);
+  /* margin: -30px 0 0 0; */
+}
+
+/* JOIN US */
+.join-us .img-join-us {
+  width: 400px;
+  height: auto;
+}
+
+/* CLIENT */
+.clients .text-clients {
+  margin: auto;
+  width: 320px;
+  height: auto;
+}
+
+/* Slider Client */
+.swiper-client {
+  width: 100%;
+  max-height: 250px;
+  background-color: #f4f4f4;
+}
+
+.swiper-client img {
+  width: 60%;
+}
+
+.swiper-slide-client {
+  margin: 40px auto;
+}
+
+.swiper-client {
+  transition: all ease-in-out 0.3s;
+}
+
+.swiper-slide-client img {
+  filter: grayscale(1) !important;
+}
+
+.swiper-slide-client img:hover {
+  filter: grayscale(0) !important;
+}
+
+/* ------------------------------------------------------------ */
+
+/* TABLET VERSION */
+@media (min-width: 768px) {
+  h4 {
+    font-size: 18px;
+  }
+
+  .header .img-header {
+    display: flex;
+    width: 380px;
+    height: auto;
+    padding: 0;
+    margin: 7% 0 auto;
+  }
+
+  /* ABOUT */
+  .about .img-about {
+    display: flex;
+    width: 380px;
+    height: auto;
+    margin: 80px 0 0 0;
+  }
+
+  .about .text {
+    padding-left: 25px;
+  }
+
+  /* Projects */
+  .projects .card-text {
+    font-size: 15px;
+  }
+
+  .card {
+    margin: 0;
+    width: 200px;
+    min-height: 500px;
+  }
+
+  .card img {
+    width: 160px;
+    height: auto;
+    margin: auto;
+    padding-top: 20px;
+  }
+
+  .card-body .card-text {
+    font-size: 16px;
+  }
+
+  .project-card,
+  .expertise-card {
+    margin: 0;
+  }
+
+  /* EKSPERTISE */
+  .expertise img {
+    width: 100px;
+    height: auto;
+  }
+
+  /* TEAMS */
+  .teams h5 {
+    font-size: 20px;
+  }
+
+  .teams .card-text-teams {
+    font-size: 14px;
+  }
+
+  .teams img {
+    bottom: 0;
+    transform: translate(-100%, 0);
+  }
+
+  .swiper-teams {
+    position: relative;
+    transform: translate(5%, -20%);
+    max-width: 490px;
+    height: 530px;
+    padding: 20px 0 !important;
+  }
+
+  .swiper-slide-teams {
+    width: 220px !important;
+    height: auto;
+    margin: 0 10px 0 0 !important;
+  }
+
+  /* JOIN US */
+  .join-us .img-join-us {
+    display: flex;
+    margin-top: 50px;
+    width: 320px;
+    height: auto;
+  }
+
+  /* CLIENTS */
+  .clients .text-clients {
+    margin: auto;
+    width: 600px;
+    height: auto;
+  }
+}
+
+/* ------------------------------------------------------------ */
+
+/* DESKTOP VERSION */
+
+@media (min-width: 1300px) {
+  .swiper-teams {
+    position: relative;
+    transform: translate(9%, -20%);
+    min-width: 730px;
+    height: 530px;
+    padding: 20px 0 !important;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  h4,
+  h5 {
+    font-size: 24px;
+  }
+
+  .content {
+    margin: auto;
+    padding: 0 100px;
+  }
+
+  /* HEADER */
+  .header .img-header {
+    display: flex;
+    width: 470px;
+    height: auto;
+    margin-left: 80px !important;
+    margin-top: -50px !important;
+    margin: auto;
+    padding: 0;
+  }
+
+  /* ABOUT */
+  .about .img-about {
+    display: flex;
+    width: 470px;
+    height: auto;
+  }
+
+  .about .text {
+    margin-top: 100px;
+  }
+
+  /* PROJECTS */
+  .projects .card-text {
+    font-size: 17px !important;
+  }
+
+  /* CARD */
+  .card {
+    width: 300px;
+    height: 535px;
+  }
+
+  .project-card,
+  .expertise-card {
+    margin: 0;
+  }
+
+  .card img {
+    width: 250px;
+    height: auto;
+    margin: auto;
+    padding-top: 25px;
+  }
+
+  .card-body .card-text {
+    font-size: 20px;
+  }
+
+  /* ESXPERTISE */
+  .expertise img {
+    width: 120px;
+    height: auto;
+  }
+
+  /* TEAMS */
+  .teams img {
+    padding: 0;
+    width: 185px;
+    height: auto;
+    bottom: 0;
+    transform: translate(-100%, 0);
+  }
+
+  .teams h5 {
+    font-size: 24px;
+  }
+
+  .teams .card-text-teams {
+    font-size: 20px;
+  }
+
+  .swiper-teams {
+    position: relative;
+    transform: translate(10%, -20%);
+    max-width: 630px;
+    height: 530px;
+    padding: 20px 0 !important;
+  }
+
+  .swiper-slide-teams {
+    min-width: 300px !important;
+    height: auto;
+    margin: 0 30px 0 0 !important;
+  }
+
+  /* JOIN US */
+  .join-us .img-join-us {
+    display: flex;
+    width: 470px;
+    height: auto;
+  }
+
+  /* CLIENT */
+  .clients .text-clients {
+    margin: auto;
+    width: 800px;
+    height: auto;
+  }
+
+  .img-client {
+    padding: 10px 0;
+  }
+
+  .slider {
+    max-width: 90%;
+  }
+
+  .slick-slide img {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+/* ------------------------------------------------------------ */
+
+/* MOBILE VERSION */
+@media (max-width: 768px) {
+  .content {
+    margin: auto;
+    padding: 0 27px !important;
+  }
+
+  .button-header {
+    width: 100%;
+  }
+
+  .swiper-pc {
+    display: none;
+  }
+
+  .swiper-mobile {
+    display: block;
+  }
+
+  .btn-view-all {
+    margin-top: 30px;
+  }
+
+  .swiper-teams {
+    position: relative;
+    /* transform: translate(0, -20%); */
+    /* max-width: 300px; */
+    height: 530px !important;
+    /* padding: 20px 0 !important; */
+  }
+
+  .swiper-slide-teams {
+    min-width: 300px !important;
+    height: auto;
+    margin: 0 30px 0 0 !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .button-header .btn {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 7px 35px;
+    border-radius: 50rem;
+    background-color: #ffd800;
+  }
+}

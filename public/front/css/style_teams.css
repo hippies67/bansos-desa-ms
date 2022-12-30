@@ -1,0 +1,205 @@
+h1,
+h2,
+h4,
+h5,
+.card-text-teams {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+p {
+  line-height: 35px !important;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+nav,
+h3,
+h4 {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  color: #000;
+}
+
+h4,
+h5 {
+  font-size: 24px;
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+span {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+}
+
+span:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: -0.1em;
+  right: -0.1em;
+  bottom: 0;
+  background-color: #ffd800;
+}
+
+.btn {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 7px 45px;
+  margin: auto;
+  border-radius: 50rem;
+  /* box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); */
+  background-color: #ffd800;
+}
+
+/* Navbar */
+nav .nav-link {
+  font-size: 20px;
+  color: #555555;
+}
+
+nav a:hover {
+  color: #ffd800 !important;
+}
+
+/* TEAMS */
+.teams {
+  padding-top: 100px !important;
+}
+
+.teams .text {
+  max-width: 400px;
+  height: auto;
+  margin: auto;
+}
+
+.teams img {
+  width: 200px;
+  height: auto;
+}
+
+.teams p {
+  color: #555555;
+}
+
+.teams .card {
+  margin: 30px auto;
+  cursor: pointer;
+}
+
+.modal-content {
+  position: absolute;
+  z-index: 9;
+  top: 2%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: rgba(54, 54, 54, 0.8);
+  max-width: 1000px;
+  height: auto;
+  border-radius: 20px;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal button {
+  font-size: 25px;
+  color: #fff !important;
+  transform: translate(-8px, 10px);
+}
+
+.modal-img img {
+  min-width: 150px;
+  height: auto;
+}
+
+/* ------------------------------------------------------------------------------ */
+
+/* TABLET VERSION */
+@media (min-width: 760px) {
+  .card img {
+    width: 150px;
+    height: auto;
+  }
+
+  h4 {
+    font-size: 17px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+
+  .modal-content {
+    min-width: 700px;
+    height: auto;
+  }
+  .modal-img img {
+    min-width: 200px;
+  }
+
+  .modal-img {
+    /* background-color: #fff; */
+    /* width: 270px; */
+  }
+
+  .text-img {
+    /* margin-left: 25%; */
+  }
+
+  .modal-text {
+    /* background-color: rgb(255, 197, 197); */
+    padding: 0;
+  }
+}
+
+/* ------------------------------------------------------------------------------ */
+
+/* DESKTOP VERSION */
+@media (min-width: 992px) {
+  .teams img {
+    width: 200px;
+    height: auto;
+  }
+
+  .teams .text {
+    min-width: 800px;
+    height: auto;
+    margin: auto;
+  }
+
+  .teams h4 {
+    font-size: 30px;
+  }
+
+  .teams p {
+    font-size: 20px;
+    color: #555555;
+  }
+
+  .modal-content {
+    width: 1000px;
+  }
+
+  .modal-img img {
+    width: 250px !important;
+  }
+}
+
+@media (max-width: 770px) {
+  .modal-text h3,
+  .modal-text .card-text-dialog-box {
+    display: none;
+  }
+}
