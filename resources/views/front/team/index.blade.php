@@ -94,7 +94,7 @@
             <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important;">Teams</a></li>
             <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important;">Blog</a></li>
             <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important;">Contact</a></li>
-
+ 
             <div class="icon-sosmed-navbar">
                 <div class="icon-sosmed-header mt-5">
                     <a href="https://www.instagram.com/tahungoding/" target="_blank"><img
