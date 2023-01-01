@@ -18,7 +18,7 @@
 .highcharts-data-table table {
   font-family: Verdana, sans-serif;
   border-collapse: collapse;
-  border: 1px solid #ebebeb;
+  border: 1px solid #ff0000;
   margin: 10px auto;
   text-align: center;
   width: 100%;
@@ -44,11 +44,11 @@
 
 .highcharts-data-table thead tr,
 .highcharts-data-table tr:nth-child(even) {
-  background: #f8f8f8;
+  background: #880000;
 }
 
 .highcharts-data-table tr:hover {
-  background: #f1f7ff;
+  background: #c90404;
 }
 
 #container h4 {
@@ -73,6 +73,12 @@
     line-height: 3vw;
   }
 }
+
+.highcharts-credits {
+  display: none !important;
+}
+
+
 </style>
 @endsection
 
@@ -174,6 +180,26 @@
     </div>
 </div>
 <br><br><br><br><br>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('js')
 <script>
@@ -232,27 +258,32 @@ Highcharts.chart('container', {
     height: 600,
     inverted: true
   },
-
-  title: {
-    text: 'Highcharts Org Chart'
-  },
-
-  accessibility: {
-    point: {
-      descriptionFormatter: function (point) {
-        var nodeName = point.toNode.name,
-          nodeId = point.toNode.id,
-          nodeDesc = nodeName === nodeId ? nodeName : nodeName + ', ' + nodeId,
-          parentDesc = point.fromNode.id;
-        return point.index + '. ' + nodeDesc + ', reports to ' + parentDesc + '.';
+  tooltip: { enabled: false },
+  plotOptions : {
+      series : {
+        cursor : 'pointer',
       }
-    }
+},
+  title: {
+    text: 'Pengurus Tahungoding'
   },
 
   series: [{
     type: 'organization',
     name: 'Highsoft',
     keys: ['from', 'to'],
+    point: {
+      events: {
+        click: function() {
+          $("#exampleModal").modal('show');
+
+        }
+        // mouseOut: function() {
+        //   const popup = document.getElementById('popup');
+        //   popup.style.display = 'none';
+        // }
+      }
+    },
     data: [
       ['Shareholders', 'Board'],
       ['Board', 'CEO'],
@@ -333,17 +364,14 @@ Highcharts.chart('container', {
       name: 'Marketing team',
       column: 5
     }],
-    colorByPoint: false,
-    color: '#007ad0',
+    colorByPoint: true,
+    color: 'red',
     dataLabels: {
       color: 'white'
     },
     borderColor: 'white',
     nodeWidth: 65
   }],
-  tooltip: {
-    outside: true
-  },
   exporting: {
     allowHTML: true,
     sourceWidth: 800,

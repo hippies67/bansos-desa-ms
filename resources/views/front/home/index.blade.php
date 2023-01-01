@@ -19,6 +19,23 @@
     position: absolute;
   }
 
+  @media only screen   
+and (min-device-width : 768px)   
+and (max-device-width : 1024px)  
+{ 
+  .img-header {
+        width: 540px !important;
+      }
+}  
+@media only screen   
+and (min-width: 1030px)   
+and (max-width: 1366px)  
+{ 
+  .img-header {
+        width: 540px !important;
+      }
+}  
+
 </style>
 @endsection
 
@@ -137,7 +154,7 @@
                 <img src="{{ Storage::url($data->image) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h4 class="text-center">{{ strtoupper($data->name) }}</h4>
-                  <p class="card-text" style="font-size: 20px;">{!! strip_tags(Str::limit($data->description, 63)) !!}</p>
+                  <p class="card-text" style="font-size: 20px;">{{ substr($data->description, 0, 50) }}</p>
                 </div>
               </div>
             </div>
@@ -149,7 +166,7 @@
                 <img src="{{ Storage::url($data->image) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h4 class="text-center">{{ strtoupper($data->name) }}</h4>
-                  <p class="card-text" style="font-size: 20px;">{!! strip_tags(Str::limit($data->description, 63)) !!}</p>
+                  <p class="card-text" style="font-size: 20px;">{{ substr($data->description, 0, 50) }}</p>
                 </div>
               </div>
             </div>
