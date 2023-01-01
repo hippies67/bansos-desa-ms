@@ -33,12 +33,12 @@
         <i class="fas fa-times"></i>
       </div>
 
-      <li><a href="{{ url('/') }}">Home</a></li>
-      <li><a href="{{ url('/about') }}">About</a></li>
-      <li><a href="{{ url('/projects') }}">Projects</a></li>
-      <li><a href="{{ url('/teams') }}">Teams</a></li>
-      <li><a href="{{ url('/blog') }}">Blog</a></li>
-      <li><a href="{{ url('/contact') }}">Contact</a></li>
+      <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important;">Home</a></li>
+      <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important;">About</a></li>
+      <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important;">Projects</a></li>
+      <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important;">Teams</a></li>
+      <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important;">Blog</a></li>
+      <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important;">Contact</a></li>
 
       <div class="icon-sosmed-navbar">
         <div class="icon-sosmed-header mt-5">
@@ -90,7 +90,7 @@
         </div>
 
         <div class="col-md-6">
-          <img class="img-header bouncer" src="{{ asset('front/img/Illustrasi_header.svg') }}" alt="">
+          <img class="img-header bouncer" src="{{ asset('View_Angle_1.png') }}" alt="">
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
     <div class="content container-fluid" style="max-width: 1300px;">
       <div class="row">
         <div class="col-md-6">
-          <img class="img-about" src="{{ asset('front/img/Illustrasi_about.svg') }}" alt="">
+          <img class="img-about" src="{{ asset('Team_Working.png') }}" alt="">
         </div>
         <div class="col-md-6 text-end mt-5 pt-5">
           <div class="text">
@@ -244,31 +244,31 @@
     <div class="content container-fluid" style="max-width: 1300px;">
       <div class="row">
         <div class="col-md-4">
-          <h2><span>TEAMS</span> </h2>
+          <h2><span>TEAM</span> </h2>
           <p>We are young and creative people who are trying to find and develop our talents. We can only do small
             things on our own, but together we can do extraordinary things.</p>
-            <div class="row swiper swiper-teams" style="display: none">
+            <div class="row swiper swiper-teams swiper-mobile" style="display: none">
               <div class="swiper-wrapper swiper-wrapper-teams">
   
                 <div class="card swiper-slide swiper-slide-teams swiper-mobile">
-                  <div class="card-body mt-3">
-                    <h5>Kemal Adnan</h5>
-                    <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">UI/UX Designer</p>
+                  <div class="card-body mt-3 text-center">
+                    <h5>Muhammad Iqbal Rivaldi</h5>
+                    {{-- <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">UI/UX Designer</p> --}}
                     <div class="img-teams text-end">
-                      <img src="{{ asset('front/img/Adnan.png') }}" class="text-end" alt="...">
+                      <img src="{{ asset('founder_1.png') }}" class="text-end" alt="..." style="width: 280px;">
                     </div>
                   </div>
                 </div>
                 <div class="card swiper-slide swiper-slide-teams">
-                  <div class="card-body mt-3">
-                    <h5>Ikbal Rivaldi</h5>
-                    <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">Back End Developer</p>
+                  <div class="card-body mt-3 text-center">
+                    <h5>Jajang Jamaludin</h5>
+                    {{-- <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">Back End Developer</p> --}}
                     <div class="img-teams text-end">
-                      <img src="{{ asset('front/img/Ikbal.png') }}" class="text-end" alt="...">
+                      <img src="{{ asset('founder_2.png') }}" class="text-end" alt="...">
                     </div>
                   </div>
                 </div>
-                <div class="card swiper-slide swiper-slide-teams">
+                {{-- <div class="card swiper-slide swiper-slide-teams">
                   <div class="card-body mt-3">
                     <h5>Bagas Pradana</h5>
                     <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">Front End Developer</p>
@@ -276,7 +276,7 @@
                       <img src="{{ asset('front/img/Bagas.png') }}" class="text-end" alt="...">
                     </div>
                   </div>
-                </div>
+                </div> --}}
   
                 <!-- Tombol Navigasi -->
                 <!-- <div class="swiper-button-prev"></div>
@@ -292,24 +292,24 @@
             <div class="swiper-wrapper swiper-wrapper-teams">
 
               <div class="card swiper-slide swiper-slide-teams">
-                <div class="card-body mt-3">
-                  <h5>Kemal Adnan</h5>
-                  <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">UI/UX Designer</p>
+                <div class="card-body mt-3 text-center">
+                  <h5>Muhammad Iqbal Rivaldi</h5>
+                  <p class="card-text-teams text-center" style="margin-top: -5px;font-size: 15px;">Founder Of Tahungoding</p>
                   <div class="img-teams text-end">
-                    <img src="{{ asset('front/img/Adnan.png') }}" class="text-end" alt="...">
+                    <img src="{{ asset('founder_1.png') }}" class="text-end" alt="..." style="width: 265px;">
                   </div>
                 </div>
               </div>
               <div class="card swiper-slide swiper-slide-teams">
-                <div class="card-body mt-3">
-                  <h5>Ikbal Rivaldi</h5>
-                  <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">Back End Developer</p>
-                  <div class="img-teams text-end">
-                    <img src="{{ asset('front/img/Ikbal.png') }}" class="text-end" alt="...">
+                <div class="card-body mt-3 text-center">
+                  <h5>Jajang <br> Jamaludin</h5>
+                  <p class="card-text-teams text-center" style="margin-top: -5px;font-size: 15px;">Founder Of Tahungoding</p>
+                  <div class="img-teams text-center">
+                    <img src="{{ asset('founder_2.png') }}" class="text-center" alt="..." style="width: 190px;margin-left: 110px;">
                   </div>
                 </div>
               </div>
-              <div class="card swiper-slide swiper-slide-teams">
+              {{-- <div class="card swiper-slide swiper-slide-teams">
                 <div class="card-body mt-3">
                   <h5>Bagas Pradana</h5>
                   <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">Front End Developer</p>
@@ -317,7 +317,7 @@
                     <img src="{{ asset('front/img/Bagas.png') }}" class="text-end" alt="...">
                   </div>
                 </div>
-              </div>
+              </div> --}}
 
               <!-- Tombol Navigasi -->
               <!-- <div class="swiper-button-prev"></div>
@@ -344,8 +344,24 @@
           <a class="button btn" href="https://www.open.tahungoding.my.id">Join Us</a>
 
         </div>
-        <div class="col-md-5">
-          <img class="img-join-us" src="{{ asset('front/img/Illustrasi_join-us.svg') }}" alt="">
+        <div class="col-md-5 d-flex">
+          {{-- <img class="" src="{{ asset('phone.png') }}" alt="" width="300"> --}}
+          <img class="" src="{{ asset('phone.png') }}" alt="" width="400">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="join-us-mobile" class="jumbotron jumbotron-fluid join-us">
+    <div class="content container-fluid" style="max-width: 1300px;">
+      <div class="row">
+        <div class="col-md-12 mt-12 pt-5">
+          <h2> <span>JOIN THE FAMILY</span></h2>
+          <p>Let's join us so that you can increase your horizons and develop your skills, especially in
+            multi-platform programming.</p>
+
+          <a class="button btn" href="https://www.open.tahungoding.my.id">Join Us</a>
+
         </div>
       </div>
     </div>
@@ -396,10 +412,10 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script>
   function loop() {
-    $('.bouncer').animate({'top': '220'}, {
+    $('.bouncer').animate({'top': '180'}, {
         duration: 2300, 
         complete: function() {
-            $('.bouncer').animate({top: 200}, {
+            $('.bouncer').animate({top: 150}, {
                 duration: 2300, 
                 complete: loop});
         }});

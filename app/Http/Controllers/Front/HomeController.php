@@ -15,8 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['project_1'] = Project::where('name', 'LIKE', '%Pemilu Umum Raya Sebelas April%')->get();
-        $data['project_2'] = Project::where('name', 'LIKE', '%Sumedang Lebaran Real Time%')->get();
+        $data['project_1'] = Project::where('name', 'LIKE', '%E-Voting Pemira UNSAP Sumedang%')->get();
+        $data['project_2'] = Project::where('name', 'LIKE', '%Sumedang Lebaran Realtime%')->get();
 
         return view('front.home.index', $data);
     }

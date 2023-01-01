@@ -16,7 +16,7 @@ class ContactBackController extends Controller
      */
     public function index()
     {
-        $data['contact'] = Contact::paginate(6);
+        $data['contact'] = Contact::paginate(10);
         return view('back.contact.index', $data);
     }
 
@@ -40,7 +40,6 @@ class ContactBackController extends Controller
     {
         $data = [
             'name' => $request->name,
-            'subject' => $request->subject,
             'email' => $request->email,
             'message' => $request->message
         ];

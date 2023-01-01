@@ -12,7 +12,7 @@
     </div>
 
     <div class="modal fade" id="project{{ $data->id }}" tabindex="-1" aria-labelledby="project" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>

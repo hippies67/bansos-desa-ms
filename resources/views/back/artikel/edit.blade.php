@@ -75,12 +75,10 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Status</label>
-                        <div class="dropdown bootstrap-select form-control form-control-lg">
-                            <select name="edit_status" class="form-control form-control-lg" tabindex="-98">
-                                <option value="published" {{ $artikel->status == 'published' ? 'selected' : '' }}>Published</option>
-                                <option value="unpublished" {{ $artikel->status == 'unpublished' ? 'selected' : '' }}>Unpublished</option>
-                            </select>
-                        </div>
+                        <select name="edit_status" class="form-control form-control-lg">
+                            <option value="published" {{ $artikel->status == 'published' ? 'selected' : '' }}>Published</option>
+                            <option value="unpublished" {{ $artikel->status == 'unpublished' ? 'selected' : '' }}>Unpublished</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Simpan Artikel</button>
@@ -95,7 +93,6 @@
 
 @section('js')
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('js/deznav-init.js') }}"></script>
     <script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>

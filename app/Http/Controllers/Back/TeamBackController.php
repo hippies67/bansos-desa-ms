@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use Alert;
+use App\Models\RefDivisi;
+use Illuminate\Support\Facades\Storage;
 
 class TeamBackController extends Controller
 {
@@ -16,7 +18,8 @@ class TeamBackController extends Controller
      */
     public function index()
     {
-        $data['team'] = Team::paginate(6);
+        $data['team'] = Team::all();
+        $data['ref_divisi'] = RefDivisi::where('status', '=', 'Y')->get();
         $data['allTeam'] = Team::all();
         return view('back.team.index', $data);
     }
@@ -45,7 +48,7 @@ class TeamBackController extends Controller
         $data = [
             'fullname' => $request->team_fullname,
             'photo' => $photo,
-            'position' => $request->team_position,
+            'ref_divisi_id' => $request->ref_divisi_id,
             // 'division_id' => $request->team_division_id,
             // 'sub_division_id' => $request->team_sub_division_id,
         ];
@@ -99,7 +102,7 @@ class TeamBackController extends Controller
         $data = [
             'fullname' => $request->edit_team_fullname ? $request->edit_team_fullname : $team->fullname, 
             'photo' => $request->hasFile('edit_team_photo') ? $edit_photo : $team->photo, 
-            'position' => $request->edit_team_position ? $request->edit_team_position : $team->position, 
+            'ref_divisi_id' => $request->edit_ref_divisi_id ? $request->edit_ref_divisi_id : $team->ref_divisi_id, 
             // 'division_id' => $request->edit_team_division_id ? $request->edit_team_division_id : $team->division_id, 
             // 'sub_division_id' => $request->edit_team_sub_division_id ? $request->edit_team_sub_division_id : $team->sub_division_id, 
         ];
@@ -119,15 +122,14 @@ class TeamBackController extends Controller
      */
     public function destroy($id)
     {
-         //    
+        $team = Team::find($id);
+
+        $team->delete() 
+        ? Alert::success('Berhasil', "Team telah berhasil dihapus!")
+        : Alert::error('Error', "Team gagal dihapus!");
+
+        return redirect()->back();
     }
 
-    public function hapus(Request $request)
-    {
-        $team = Team::find($request->id);
-
-        $team->delete();
-
-        return 'true';
-    }
+    
 }

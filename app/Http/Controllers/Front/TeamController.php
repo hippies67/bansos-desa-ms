@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Team;
+use App\Models\RefDivisi;
+use Illuminate\Support\Facades\Storage;
 
 class TeamController extends Controller
 {
@@ -15,7 +17,7 @@ class TeamController extends Controller
      */
     public function getTeam(Request $request)
     {
-        $data['team'] = Team::paginate(6);
+        $data['team'] = Team::paginate(20);
 
     	if ($request->ajax()) {
     		$view = view('front.team.load_team', $data)->render();
@@ -89,5 +91,36 @@ class TeamController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ref_divisi(Request $request)
+    {
+        // $ref_divisi = RefDivisi::where('status', '=', 'Y')->get();
+
+        // return json_encode($ref_divisi);
+
+        $team = Team::all();
+        $wrap = [];
+        $team_name = null;
+        $id_induk = null;
+        $obj = null;
+
+        foreach($team as $key => $data) {
+            if($data->ref_divisi_id == '') {
+                continue;
+            }
+
+            if($key > 10) {
+                break;
+            }
+
+            $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data->ref_divisi->id_induk];
+            // $team_name = $data->fullname;
+            // $induk_name = $data->ref_divisi->nama;
+            // $induk_id = $data->ref_divisi->id_induk;
+        }
+
+        return json_encode($wrap);
+
     }
 }

@@ -12,6 +12,11 @@ class Team extends Model
     protected $table = 'team';
 
     protected $fillable = [
-        'fullname', 'photo', 'position', 'division_id', 'sub_division_id'
+        'fullname', 'photo', 'ref_divisi_id'
     ];
+
+    public function ref_divisi()
+    {
+        return $this->belongsTo(RefDivisi::class);
+    }
 }

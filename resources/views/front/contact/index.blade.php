@@ -37,12 +37,12 @@
                 <i class="fas fa-times"></i>
             </div>
 
-            <li><a href="{{ url('/') }}">Home</a></li>
-            <li><a href="{{ url('/about') }}">About</a></li>
-            <li><a href="{{ url('/projects') }}">Projects</a></li>
-            <li><a href="{{ url('/teams') }}">Teams</a></li>
-            <li><a href="{{ url('/blog') }}">Blog</a></li>
-            <li><a href="{{ url('/contact') }}">Contact</a></li>
+            <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important;">Home</a></li>
+            <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important;">About</a></li>
+            <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important;">Projects</a></li>
+            <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important;">Teams</a></li>
+            <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important;">Blog</a></li>
+            <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important;">Contact</a></li>
 
             <div class="icon-sosmed-navbar">
                 <div class="icon-sosmed-header mt-5">
@@ -68,11 +68,11 @@
 
 @section('content')
 <!-- Contact -->
-<div class="jumbotron jumbotron-fluid contact mt-5 pt-5">
+<div class="jumbotron jumbotron-fluid contact mt-5 pt-5"  style="font-family: 'Poppins', sans-serif !important;">
     <div class="content container-fluid" style="max-width: 1300px;">
         <div class="text">
             <h2 class="text-center"><span>LET’S COLLABORATE</span></h2>
-            <p class="text-center mt-5 mb-5">Thank you for visiting our website. If you have a project in mind, please
+            <p class="text-center mt-5 mb-5" style="font-family: 'Poppins', sans-serif !important;">Thank you for visiting our website. If you have a project in mind, please
                 fill
                 out our online form below and our admin will get back to you as soon as possible.</p>
         </div>
@@ -182,6 +182,5 @@
             }
         });
     });
-
 </script>
 @endsection

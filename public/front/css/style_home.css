@@ -147,7 +147,7 @@ nav a:hover {
   height: 500px;
   border: none;
   background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 h4 {
@@ -243,6 +243,14 @@ h4 {
 @media (min-width: 768px) {
   h4 {
     font-size: 18px;
+  }
+
+  #join-us-mobile {
+    display: none;
+  }
+
+  #join-us {
+    display: block;
   }
 
   .header .img-header {
@@ -371,7 +379,7 @@ h4 {
   /* HEADER */
   .header .img-header {
     display: flex;
-    width: 470px;
+    width: 670px;
     height: auto;
     margin-left: 80px !important;
     margin-top: -50px !important;
@@ -486,6 +494,7 @@ h4 {
 
 /* MOBILE VERSION */
 @media (max-width: 768px) {
+  
   .content {
     margin: auto;
     padding: 0 27px !important;
@@ -500,7 +509,7 @@ h4 {
   }
 
   .swiper-mobile {
-    display: block;
+    display: block !important;
   }
 
   .btn-view-all {
@@ -519,6 +528,14 @@ h4 {
     min-width: 300px !important;
     height: auto;
     margin: 0 30px 0 0 !important;
+  }
+
+  #join-us-mobile {
+    display: block;
+  }
+
+  #join-us {
+    display: none;
   }
 }
 

@@ -106,11 +106,11 @@ $web_profile = App\Models\WebProfile::all();
                 </div>
                 <div class="col-md-2 mt-5 menu">
                     <h5>Menu</h5>
-                    <div class="menu-footer">
-                        <a href="Teams.html">Teams</a>
-                        <a href="About.html">About</a>
-                        <a href="Projects.html">Projects</a>
-                        <a href="Blog.html">Blog</a>
+                    <div class="menu-footer" style="">
+                        <a href="{{ url('teams') }}" >Teams</a>
+                        <a href="{{ url('about') }}">About</a>
+                        <a href="{{ url('projects') }}">Projects</a>
+                        <a href="{{ url('blog') }}">Blog</a>
                     </div>
                 </div>
                 <div class="col-md-2 mt-5 contact-us">

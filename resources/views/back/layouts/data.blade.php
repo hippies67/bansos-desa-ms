@@ -29,8 +29,10 @@ $web_profile = App\Models\WebProfile::all();
     @foreach($web_profile as $data)
     <style>
         body {
-            --primary: {{ $data->primary_color}};
+            --primary: {{ $data->primary_color }};
+
             --primary-dark: {{ $data->dark_primary_color }};
+
             --primary-light: {{ $data->light_primary_color }};
         }
     </style>
@@ -120,7 +122,7 @@ $web_profile = App\Models\WebProfile::all();
                                     <img src="{{ Storage::url(Auth::user()->photo) }}" width="20"
                                         style="object-fit: cover;" alt="" />
                                     @else
-                                    <img src="{{ asset('default.jpg') }}" width="20" style="object-fit: cover;"
+                                    <img src="{{ asset('default_profile.png') }}" width="20" style="object-fit: cover;"
                                         alt="" />
                                     @endif
                                     <div class="header-info">
@@ -165,41 +167,61 @@ $web_profile = App\Models\WebProfile::all();
         <div class="deznav">
             <div class="deznav-scroll mm-active">
                 <ul class="metismenu mm-show" id="menu">
-                    <li class="">
-                        <a class="ai-icon" href="{{ route('dashboard.index') }}" aria-expanded="false">
+                    <li class="{{ Request::routeIs('dashboard.*') ? 'mm-active active-no-child' : '' }}">
+                        <a class="ai-icon {{ Request::routeIs('dashboard.*') ? 'mm-active' : '' }}"
+                            href="{{ route('dashboard.index') }}" aria-expanded="false">
                             <i class="bi bi-speedometer"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('web-profile.index') }}" class="ai-icon" aria-expanded="false">
+                    <li class="{{ Request::routeIs('web-profile.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('web-profile.index') }}"
+                            class="ai-icon {{ Request::routeIs('web-profile.*') ? 'mm-active' : '' }}"
+                            aria-expanded="false">
                             <i class="bi bi-gear-wide"></i>
                             <span class="nav-text">Web Profile</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('artikel.index') }}" class="ai-icon" aria-expanded="false">
+                    <li class="{{ Request::routeIs('artikel.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('artikel.index') }}"
+                            class="ai-icon {{ Request::routeIs('artikel.*') ? 'mm-active' : '' }}"
+                            aria-expanded="false">
                             <i class="bi bi-journals"></i>
                             <span class="nav-text">Artikel</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('project-back.index') }}" class="ai-icon" aria-expanded="false">
+                    <li class="{{ Request::routeIs('project-back.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('project-back.index') }}"
+                            class="ai-icon {{ Request::routeIs('project-back.*') ? 'mm-active' : '' }}"
+                            aria-expanded="false">
                             <i class="bi bi-gear-wide-connected"></i>
                             <span class="nav-text">Project</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('contact-back.index') }}" class="ai-icon" aria-expanded="false">
-                            <i class="bi bi-inbox-fill"></i>
+                    <li class="{{ Request::routeIs('contact-back.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('contact-back.index') }}"
+                            class="ai-icon {{ Request::routeIs('contact-back.*') ? 'mm-active' : '' }}"
+                            aria-expanded="false">
+                            <i class="bi bi-inbox"></i>
                             <span class="nav-text">Contact</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('team-back.index') }}" class="ai-icon" aria-expanded="false">
-                            <i class="bi bi-people-fill"></i>
+                    {{-- <li class="{{ Request::routeIs('team-back.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('team-back.index') }}"
+                            class="ai-icon {{ Request::routeIs('team-back.*') ? 'mm-active' : '' }}"
+                            aria-expanded="false">
+                            <i class="bi bi-people"></i>
                             <span class="nav-text">Team</span>
                         </a>
+                    </li> --}}
+                    <li class="{{ Request::routeIs('team-back.*') || Request::routeIs('ref-divisi.*')  ? 'mm-active' : '' }}"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="bi bi-people"></i>
+                            <span class="nav-text">Team</span>
+                        </a>
+                        <ul class="{{ Request::routeIs('ref-divisi.*')  ? 'mm-active' : '' }}" aria-expanded="false">
+                            <li><a href="{{ route('ref-divisi.index') }}" class="{{ Request::routeIs('ref-divisi.*')  ? 'mm-active' : '' }}">Ref. Divisi</a></li>
+                            <li><a href="{{ route('team-back.index') }}" class="{{ Request::routeIs('team-back.*') ? 'mm-active' : '' }}">Anggota</a></li>
+                        </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="bi bi-person-lines-fill"></i>
@@ -222,7 +244,7 @@ $web_profile = App\Models\WebProfile::all();
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
-                   @yield('content')
+                @yield('content')
             </div>
         </div>
         <!--**********************************
@@ -263,7 +285,7 @@ $web_profile = App\Models\WebProfile::all();
     @include('sweetalert::alert')
 
     @yield('js')
-    
+
     @stack('scripts')
 
 </body>

@@ -2,7 +2,7 @@
     @foreach($team as $data)
         <div class="col-md-3" data-bs-toggle="modal" data-bs-target="#team{{ $data->id }}">
             <div class="card" style="border: none;">
-                <img src="{{ Storage::url($data->photo) }}" class="card-img-top" style="margin: auto;"
+                <img src="{{ Storage::url($data->photo) }}" class="card-img-top" style="margin: auto;height : 300px; object-fit: contain;"
                     alt="...">
                 <div class="card-body">
                     <h4 class="text-center">{{ $data->fullname }}</h4>

@@ -16,12 +16,12 @@
         <i class="fas fa-times"></i>
       </div>
 
-      <li><a href="{{ url('/') }}">Home</a></li>
-      <li><a href="{{ url('/about') }}">About</a></li>
-      <li><a href="{{ url('/projects') }}">Projects</a></li>
-      <li><a href="{{ url('/teams') }}">Teams</a></li>
-      <li><a href="{{ url('/blog') }}">Blog</a></li>
-      <li><a href="{{ url('/contact') }}">Contact</a></li>
+      <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important;">Home</a></li>
+      <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important;">About</a></li>
+      <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important;">Projects</a></li>
+      <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important;">Teams</a></li>
+      <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important;">Blog</a></li>
+      <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important;">Contact</a></li>
 
       <div class="icon-sosmed-navbar">
         <div class="icon-sosmed-header mt-5">

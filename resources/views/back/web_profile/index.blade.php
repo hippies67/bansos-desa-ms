@@ -327,19 +327,19 @@ Artikel
                                 <div class="col-sm">
                                     <label for="primary_color">Primary Color</label>
                                     <input type="text" id="primary-color" name="primary_color"
-                                        class="form-control text-dark" value="{{ $webs->primary_color }}"
+                                        class="form-control text-dark" value=""
                                         placeholder="Warna Primer">
                                 </div>
                                 <div class="col-sm">
                                     <label for="primary_color">Dark Primary Color</label>
                                     <input type="text" id="dark-primary-color" name="dark_primary_color"
-                                        class="form-control text-dark" value="{{ $webs->dark_primary_color }}"
+                                        class="form-control text-dark" value=""
                                         placeholder="Warna Primer Gelap">
                                 </div>
                                 <div class="col-sm">
                                     <label for="primary_color">Light Primary Color</label>
                                     <input type="text" id="light-primary-color" name="light_primary_color"
-                                        class="form-control text-dark" value="{{ $webs->ligth_primary_color }}"
+                                        class="form-control text-dark" value=""
                                         placeholder="Warna Primer Muda">
                                 </div>
                             </div>
@@ -546,7 +546,6 @@ Artikel
 
 @section('js')
 <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('js/custom.min.js') }}"></script>
 <script src="{{ asset('js/deznav-init.js') }}"></script>
 <script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>

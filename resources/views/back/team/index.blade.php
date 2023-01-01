@@ -9,11 +9,11 @@
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
-  integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+    integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
-   @media (min-width: 767.98px) {
+    @media (min-width: 767.98px) {
         .dataTables_wrapper .dataTables_length {
             margin-bottom: -42px;
         }
@@ -92,19 +92,17 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">Data User</h4>
-                      <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tambahTeam"><i
-                        class="fas fa-plus-circle"></i></button>
+                        <h4 class="card-title">Data Anggota</h4>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tambahTeam"><i
+                                class="fas fa-plus-circle"></i></button>
                     </div>
                     <div class="card-body">
-                        <table id="example4" class="table dt-responsive" style="width:100%">
-                          <thead>
+                        <table id="teamTable" class="table dt-responsive" style="width:100%">
+                            <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Nama Lengkap</th>
                                     <th>Jabatan</th>
-                                    {{-- <th>Divisi</th>
-                                            <th>Sub Divisi</th> --}}
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -116,13 +114,13 @@
                                 <tr>
                                     <td>{{ $increment++ }}</td>
                                     <td>
-                                      @if(!empty($teams->photo) && Storage::exists($teams->photo))
-                                      <img src="{{ Storage::url($teams->photo) }}" alt="Photo" width="100" height="80"
-                                          style="object-fit: cover" class="rounded">
-                                      @endif
-                                      <span class="ml-3">{{ $teams->fullname }}</span>
-                                      </td>
-                                    <td>{{ $teams->position }}</td>
+                                        @if(!empty($teams->photo) && Storage::exists($teams->photo))
+                                        <img src="{{ Storage::url($teams->photo) }}" alt="Photo" width="100" height="80"
+                                            style="object-fit: cover" class="rounded">
+                                        @endif
+                                        <span class="ml-3">{{ $teams->fullname }}</span>
+                                    </td>
+                                    <td>{{ isset($teams->ref_divisi->nama) ? $teams->ref_divisi->nama : '-' }}</td>
                                     {{-- <td>
                                             @if (isset($teams->divisions->name))
                                             {{ $teams->divisions->name }}
@@ -171,49 +169,29 @@
                     </div>
                     <div class="form-group">
                         <label for="position">Jabatan</label>
-                        <input type="text" class="form-control" name="team_position" placeholder="Jabatan">
+                        <select name="ref_divisi_id" class="form-control">
+                            <option value="">Pilih Jabatan</option>
+                            @foreach($ref_divisi as $data)
+                            <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    {{-- <div class="form-group">
-              <label for="division">Divisi</label>
-              <select class="form-control" name="team_division_id">
-                @if (count($division))
-                <option value="">Pilih Divisi</option>
-                @foreach ($division as $divisions)
-                <option value="{{ $divisions->id }}">{{ $divisions->name }}</option>
-                    @endforeach
-                    @else
-                    <option value="">Divisi Tidak Tersedia</option>
-                    @endif
-                    </select>
-                </div> --}}
-                {{-- <div class="form-group">
-              <label for="sub_division">Sub Divisi</label>
-              <select class="form-control" name="team_sub_division_id">
-                @if (count($sub_division))
-                <option value="">Pilih Sub Divisi</option>
-                @foreach ($sub_division as $sub_divisions)
-                <option value="{{ $sub_divisions->id }}">{{ $sub_divisions->name }}</option>
-                @endforeach
-                @else
-                <option value="">Sub Divisi Tidak Tersedia</option>
-                @endif
-                </select>
-        </div> --}}
-        <div class="form-group">
-            <label for="team_photo">Foto</label>
-            <input type="file" class="form-control dropify" name="team_photo"
-                data-allowed-file-extensions="png jpg jpeg" data-show-remove="false">
-            <div id="errorImage">
-            </div>
+
+                    <div class="form-group">
+                        <label for="team_photo">Foto</label>
+                        <input type="file" class="form-control dropify" name="team_photo"
+                            data-allowed-file-extensions="png jpg jpeg" data-show-remove="false">
+                        <div id="errorImage">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Kembali</button>
+                    <button type="submit" class="btn btn-primary" id="tambahButton">Tambah</button>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="modal-footer bg-whitesmoke br">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Kembali</button>
-        <button type="submit" class="btn btn-primary" id="tambahButton">Tambah</button>
-    </div>
-    </form>
-</div>
-</div>
 </div>
 
 @foreach ($team as $teams)
@@ -238,53 +216,29 @@
                     </div>
                     <div class="form-group">
                         <label for="edit_team_position">Jabatan</label>
-                        <input type="text" class="form-control" name="edit_team_position" id="edit_team_position"
-                            placeholder="Deskripsi" value="{{ $teams->position }}">
+                        <select name="edit_ref_divisi_id" class="form-control">
+                            <option value="">Pilih Jabatan</option>
+                            @foreach($ref_divisi as $data)
+                            <option value="{{ $data->id }}" {{ $data->id == $teams->ref_divisi_id ? 'selected' : '' }}>{{ $data->nama }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    {{-- <div class="form-group">
-              <label for="edit_team_division">Divisi</label>
-              <select class="form-control" name="edit_team_division_id">
-                @if (count($division))
-                <option value="">Pilih Divisi</option>
-                @foreach ($division as $divisions)
-                <option value="{{ $divisions->id }}"
-                    {{ $divisions->id == $teams->division_id ? 'selected' : '' }}>{{ $divisions->name }}</option>
-                    @endforeach
-                    @else
-                    <option value="">Divisi Tidak Tersedia</option>
-                    @endif
-                    </select>
-                </div> --}}
-                {{-- <div class="form-group">
-              <label for="edit_team_sub_division">Sub Divisi</label>
-              <select class="form-control" name="edit_team_sub_division_id">
-                @if (count($sub_division))
-                <option value="">Pilih Sub Divisi</option>
-                @foreach ($sub_division as $sub_divisions)
-                <option value="{{ $sub_divisions->id }}"
-                {{ $sub_divisions->id == $teams->sub_division_id ? 'selected' : '' }}>{{ $sub_divisions->name }}
-                </option>
-                @endforeach
-                @else
-                <option value="">Sub Divisi Tidak Tersedia</option>
-                @endif
-                </select>
-        </div> --}}
-        <div class="form-group">
-            <label for="edit_photo">Foto</label>
-            <input type="file" class="form-control dropify" name="edit_team_photo"
-                data-allowed-file-extensions="png jpg jpeg" data-default-file="@if(!empty($teams->photo) &&
+
+                    <div class="form-group">
+                        <label for="edit_photo">Foto</label>
+                        <input type="file" class="form-control dropify" name="edit_team_photo"
+                            data-allowed-file-extensions="png jpg jpeg" data-default-file="@if(!empty($teams->photo) &&
                               Storage::exists($teams->photo)){{ Storage::url($teams->photo) }}@endif"
-                data-show-remove="false">
+                            data-show-remove="false">
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Kembali</button>
+                    <button type="submit" class="btn btn-primary" id="editButton">Ubah</button>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="modal-footer bg-whitesmoke br">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Kembali</button>
-        <button type="submit" class="btn btn-primary" id="editButton">Ubah</button>
-    </div>
-    </form>
-</div>
-</div>
 </div>
 @endforeach
 
@@ -339,7 +293,6 @@
 
 @section('js')
 <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('js/custom.min.js') }}"></script>
 <script src="{{ asset('js/deznav-init.js') }}"></script>
 
@@ -360,11 +313,11 @@
 <script>
     $('.dropify').dropify();
 
-    // $(document).ready(function () {
-    //     $('#teamTable').DataTable({
-    //         responsive: true
-    //     });
-    // });
+    $(document).ready(function () {
+        $('#teamTable').DataTable({
+            stateSave: true,
+        });
+    });
 
 </script>
 
@@ -382,7 +335,7 @@
                 team_fullname: {
                     required: true,
                 },
-                team_position: {
+                ref_divisi_id: {
                     required: true,
                 },
             },
@@ -390,7 +343,7 @@
                 team_fullname: {
                     required: "Nama Lengkap harus di isi",
                 },
-                team_position: {
+                ref_divisi_id: {
                     required: "Jabatan harus di isi",
                 },
             },
@@ -407,7 +360,7 @@
                 edit_team_fullname: {
                     required: true,
                 },
-                edit_team_position: {
+                edit_ref_divisi_id: {
                     required: true,
                 },
             },
@@ -415,7 +368,7 @@
                 edit_team_fullname: {
                     required: "Nama Lengkap harus di isi",
                 },
-                edit_team_position: {
+                edit_ref_divisi_id: {
                     required: "Jabatan harus di isi",
                 },
             },

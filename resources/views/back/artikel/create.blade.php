@@ -129,13 +129,11 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Status</label>
-                        <div class="dropdown bootstrap-select form-control form-control-lg">
-                            <select name="status" class="form-control form-control-lg" id="status" tabindex="-98">
-                                <option value="">Pilih Status</option>
-                                <option value="published">Published</option>
-                                <option value="unpublished">Unpublished</option>
-                            </select>
-                        </div>
+                        <select name="status" class="form-control form-control-lg" id="status">
+                             <option value="">Pilih Status</option>
+                            <option value="published">Published</option>
+                            <option value="unpublished">Unpublished</option>
+                         </select>
                         <span id="statusError">Status harus di isi.</span>
                     </div>
                     <div class="form-group">
@@ -151,7 +149,6 @@
 
 @section('js')
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('js/deznav-init.js') }}"></script>
     <script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>

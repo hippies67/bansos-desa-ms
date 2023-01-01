@@ -16,6 +16,7 @@ use App\Http\Controllers\Back\ArtikelController;
 use App\Http\Controllers\Back\ProjectBackController;
 use App\Http\Controllers\Back\ContactBackController;
 use App\Http\Controllers\Back\TeamBackController;
+use App\Http\Controllers\Back\RefDivisiController;
 use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Back\ManajemenUserController;
 use App\Http\Livewire\ManajemenUserComponent;
@@ -42,6 +43,8 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('about', [AboutController::class, 'index']);
 Route::get('projects', [ProjectController::class, 'getProject']);
 Route::get('teams', [TeamController::class, 'getTeam']);
+Route::post('teams/ref-divisi', [TeamController::class, 'ref_divisi'])->name('team.ref-divisi');
+
 Route::get('blog', [BlogController::class, 'getBlog']);
 Route::get('blog/{slug}', [BlogController::class, 'show']);
 Route::get('contact', [ContactController::class, 'index']);
@@ -78,6 +81,15 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::resource('team-back', TeamBackController::class);
         Route::post('team-back/hapus', [TeamBackController::class, 'hapus'])->name('team-back.hapus');
+
+        //Modul Ref Unit Kerja
+     Route::get('ref-divisi', [RefDivisiController::class, 'index'])->name('ref-divisi.index');
+     Route::get('ref-divisi-induk/{id}', [RefDivisiController::class, 'RefDivisiInduk'])->name('ref-divisi.induk-modal');
+     Route::get('ref-divisi-detail/{id}', [RefDivisiController::class, 'RefDivisiDetail'])->name('ref-divisi.detail-modal');
+     Route::post('ref-divisi-store', [RefDivisiController::class, 'RefDivisiStore'])->name('ref-divisi.store-modal');
+     Route::post('ref-divisi-update', [RefDivisiController::class, 'RefDivisiUpdate'])->name('ref-divisi.update-modal');
+     Route::post('ref-divisi-delete', [RefDivisiController::class, 'RefDivisiDelete'])->name('ref-divisi.delete-modal');
+
 
         Route::get('user-livewire', ManajemenUserComponent::class);
         Route::resource('manajemen-akun-user', UserController::class);

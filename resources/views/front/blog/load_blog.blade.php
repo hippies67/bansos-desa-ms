@@ -13,8 +13,8 @@
                         <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important;">&#8226;</small>
                         <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important">{{ $data->updated_at->format('d M Y')}}</small>
                     </div>
-                    <h4 class="mt-4">{{ Str::limit($data->judul, 43) }}</h4>
-                    <p>{!! strip_tags(Str::limit($data->konten, 300)) !!}</p>
+                    <h4 class="mt-4" style="font-family: 'Poppins', sans-serif !important;">{{ Str::limit($data->judul, 43) }}</h4>
+                    <p style="font-family: 'Poppins', sans-serif !important;">{!! strip_tags(Str::limit($data->konten, 300)) !!}</p>
                     {{-- <p class="card-text">{{ $data->user->nama_lengkap }} <br> {{ $data->updated_at->format('d M Y')}}</p> --}}
                 </div>
               </div>

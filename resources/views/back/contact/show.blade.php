@@ -13,6 +13,28 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.20/sweetalert2.min.css" integrity="sha512-Yn5Z4XxNnXXE8Y+h/H1fwG/2qax2MxG9GeUOWL6CYDCSp4rTFwUpOZ1PS6JOuZaPBawASndfrlWYx8RGKgILhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+         label.error {
+        color: #F94687;
+        font-size: 13px;
+        font-size: .875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-top: 5px;
+        padding: 0;
+    }
+
+    input.error {
+        color: #F94687;
+        border: 1px solid #F94687;
+    }
+
+    textarea.error {
+        color: #F94687;
+        border: 1px solid #F94687;
+    }
+
+    </style>
 @endsection
 
 @section('content')
@@ -29,10 +51,10 @@
             <div class="card-body">
                 <div class="email-left-box generic-width px-0 mb-5">
                     <div class="p-0">
-                        <a href="email-compose.html" class="btn btn-primary btn-block">Compose</a>
+                        <a href="{{ url('admin/contact-back') }}" class="btn btn-primary btn-block">Compose</a>
                     </div>
                     <div class="mail-list mt-4">
-                        <a href="email-inbox.html" class="list-group-item active"><i
+                        <a href="{{ url('admin/contact-back') }}" class="list-group-item active"><i
                                 class="fa fa-inbox font-18 align-middle mr-2"></i> Inbox <span
                                 class="badge badge-primary badge-sm float-right">198</span> </a>
                         <a href="javascript:void()" class="list-group-item"><i
@@ -40,11 +62,11 @@
                                 class="fa fa-star font-18 align-middle mr-2"></i>Important <span
                                 class="badge badge-danger badge-sm text-white float-right">47</span>
                         </a>
-                        <a href="javascript:void()" class="list-group-item"><i
+                        {{-- <a href="javascript:void()" class="list-group-item"><i
                                 class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a><a href="javascript:void()" class="list-group-item"><i
-                                class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a>
+                                class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a> --}}
                     </div>
-                    <div class="intro-title d-flex justify-content-between">
+                    {{-- <div class="intro-title d-flex justify-content-between">
                         <h5>Categories</h5>
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </div>
@@ -61,7 +83,7 @@
                         <a href="email-inbox.html" class="list-group-item"><span class="icon-dpink"><i
                                     class="fa fa-circle" aria-hidden="true"></i></span>
                             Social </a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="email-right-box ml-0 ml-sm-4 ml-sm-0">
                     <div class="row">
@@ -74,17 +96,17 @@
                                         <button type="button" class="btn btn-primary light px-3"><i class="fa fa-trash"></i></button>
                                     </div>
                                     <div class="btn-group mb-1">
-                                        <button type="button" class="btn btn-primary light dropdown-toggle px-3" data-toggle="dropdown">
+                                        {{-- <button type="button" class="btn btn-primary light dropdown-toggle px-3" data-toggle="dropdown">
                                             <i class="fa fa-folder"></i> <b class="caret m-l-5"></b>
-                                        </button>
-                                        <div class="dropdown-menu"> 
+                                        </button> --}}
+                                        {{-- <div class="dropdown-menu"> 
                                             <a class="dropdown-item" href="javascript: void(0);">Social</a> 
                                             <a class="dropdown-item" href="javascript: void(0);">Promotions</a> 
                                             <a class="dropdown-item" href="javascript: void(0);">Updates</a>
                                             <a class="dropdown-item" href="javascript: void(0);">Forums</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
-                                    <div class="btn-group mb-1">
+                                    {{-- <div class="btn-group mb-1">
                                         <button type="button" class="btn btn-primary light dropdown-toggle px-3" data-toggle="dropdown">
                                             <i class="fa fa-tag"></i> <b class="caret m-l-5"></b>
                                         </button>
@@ -94,7 +116,7 @@
                                             <a class="dropdown-item" href="javascript: void(0);">Promotions</a>
                                             <a class="dropdown-item" href="javascript: void(0);">Forums</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="btn-group mb-1">
                                         <button type="button" class="btn btn-primary light dropdown-toggle v" data-toggle="dropdown">More <span class="caret m-l-5"></span>
                                         </button>
@@ -105,10 +127,11 @@
                                 </div>
                                 <div class="read-content">
                                     <div class="media pt-3">
-                                        <img class="mr-2 rounded" width="50" alt="image" src="./images/avatar/1.jpg">
+                                        <img class="mr-2 rounded" width="50" alt="image" src="{{ asset('default_profile_2.png') }}">
                                         <div class="media-body mr-2">
                                             <h5 class="text-primary mb-0 mt-1">Ingredia Nutrisha</h5>
-                                            <p class="mb-0">20 May 2018</p>
+                                            <p class="mb-0">{{ \Carbon\Carbon::parse($contact->created_at)->isoFormat('DD MMM YYYY')}}</p>
+                                            {{-- <p class="mb-0">20 May 2018</p> --}}
                                         </div>
                                         <a href="javascript:void()" class="btn btn-primary px-3 light"><i class="fa fa-reply"></i> </a>
                                         <a href="javascript:void()" class="btn btn-primary px-3 light ml-2"><i class="fa fa-long-arrow-right"></i> </a>
@@ -116,26 +139,18 @@
                                     </div>
                                     <hr>
                                     <div class="media mb-2 mt-3">
-                                        <div class="media-body"><span class="pull-right">07:23 AM</span>
-                                            <h5 class="my-1 text-primary">A collection of textile samples lay spread</h5>
+                                        <div class="media-body"><span class="pull-right">{{ \Carbon\Carbon::parse($contact->created_at)->format('H:i:s') }}</span>
+                                            <h5 class="my-1 text-primary">{{ $contact->subject }}</h5>
                                             <p class="read-content-email">
-                                                To: Me, info@example.com</p>
+                                                {{ $contact->email }}</p>
                                         </div>
                                     </div>
                                     <div class="read-content-body">
-                                        <h5 class="mb-4">Hi,Ingredia,</h5>
-                                        <p class="mb-2"><strong>Ingredia Nutrisha,</strong> A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</p>
-                                        <p class="mb-2">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for
-                                            the far World of Grammar. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
-                                        </p>
-                                        <p class="mb-2">Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut
-                                            metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
-                                            rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,</p>
-                                        <h5 class="pt-3">Kind Regards</h5>
-                                        <p>Mr Smith</p>
-                                        <hr>
+                                        {{ $contact->message }}
                                     </div>
-                                    <div class="read-content-attachment">
+                                    <br>
+                         
+                                    {{-- <div class="read-content-attachment">
                                         <h6><i class="fa fa-download mb-2"></i> Attachments
                                             <span>(3)</span></h6>
                                         <div class="row attachment">
@@ -149,15 +164,21 @@
                                                 <a href="javascript:void()" class="text-muted">My-Resume.pdf</a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <hr>
+                                    </div> --}}
+                                    {{-- <hr> --}}
+                                    <form action="" method="POST" id="replyForm">
+                                        @csrf
                                     <div class="form-group pt-3">
-                                        <textarea name="write-email" id="write-email" cols="30" rows="5" class="form-control" placeholder="It's really an amazing.I want to know more about it..!"></textarea>
+                                        <input type="hidden" name="name" value="{{ $contact->name }}">
+                                        <input type="hidden" name="email" value="{{ $contact->email }}">
+                                        <textarea name="reply" id="reply" cols="30" rows="5" class="form-control" placeholder="It's really an amazing.I want to know more about it..!"></textarea>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <button class="btn btn-primary " type="button">Send</button>
+                                    <a href="{{ route('contact-back.index') }}" class="btn btn-outline-primary">Kembali</a>
+                                    <button class="btn btn-primary " type="submit">Kirim</button>
                                 </div>
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -170,7 +191,6 @@
 
 @section('js')
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('js/deznav-init.js') }}"></script>
     <script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>
@@ -179,6 +199,29 @@
     <!-- Chart piety plugin files -->
     <script src="{{ asset('vendor/peity/jquery.peity.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.20/sweetalert2.min.js" integrity="sha512-ISPBRsvggCFa1YHNMzuhaNqa4vMzTpmxyWhtt01JOmJlbh+nQwAxH49NhbMAGRYviTcH4sy1Wg8SIkBkLyOEGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $("#replyForm").validate({
+                rules: {
+                    reply: {
+                        required: true
+                    }
+                },
+                messages: {
+                    reply: {
+                        required: "Balasan Harus Di Isi."
+                    }
+                }
+            });
+        });
+    </script>
 
     <script>
     function deleteArtikel(dataId) {

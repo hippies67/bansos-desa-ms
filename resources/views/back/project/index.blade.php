@@ -134,7 +134,7 @@
           <div class="form-group">
             <label for="description">Deskripsi</label>
             <textarea name="project_description" id="project_description" class="form-control" placeholder="Deskripsi"
-              style="height: 100%;"></textarea>
+              style="height: 30vh;"></textarea>
           </div>
           <div class="form-group">
             <label for="link">Link Project</label>
@@ -182,7 +182,7 @@
           <div class="form-group">
             <label for="description">Deskripsi</label>
             <textarea name="edit_project_description" id="edit_project_description" class="form-control"
-              placeholder="Deskripsi" style="height: 100%;">{{ $projects->description }}</textarea>
+              placeholder="Deskripsi" style="height: 30vh;">{{ $projects->description }}</textarea>
           </div>
           <div class="form-group">
             <label for="link">Link Project</label>
@@ -284,7 +284,6 @@
 
 @section('js')
 <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('js/custom.min.js') }}"></script>
 <script src="{{ asset('js/deznav-init.js') }}"></script>
 <script src="{{ asset('vendor/owl-carousel/owl.carousel.js') }}"></script>
