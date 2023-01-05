@@ -49,7 +49,7 @@ span:after {
   left: -0.1em;
   right: -0.1em;
   bottom: 0;
-  background-color: #ffd800;
+  background-color: none  ;
 }
 
 .btn {

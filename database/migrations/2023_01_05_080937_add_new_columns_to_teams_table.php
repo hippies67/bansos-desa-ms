@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNewColumnToTeamTable extends Migration
+class AddNewColumnsToTeamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class AddNewColumnToTeamTable extends Migration
     public function up()
     {
         Schema::table('team', function (Blueprint $table) {
-            // $table->dropColumn('position');
-            // $table->unsignedBigInteger('ref_divisi_id')->after('photo');
-            // $table->foreign('ref_divisi_id')->references('id')->on('ref_divisi')->onDelete('cascade');
+            $table->text("description")->nullable()->after('photo');
+            $table->string("instagram")->nullable()->after('description');
         });
     }
 
@@ -27,7 +26,7 @@ class AddNewColumnToTeamTable extends Migration
      */
     public function down()
     {
-        Schema::table('team', function (Blueprint $table) {
+        Schema::table('teams', function (Blueprint $table) {
             //
         });
     }

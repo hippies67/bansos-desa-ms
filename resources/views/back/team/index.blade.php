@@ -184,6 +184,16 @@
                         <div id="errorImage">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="fullname">Deskripsi</label>
+                        <textarea name="description" class="form-control" cols="30" rows="5" placeholder="Deskripsi"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instagram">Instagram</label>
+                        <input type="text" class="form-control" name="instagram" placeholder="Link Instagram">
+                    </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-dark" data-dismiss="modal">Kembali</button>
@@ -230,6 +240,16 @@
                             data-allowed-file-extensions="png jpg jpeg" data-default-file="@if(!empty($teams->photo) &&
                               Storage::exists($teams->photo)){{ Storage::url($teams->photo) }}@endif"
                             data-show-remove="false">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullname">Deskripsi</label>
+                        <textarea name="edit_description" class="form-control" cols="30" rows="5" placeholder="Deskripsi">{{ $teams->description }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instagram">Instagram</label>
+                        <input type="text" class="form-control" name="edit_instagram" value="{{ $teams->instagram }}" placeholder="Link Instagram">
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">

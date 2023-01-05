@@ -95,7 +95,7 @@ class TeamController extends Controller
 
     public function ref_divisi(Request $request)
     {
-        // $ref_divisi = RefDivisi::where('status', '=', 'Y')->get();
+        $ref_divisi = RefDivisi::where('status', '=', 'Y')->get();
 
         // return json_encode($ref_divisi);
 
@@ -110,17 +110,18 @@ class TeamController extends Controller
                 continue;
             }
 
-            if($key > 10) {
-                break;
-            }
-
-            $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data->ref_divisi->id_induk];
+            // if($key > 10) {
+            //     break;
+            // }
+            
+            $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data];
             // $team_name = $data->fullname;
             // $induk_name = $data->ref_divisi->nama;
             // $induk_id = $data->ref_divisi->id_induk;
         }
 
-        return json_encode($wrap);
+        $final = [$wrap, $ref_divisi];
+        return json_encode($final);
 
     }
 }

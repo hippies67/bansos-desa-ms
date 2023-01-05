@@ -31,23 +31,19 @@
         font-size: 10px;
         font-weight: normal;
     }
-    
-    #container text{
-        font-family: 'Poppins', sans-serif;
-    }
 
-/* 
+
     #container p {
         font-size: 10px;
-    } */
+    }
 
     #container img {
         object-fit: contain !important;
     }
 
-    /* h4 {
+    h4 {
         font-size: 9.5px !important;
-    } */
+    }
 
     @media (min-width: 576px) {
         h4 {
@@ -73,37 +69,6 @@
         }
     }
 
-    .highcharts-data-labels h4 {
-        font-weight: 600;
-        color: #000000;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .highcharts-data-labels p {
-        font-weight: 600;
-        color: #000000;
-        font-size: 10px;
-        font-family: 'Poppins', sans-serif;
-        line-height: 15px !important;
-        margin-top: 5px !important;    
-    }
-
-    .highcharts-tracker {
-        margin-top: 4px;
-        margin-left: 8px;
-        width: 230px !important;
-        height: 75px !important;
-    }
-
-    .highcharts-data-labels img {
-        border: 1px solid #f4cf00;
-        border-radius: 3rem;
-        object-fit: contain !important;
-    }
-
-    .highcharts-credits {
-        display: none;
-    }
 </style>
 @endsection
 
@@ -168,6 +133,12 @@
 
             <figure class="highcharts-figure">
                 <div id="container"></div>
+                <p class="highcharts-description">
+                    Organization charts are a common case of hierarchical network charts,
+                    where the parent/child relationships between nodes are visualized.
+                    Highcharts includes a dedicated organization chart type that streamlines
+                    the process of creating these types of visualizations.
+                </p>
             </figure>
         </div>
 
@@ -188,23 +159,33 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="modal-img text-center mb-3">
-                            <img src="#" alt="" id="modalImage" width="150">
+                            <img src="#" alt="">
                         </div>
-                        <h3 class="text-img" style="color: #ffd800; text-align: center;" id="modalName"></h3>
-                        <p class="card-text-dialog-box text-img text-white" style="text-align: center;" id="titleModalPengurus"></p>
+                        <h3 class="text-img" style="color: #ffd800;">Hadi</h3>
+                        <p class="card-text-dialog-box text-img text-white">Ketua</p>
                     </div>
                     <div class="col-md-8">
                         <div class="modal-text py-2 px-5 text-start">
-                            {{-- <h3 class="text-white fw-bold">Hadi</h3>
-                            <p class="card-text-dialog-box text-white">Ketua</p> --}}
-                            <p class="text-white" id="descriptionModal">
-                                -
+                            <h3 class="text-white fw-bold">Hadi</h3>
+                            <p class="card-text-dialog-box text-white">Ketua</p>
+                            <p class="text-white">We are young and creative people who are trying to find
+                                and develop our
+                                talents. We can only do small things on our own, but together we can do
+                                extraordinary things.
+                                <br><br> We are young and creative people who are trying to find and develop
+                                our
+                                talents. We can only do small things on our own, but together we can do
+                                extraordinary things. We
+                                are young and creative people who are trying to find and develop our
+                                talents. We can only do small things on our own, but together we can do
+                                extraordinary things.
                             </p>
                         </div>
                     </div>
@@ -216,7 +197,7 @@
 @endsection
 @section('js')
 <script>
-    const container = document.querySelector('#container');
+     const container = document.querySelector('#container');
 
     let startY;
     let startX;
@@ -256,6 +237,7 @@
             const y = e.pageY - container.offsetTop;
             const walkY = y - startY;
             container.scrollTop = scrollTop - walkY;
+            console.log(container.scrollTop);
 
             //Move Horizontally
             const x = e.pageX - container.offsetLeft;
@@ -288,13 +270,11 @@
                 team_object['title'] = value[2];
                 team_object['name'] = value[0];
                 team_object['image'] = value[1];
-             
-                team_object['info'] = value[4];
+
                 wrap_team_object.push(team_object);
             }
 
 
-            console.log(wrap_team_object);
 
             var level = [];
 
@@ -308,15 +288,10 @@
                 level[key] = [levelinduk, levelid];
             }
 
-            console.log(level.sort(function(a,b) {
-                return a[0]-b[0]
-            }));
-
-
             Highcharts.chart('container', {
                 chart: {
                     height: 1000,
-                    width: 6000,
+                    width: 4000,
                     inverted: true
                 },
                 title: {
@@ -334,35 +309,26 @@
                         events: {
                             click: function () {
                                 $("#team").modal('show');
-                                $("#modalImage").attr('src', '');
-                                $("#modalName").html('');
-                                $("#titleModalPengurus").html('');
-                                $("#descriptionModal").html('');
-                                $("#modalImage").attr('src', this.image);
-                                $("#modalName").html(this.name);
-                                $("#titleModalPengurus").html(this.title);
-                                $("#descriptionModal").html(this.info.description);
+                                console.log(this.name);
                             }
                         }
                     },
                     data: level,
                     levels: [{
                         level: 0,
-                        color: '#fff9d8',
+                        color: 'silver',
                         dataLabels: {
                             color: 'black'
                         },
-                        height: 25
                     }, {
                         level: 1,
-                        color: 'red',
+                        color: 'silver',
                         dataLabels: {
                             color: 'black'
                         },
-                        height: 25
                     }, {
                         level: 2,
-                        color: '#980104'
+                        color: '#980104',
                     }, {
                         level: 4,
                         color: '#359154'
@@ -401,6 +367,7 @@
 
     function loadContent() {
         page++;
+        console.log(page);
         loadMoreData(page);
     }
 

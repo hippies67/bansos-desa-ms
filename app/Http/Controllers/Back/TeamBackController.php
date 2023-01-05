@@ -48,9 +48,9 @@ class TeamBackController extends Controller
         $data = [
             'fullname' => $request->team_fullname,
             'photo' => $photo,
+            'description' => $request->description,
+            'instagram' => $request->instagram,
             'ref_divisi_id' => $request->ref_divisi_id,
-            // 'division_id' => $request->team_division_id,
-            // 'sub_division_id' => $request->team_sub_division_id,
         ];
 
         Team::create($data)
@@ -102,9 +102,9 @@ class TeamBackController extends Controller
         $data = [
             'fullname' => $request->edit_team_fullname ? $request->edit_team_fullname : $team->fullname, 
             'photo' => $request->hasFile('edit_team_photo') ? $edit_photo : $team->photo, 
+            'description' => $request->edit_description ? $request->edit_description : $team->description, 
+            'instagram' => $request->edit_instagram ? $request->edit_instagram : $team->instagram, 
             'ref_divisi_id' => $request->edit_ref_divisi_id ? $request->edit_ref_divisi_id : $team->ref_divisi_id, 
-            // 'division_id' => $request->edit_team_division_id ? $request->edit_team_division_id : $team->division_id, 
-            // 'sub_division_id' => $request->edit_team_sub_division_id ? $request->edit_team_sub_division_id : $team->sub_division_id, 
         ];
 
         $team->update($data)
