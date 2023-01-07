@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RefDivisi;
+use App\Models\RefPeriode;
 
 class RefDivisiController extends Controller
 {
@@ -17,8 +18,10 @@ class RefDivisiController extends Controller
     { 
         if(RefDivisi::with('children')->where('level', 1)->exists()) {
             $data['list'] = RefDivisi::with('children')->where('level', 1)->get();
+            $data['ref_periode'] = RefPeriode::all();
         } else {
             $data['list'] = RefDivisi::all();
+            $data['ref_periode'] = RefPeriode::all();
         }
         // dd($data['list']);die;
         return view('back.ref_divisi.index', $data);

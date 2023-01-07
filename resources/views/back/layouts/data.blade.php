@@ -214,11 +214,12 @@ $web_profile = App\Models\WebProfile::all();
                             <span class="nav-text">Team</span>
                         </a>
                     </li> --}}
-                    <li class="{{ Request::routeIs('team-back.*') || Request::routeIs('ref-divisi.*')  ? 'mm-active' : '' }}"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li class="{{ Request::routeIs('team-back.*') || Request::routeIs('ref-divisi.*')  || Request::routeIs('ref-periode.*') ? 'mm-active' : '' }}"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="bi bi-people"></i>
                             <span class="nav-text">Team</span>
                         </a>
                         <ul class="{{ Request::routeIs('ref-divisi.*')  ? 'mm-active' : '' }}" aria-expanded="false">
+                            <li><a href="{{ route('ref-periode.index') }}" class="{{ Request::routeIs('ref-periode.*')  ? 'mm-active' : '' }}">Ref. Periode</a></li>
                             <li><a href="{{ route('ref-divisi.index') }}" class="{{ Request::routeIs('ref-divisi.*')  ? 'mm-active' : '' }}">Ref. Divisi</a></li>
                             <li><a href="{{ route('team-back.index') }}" class="{{ Request::routeIs('team-back.*') ? 'mm-active' : '' }}">Anggota</a></li>
                         </ul>

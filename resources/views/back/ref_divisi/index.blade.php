@@ -97,7 +97,13 @@
                                 Tambah Divisi</a>
                         </div>
 
-
+                        <div class="form-group mt-4">
+                           <select class="form-control" name="tahun">
+                                @foreach($ref_periode as $data)
+                                    <option value="{{ $data->id }}">{{ $data->tahun_mulai }} - {{ $data->tahun_akhir }}</option>
+                                @endforeach
+                           </select>
+                        </div>
 
 
                         <div class="mt-3" style="width:100% !important">
@@ -445,9 +451,7 @@
                 $('#tambahData').modal('hide');
                 Swal.fire('Ref. Division berhasil ditambahkan', '', 'success');
 
-                setTimeout(function () {
-                    location.reload();
-                }, 2000);
+                location.reload();
             }
 
         } catch (err) {
@@ -538,23 +542,8 @@
 
             if (datasend.status == 'success') {
 
-                var res_id = datasend.data.id;
-                var res_nama = datasend.data.nama;
-
-                var row =
-                    '<div class="" style="height: 100%;"></div> <div class="">';
-                row += '<div class="row"><div class="col-md-10 px-5"><h6>' + res_nama +
-                    '</h6> </div> <div class="col-md-2">';
-                row += '<a href="javascript:void(0)" onclick="editData(' + res_id +
-                    ')"> <i class="fa fa-edit text-info"></i></a>';
-                row += '<a href="javascript:void(0)" onclick="deleteData(' + res_id +
-                    ')"> <i class="fa fa-trash text-danger"></i>';
-                row += '</a></div></div></div>';
-
-                $('#editData').modal('hide');
-
-                $('#list_' + res_id).replaceWith(row);
                 Swal.fire('Ref. Division berhasil diubah', '', 'success');
+                location.reload();
             }
         } catch (err) {
             console.log(err);

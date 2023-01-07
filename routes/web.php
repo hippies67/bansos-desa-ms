@@ -16,6 +16,7 @@ use App\Http\Controllers\Back\ArtikelController;
 use App\Http\Controllers\Back\ProjectBackController;
 use App\Http\Controllers\Back\ContactBackController;
 use App\Http\Controllers\Back\TeamBackController;
+use App\Http\Controllers\Back\RefPeriodeController;
 use App\Http\Controllers\Back\RefDivisiController;
 use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Back\ManajemenUserController;
@@ -82,13 +83,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('team-back', TeamBackController::class);
         Route::post('team-back/hapus', [TeamBackController::class, 'hapus'])->name('team-back.hapus');
 
-        //Modul Ref Unit Kerja
-     Route::get('ref-divisi', [RefDivisiController::class, 'index'])->name('ref-divisi.index');
-     Route::get('ref-divisi-induk/{id}', [RefDivisiController::class, 'RefDivisiInduk'])->name('ref-divisi.induk-modal');
-     Route::get('ref-divisi-detail/{id}', [RefDivisiController::class, 'RefDivisiDetail'])->name('ref-divisi.detail-modal');
-     Route::post('ref-divisi-store', [RefDivisiController::class, 'RefDivisiStore'])->name('ref-divisi.store-modal');
-     Route::post('ref-divisi-update', [RefDivisiController::class, 'RefDivisiUpdate'])->name('ref-divisi.update-modal');
-     Route::post('ref-divisi-delete', [RefDivisiController::class, 'RefDivisiDelete'])->name('ref-divisi.delete-modal');
+        //Modul Ref Periode
+        Route::resource('ref-periode', RefPeriodeController::class);
+        Route::post('ref-periodes/check-tahun-mulai', [RefPeriodeController::class, 'checkTahunMulai'])->name('ref-periode.checkTahunMulai');
+        Route::post('ref-periodes/check-tahun-akhir', [RefPeriodeController::class, 'checkTahunAkhir'])->name('ref-periode.checkTahunAkhir');
+
+        //Modul Ref Divis
+        Route::get('ref-divisi', [RefDivisiController::class, 'index'])->name('ref-divisi.index');
+        Route::get('ref-divisi-induk/{id}', [RefDivisiController::class, 'RefDivisiInduk'])->name('ref-divisi.induk-modal');
+        Route::get('ref-divisi-detail/{id}', [RefDivisiController::class, 'RefDivisiDetail'])->name('ref-divisi.detail-modal');
+        Route::post('ref-divisi-store', [RefDivisiController::class, 'RefDivisiStore'])->name('ref-divisi.store-modal');
+        Route::post('ref-divisi-update', [RefDivisiController::class, 'RefDivisiUpdate'])->name('ref-divisi.update-modal');
+        Route::post('ref-divisi-delete', [RefDivisiController::class, 'RefDivisiDelete'])->name('ref-divisi.delete-modal');
 
 
         Route::get('user-livewire', ManajemenUserComponent::class);
@@ -98,7 +104,5 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('manajemen-akun-user/checkEmail', [UserController::class, 'checkEmail'])->name('manajemen-akun-user.checkEmail');
         Route::get('user-setting', [ManajemenUserController::class, 'user_setting'])->name('user-setting');
         Route::post('user-setting/update', [ManajemenUserController::class, 'update-account'])->name('user-setting.update');
-        
     });
 });
-

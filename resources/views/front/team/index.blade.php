@@ -206,6 +206,10 @@
                             <p class="text-white" id="descriptionModal">
                                 -
                             </p>
+                            <div class="icon-sosmed-footer mt-4">
+                                <a href="https://www.instagram.com/tahungoding/" target="_blank"><img
+                                        src="{{ asset('front/img/icon-instagram.svg') }}" alt=""></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -341,7 +345,11 @@
                                 $("#modalImage").attr('src', this.image);
                                 $("#modalName").html(this.name);
                                 $("#titleModalPengurus").html(this.title);
-                                $("#descriptionModal").html(this.info.description);
+                                if(this.info.description == '') {
+                                    $("#descriptionModal").html('-');
+                                } else {
+                                    $("#descriptionModal").html(this.info.description);
+                                }
                             }
                         }
                     },
