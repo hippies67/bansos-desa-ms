@@ -57,18 +57,24 @@ and (max-width: 1366px)
       <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important;">Blog</a></li>
       <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important;">Contact</a></li>
 
+      @php
+        $web_profile = App\Models\WebProfile::all();
+      @endphp
+
+      @foreach($web_profile as $data)
       <div class="icon-sosmed-navbar">
         <div class="icon-sosmed-header mt-5">
-          <a href="https://www.instagram.com/tahungoding/" target="_blank"><img src="{{ asset('front/img/icon-instagram.svg') }}"
+          <a href="https://www.instagram.com/{{ $data->instagram }}" target="_blank"><img src="{{ asset('front/img/icon-instagram.svg') }}"
               alt=""></a>
         </div>
         <div class="icon-sosmed-header">
-          <a href="https://github.com/tahungoding"><img src="{{ asset('front/img/icon-github.svg') }}" alt=""></a>
+          <a href="https://github.com/{{ $data->github }}"><img src="{{ asset('front/img/icon-github.svg') }}" alt=""></a>
         </div>
         <div class="icon-sosmed-header">
-          <a href="https://www.linkedin.com/company/tahungoding/mycompany/"><img src="{{ asset('front/img/icon-linked-in.svg') }}" alt=""></a>
+          <a href="{{ $data->linkedin }}""><img src="{{ asset('front/img/icon-linked-in.svg') }}" alt=""></a>
         </div>
       </div>
+      @endforeach
     </ul>
     <div class="icon menu-btn">
       <i class="fas fa-bars"></i>
@@ -94,16 +100,20 @@ and (max-width: 1366px)
             <a class="button btn" style="background-color: #dcdcdc; " href="{{ url('/contact') }}">Contact</a>
           </div>
 
-          <div class="icon-sosmed-header mt-4">
-            <a href="https://www.instagram.com/tahungoding/" target="_blank"><img src="{{ asset('front/img/icon-instagram.svg') }}"
-                alt=""></a>
-          </div>
-          <div class="icon-sosmed-header">
-            <a href="#"><img src="{{ asset('front/img/icon-github.svg') }}" alt=""></a>
-          </div>
-          <div class="icon-sosmed-header">
-            <a href="#"><img src="{{ asset('front/img/icon-linked-in.svg') }}" alt=""></a>
-          </div>
+          @foreach($web_profile as $data)
+
+            <div class="icon-sosmed-header mt-4">
+              <a href="https://www.instagram.com/{{ $data->instagram }}" target="_blank"><img src="{{ asset('front/img/icon-instagram.svg') }}"
+                  alt=""></a>
+            </div>
+            <div class="icon-sosmed-header">
+              <a href="https://github.com/{{ $data->github }}"><img src="{{ asset('front/img/icon-github.svg') }}" alt=""></a>
+            </div>
+            <div class="icon-sosmed-header">
+              <a href="{{ $data->linkedin }}"><img src="{{ asset('front/img/icon-linked-in.svg') }}" alt=""></a>
+            </div>
+
+          @endforeach
         </div>
 
         <div class="col-md-6">

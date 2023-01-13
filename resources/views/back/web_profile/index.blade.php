@@ -1,11 +1,11 @@
 @extends('back.layouts.data')
 
 @section('title_menu')
-Artikel
+Web Profile
 @endsection
 
 @section('title')
-Artikel
+Web Profile
 @endsection
 
 @section('css')
@@ -262,6 +262,39 @@ Artikel
                                     <small>https://youtube.com/c/<b
                                             id="youtubeUsername">{{old('edit_youtube') ?? $webs->youtube}}</b></small>
                                 </div>
+                              
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="linkedin">LinkedIn</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-white" style="background-color: #00aaff"
+                                                id="inputGroupPrepend3"><i class="fab fa-linkedin"></i></span>
+                                        </div>
+                                        <input type="text" id="linkedin" onkeyup="keyup('linkedin')" name="edit_linkedin"
+                                            class="form-control text-dark"
+                                            value="{{old('edit_linkedin') ?? $webs->linkedin}}"
+                                            placeholder="Masukkan Link Linkedin">
+                                    </div>
+                                    <small><b>{{old('edit_linkedin') ?? $webs->linkedin}}</b></small>
+                                </div>
+                                <div class="col-4">
+                                    <label for="github">Github</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-white" style="background-color: black"
+                                                id="inputGroupPrepend3"><i class="fab fa-github"></i></span>
+                                        </div>
+                                        <input type="text" id="github" onkeyup="keyup('github')" name="edit_github"
+                                            class="form-control text-dark"
+                                            value="{{old('edit_github') ?? $webs->github}}"
+                                            placeholder="Username Github">
+                                    </div>
+                                    <small>https://github.com/<b
+                                            id="githubUsername">{{old('edit_github') ?? $webs->github}}</b></small>
+                                </div>
                             </div>
                             <br>
                             <div class="row">
@@ -273,8 +306,7 @@ Artikel
                                                 style="background-color: rgb(95, 95, 95); height: 100%;"
                                                 id="inputGroupPrepend3"><i class="fa fa-info"></i> </span>
                                         </div>
-                                        <textarea name="edit_address" id="edit_address" class="form-control"
-                                            style="height: 100%;">{{$webs->address}}</textarea>
+                                        <textarea name="edit_address" id="edit_address" class="form-control" rows="6">{{$webs->address}}</textarea>
                                     </div>
                                     <label for="edit_address" generated="true" class="error"
                                         style="display: none;"></label>
@@ -471,6 +503,35 @@ Artikel
                                     </div>
                                     <small>https://youtube.com/c/<b id="youtubeUsername">{{old('youtube')}}</b></small>
                                 </div>
+                                <div class="col-4">
+                                    <label for="linkedin">LinkedIn</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-white" style="background-color: #00aaff"
+                                                id="inputGroupPrepend3"><i class="fab fa-linkedin"></i></span>
+                                        </div>
+                                        <input type="text" id="linkedin" onkeyup="keyup('linkedin')" name="linkedin"
+                                            class="form-control text-dark"
+                                            value="{{old('linkedin') ?? $webs->linkedin}}"
+                                            placeholder="Masukkan Link Linkedin">
+                                    </div>
+                                    <small><b>{{old('linkedin') ?? $webs->linkedin}}</b></small>
+                                </div>
+                                <div class="col-4">
+                                    <label for="github">Github</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-white" style="background-color: black"
+                                                id="inputGroupPrepend3"><i class="fab fa-github"></i></span>
+                                        </div>
+                                        <input type="text" id="github" onkeyup="keyup('github')" name="github"
+                                            class="form-control text-dark"
+                                            value="{{old('github') ?? $webs->github}}"
+                                            placeholder="Username Github">
+                                    </div>
+                                    <small>https://github.com/<b
+                                            id="githubUsername">{{old('github') ?? $webs->github}}</b></small>
+                                </div>
                             </div>
                             <br>
                             <div class="row">
@@ -482,8 +543,7 @@ Artikel
                                                 style="background-color: rgb(95, 95, 95); height: 100%;"
                                                 id="inputGroupPrepend3"><i class="fa fa-info"></i> </span>
                                         </div>
-                                        <textarea name="address" id="address" class="form-control"
-                                            style="height: 100%;"></textarea>
+                                        <textarea name="address" id="address" class="form-control" rows="6"></textarea>
                                     </div>
                                     <label for="address" generated="true" class="error" style="display: none;"></label>
                                 </div>

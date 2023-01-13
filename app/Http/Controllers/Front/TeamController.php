@@ -29,6 +29,20 @@ class TeamController extends Controller
         return view('front.team.index', $data);
     }
 
+    public function allTeam(Request $request)
+    {
+        $data['team'] = Team::all();
+        $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
+
+        if ($request->ajax()) {
+    		$view = view('front.team.load_team', $data)->render();
+            return response()->json(['html'=>$view]);
+        }
+
+        return view('front.team.all_team', $data);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -136,7 +150,7 @@ class TeamController extends Controller
             //     break;
             // }
             
-            $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data];
+            $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data->ref_divisi->id_induk, $data->description];
             // $team_name = $data->fullname;
             // $induk_name = $data->ref_divisi->nama;
             // $induk_id = $data->ref_divisi->id_induk;

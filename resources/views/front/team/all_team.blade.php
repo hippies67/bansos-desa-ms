@@ -2,122 +2,6 @@
 @section('title', 'Team')
 @section('css')
 <link rel="stylesheet" href="{{ asset('front/css/style_teams.css') }}">
-<script src="{{ asset('orgchart.js') }}"></script>
-
-<style>
-    #container {
-        min-width: 1000px;
-        max-height: 500px;
-        overflow: scroll !important;
-        cursor: grab;
-    }
-
-    button {
-        border: 1px solid #1da1f2;
-        border-color: #0084B4;
-        border-radius: 100px;
-        font-size: 20px;
-    }
-
-    #button-bar {
-        text-align: center;
-    }
-
-    #container {
-        text-transform: none;
-        font-size: 10px;
-        font-weight: normal;
-    }
-    
-    #container text{
-        font-family: 'Poppins', sans-serif;
-    }
-
-/* 
-    #container p {
-        font-size: 10px;
-    } */
-
-    #container img {
-        object-fit: contain !important;
-    }
-
-    /* h4 {
-        font-size: 9.5px !important;
-    } */
-
-    @media (min-width: 576px) {
-        h4 {
-            font-size: 12px !important;
-        }
-    }
-
-    @media (min-width: 768px) {
-        h4 {
-            font-size: 12.5px !important;
-        }
-    }
-
-    @media (min-width: 992px) {
-        h4 {
-            font-size: 15px !important;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        h4 {
-            font-size: 18px !important;
-        }
-    }
-
-    .highcharts-data-labels h4 {
-        font-weight: 600;
-        color: #000000;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .highcharts-data-labels p {
-        font-weight: 600;
-        color: #000000;
-        font-size: 10px;
-        font-family: 'Poppins', sans-serif;
-        line-height: 15px !important;
-        margin-top: 5px !important;    
-    }
-
-    .highcharts-tracker {
-        margin-top: 4px;
-        margin-left: 8px;
-        width: 230px !important;
-        height: 75px !important;
-    }
-
-    .highcharts-data-labels img {
-        border: 1px solid #f4cf00;
-        border-radius: 3rem;
-        object-fit: contain !important;
-    }
-
-    .highcharts-credits {
-        display: none;
-    }
-
-
-#tree {
-    width: 100%;
-    height: 100%;
-}
-
-
-
-    rect {
-        fill: #ffeb79 !important;
-    }
-
-    image {
-        height: initial;
-    }
-</style>
 @endsection
 
 @section('navbar')
@@ -175,52 +59,15 @@
         </div>
 
         <div id="loadTeam">
-            <br><br>
-            <div class="form-group">
-                <select name="tahun" class="form-control" style="border-color: #ffd800 !important" onchange="byYear(this.value)">
-                    @foreach($ref_periode as $data)
-                    @php
-                        $date = Date('Y');
-                    @endphp
-                        @if($date == $data->tahun_mulai || $date == $data->tahun_akhir)
-                            <option value="{{ $data->id }}" selected>{{ $data->tahun_mulai }} - {{ $data->tahun_akhir }}</option>
-                        @else
-                            <option value="{{ $data->id }}">{{ $data->tahun_mulai }} - {{ $data->tahun_akhir }}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </div>
-            <br><br>
-
-            <select style="position: absolute;right: 30px;top: 30px;font-size: 14px;padding: 10px;background-color: #F57C00;color: #ffffff;width: 100px;z-index:2;" id="selectTemplate">
-                <option>olivia</option>
-                <option>diva</option>
-                <option>mila</option>
-                <option>polina</option>
-                <option>mery</option>
-                <option>rony</option>
-                <option>belinda</option>
-                <option>ula</option>
-                <option>ana</option>
-                <option>isla</option>
-                <option>deborah</option>
-            </select>
-            
-            <div id="tree"></div>        
-            
-            
-        </div>
-
-        <br><br>
         @foreach($team as $data)
             <img class="rounded-circle mb-3" alt="avatar1" style="border-radius: 50%; 
             width: 100px;
             height: 100px;object-fit: contain;" src="{{ Storage::url($data->photo) }}" />
         @endforeach
-
-        <div class="text-center mt-5 mb-5">
-            <a href="{{ url('all-team') }}" type="button" class="button btn" >View More</a>
-        </div>
+    {{-- 
+            <div class="text-center mt-5 mb-5">
+                <a href="{{ url('all-team') }}" type="button" class="button btn" >View More</a>
+            </div> --}}
 
     </div>
 </div>

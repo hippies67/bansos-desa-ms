@@ -12,6 +12,6 @@ class WebProfile extends Model
     protected $table = "web_profile";
 
     protected $fillable = [
-        'logo', 'primary_color', 'dark_primary_color', 'light_primary_color', 'name', 'description', 'tagline', 'address', 'phone', 'email', 'facebook', 'instagram', 'youtube', 'twitter', 'whatsapp', 'updator' 
+        'logo', 'primary_color', 'dark_primary_color', 'light_primary_color', 'name', 'description', 'tagline', 'address', 'phone', 'email', 'facebook', 'instagram', 'youtube', 'twitter', 'whatsapp', 'github', 'linkedin', 'updator' 
     ];
 }

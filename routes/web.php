@@ -44,6 +44,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('about', [AboutController::class, 'index']);
 Route::get('projects', [ProjectController::class, 'getProject']);
 Route::get('teams', [TeamController::class, 'getTeam']);
+Route::get('all-team', [TeamController::class, 'allTeam']);
 Route::post('teams/ref-divisi', [TeamController::class, 'ref_divisi'])->name('team.ref-divisi');
 
 Route::get('blog', [BlogController::class, 'getBlog']);

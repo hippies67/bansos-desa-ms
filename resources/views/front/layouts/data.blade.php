@@ -102,7 +102,9 @@ $web_profile = App\Models\WebProfile::all();
                 <div class="col-md-2 mt-5 identity">
                     <img class="logo-footer" src="{{ asset('front/img/logo_tahungoding.png') }}" alt="">
                     <h5>TAHUNGODING HEADQUARTER</h5>
-                    <p>Jl. Angkrek Situ No.19, Situ, Sumedang Utara, Sumedang, Jawa Barat 45621, Indonesia</p>
+                    @foreach($web_profile as $data)
+                        <p>{{ $data->address }}</p>
+                    @endforeach
                 </div>
                 <div class="col-md-2 mt-5 menu">
                     <h5>Menu</h5>
@@ -116,23 +118,27 @@ $web_profile = App\Models\WebProfile::all();
                 <div class="col-md-2 mt-5 contact-us">
                     <h5>Contact Us</h5>
                     <div class="contact-us-footer mt-4">
-                        <p>+62 823 1584 4442</p>
+                        @foreach($web_profile as $data)
+                        <p>{{ $data->phone }}</p>
                         <p>tahungoding.com</p>
-                        <p>tahungoding@gmail.com</p>
+                        <p>{{ $data->email }}</p>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-2 mt-5 sosial-media">
                     <h5>Sosial Media</h5>
-                    <div class="icon-sosmed-footer mt-4">
-                        <a href="https://www.instagram.com/tahungoding/" target="_blank"><img
-                                src="{{ asset('front/img/icon-instagram.svg') }}" alt=""></a>
-                    </div>
-                    <div class="icon-sosmed-footer">
-                        <a href="#"><img src="{{ asset('front/img/icon-github.svg') }}" alt=""></a>
-                    </div>
-                    <div class="icon-sosmed-footer">
-                        <a href="#"><img src="{{ asset('front/img/icon-linked-in.svg') }}" alt=""></a>
-                    </div>
+                    @foreach($web_profile as $data)
+                        <div class="icon-sosmed-footer mt-4">
+                            <a href="https://www.instagram.com/{{ $data->instagram }}" target="_blank"><img
+                                    src="{{ asset('front/img/icon-instagram.svg') }}" alt=""></a>
+                        </div>
+                        <div class="icon-sosmed-footer">
+                            <a href="https://github.com/{{ $data->github }}" target="_blank"><img src="{{ asset('front/img/icon-github.svg') }}" alt=""></a>
+                        </div>
+                        <div class="icon-sosmed-footer">
+                            <a href="{{ $data->linkedin }}" target="_blank"><img src="{{ asset('front/img/icon-linked-in.svg') }}" alt=""></a>
+                        </div>
+                    @endforeach
                 </div>
 
                 <p class="text-copyright">Copyright @ 2021 tahungoding</p>

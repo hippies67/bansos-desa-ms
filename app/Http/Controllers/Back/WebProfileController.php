@@ -57,6 +57,8 @@ class WebProfileController extends Controller
             'youtube' => $request->youtube,
             'twitter' => $request->twitter,
             'whatsapp' => $request->whatsapp,
+            'linkedin' => $request->linkedin,
+            'github' => $request->github,
             'updator' => '1',
         ];
 
@@ -122,6 +124,8 @@ class WebProfileController extends Controller
             'youtube' => $request->edit_youtube ? $request->edit_youtube : $web->youtube,
             'twitter' => $request->edit_twitter ? $request->edit_twitter : $web->twitter,
             'whatsapp' => $request->edit_whatsapp ? $request->edit_whatsapp : $web->whatsapp,
+            'linkedin' => $request->edit_linkedin ? $request->edit_linkedin : $web->linkedin,
+            'github' => $request->edit_github ? $request->edit_github : $web->github,
             'updator' => '1',
         ];
 
