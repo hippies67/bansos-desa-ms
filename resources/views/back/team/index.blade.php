@@ -167,16 +167,7 @@
                         <label for="fullname">Nama Lengkap</label>
                         <input type="text" class="form-control" name="team_fullname" placeholder="Nama Lengkap">
                     </div>
-                    <div class="form-group">
-                        <label for="position">Jabatan</label>
-                        <select name="ref_divisi_id" class="form-control">
-                            <option value="">Pilih Jabatan</option>
-                            @foreach($ref_divisi as $data)
-                            <option value="{{ $data->id }}">{{ $data->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
+                   
                     <div class="form-group">
                         <label for="team_photo">Foto</label>
                         <input type="file" class="form-control dropify" name="team_photo"
@@ -193,6 +184,19 @@
                     <div class="form-group">
                         <label for="instagram">Instagram</label>
                         <input type="text" class="form-control" name="instagram" placeholder="Link Instagram">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Periode Jabatan</label>
+                        <select name="ref_periode_id" class="form-control" onchange="periodeSelect(this.value)">
+                            <option value="">Pilih Periode</option>
+                            @foreach($ref_periode as $data)
+                                <option value="{{ $data->id }}">{{ $data->tahun_mulai }} - {{ $data->tahun_akhir }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div id="wrapJabatan">
+                        
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -224,15 +228,6 @@
                         <input type="text" class="form-control" name="edit_team_fullname" id="edit_team_fullname"
                             placeholder="Nama" value="{{ $teams->fullname }}">
                     </div>
-                    <div class="form-group">
-                        <label for="edit_team_position">Jabatan</label>
-                        <select name="edit_ref_divisi_id" class="form-control">
-                            <option value="">Pilih Jabatan</option>
-                            @foreach($ref_divisi as $data)
-                            <option value="{{ $data->id }}" {{ $data->id == $teams->ref_divisi_id ? 'selected' : '' }}>{{ $data->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <div class="form-group">
                         <label for="edit_photo">Foto</label>
@@ -250,6 +245,29 @@
                     <div class="form-group">
                         <label for="instagram">Instagram</label>
                         <input type="text" class="form-control" name="edit_instagram" value="{{ $teams->instagram }}" placeholder="Link Instagram">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Periode Jabatan</label>
+                        <select name="edit_ref_periode_id" class="form-control" onchange="periodeEditSelect(this.value)">
+                            <option value="">Pilih Periode</option>
+                            @foreach($ref_periode as $item)
+                                <option value="{{ $item->id }}" {{ $item->id == $teams->ref_periode_id ? 'selected' : '' }}>{{ $item->tahun_mulai }} - {{ $item->tahun_akhir }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="edit-jabatan">
+                        @if($teams->ref_periode_id != '')
+                        <div class="form-group">
+                            <label for="position">Jabatan</label>
+                            <select name="edit_ref_divisi_id" class="form-control" id="editRefDivisiId">
+                                <option value="">Pilih Jabatan</option>
+                                @foreach($ref_divisi as $item)
+                                <option value="{{ $item->id }}" {{ $item->id == $teams->ref_divisi_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
@@ -331,6 +349,47 @@
 <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
 <script>
+     function periodeSelect(data) {
+            if(data != "") {
+                $("#wrapJabatan").css("display", "block");
+                $.ajax({
+                    url: "{{ route('team-back.generate-jabatan') }}",
+                    method: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        ref_periode_id: data,
+                    },
+                    success: function (result) {
+                        $("#wrapJabatan").html(result);
+                    }
+                });
+            } else {
+                $("#wrapJabatan").css("display", "none");
+            }
+        } 
+
+        function periodeEditSelect(data) {
+            if(data != "") {
+                $(".edit-jabatan").css("display", "block");
+                $.ajax({
+                    url: "{{ route('team-back.generate-edit-jabatan') }}",
+                    method: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        ref_periode_id: data,
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        $(".edit-jabatan").html(result);
+                    }
+                });
+            } else {
+                $(".edit-jabatan").css("display", "none");
+            }
+        } 
+</script>
+
+<script>
     $('.dropify').dropify();
 
     $(document).ready(function () {
@@ -355,6 +414,9 @@
                 team_fullname: {
                     required: true,
                 },
+                ref_periode_id: {
+                    required: true,
+                },
                 ref_divisi_id: {
                     required: true,
                 },
@@ -362,6 +424,9 @@
             messages: {
                 team_fullname: {
                     required: "Nama Lengkap harus di isi",
+                },
+                ref_periode_id: {
+                    required: "Periode harus di isi",
                 },
                 ref_divisi_id: {
                     required: "Jabatan harus di isi",
@@ -380,6 +445,9 @@
                 edit_team_fullname: {
                     required: true,
                 },
+                edit_ref_periode_id: {
+                    required: true,
+                },
                 edit_ref_divisi_id: {
                     required: true,
                 },
@@ -387,6 +455,9 @@
             messages: {
                 edit_team_fullname: {
                     required: "Nama Lengkap harus di isi",
+                },
+                edit_ref_periode_id: {
+                    required: "Periode Jabatan harus di isi",
                 },
                 edit_ref_divisi_id: {
                     required: "Jabatan harus di isi",

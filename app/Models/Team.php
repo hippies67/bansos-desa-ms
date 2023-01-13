@@ -12,7 +12,7 @@ class Team extends Model
     protected $table = 'team';
 
     protected $fillable = [
-        'fullname', 'photo', 'description', 'instagram', 'ref_divisi_id'
+        'fullname', 'photo', 'description', 'instagram', 'ref_divisi_id', 'ref_periode_id'
     ];
 
     public function ref_divisi()

@@ -8,6 +8,7 @@ use App\Models\Team;
 use Alert;
 use App\Models\RefDivisi;
 use Illuminate\Support\Facades\Storage;
+use App\Models\RefPeriode;
 
 class TeamBackController extends Controller
 {
@@ -19,6 +20,8 @@ class TeamBackController extends Controller
     public function index()
     {
         $data['team'] = Team::all();
+        $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
+
         $data['ref_divisi'] = RefDivisi::where('status', '=', 'Y')->get();
         $data['allTeam'] = Team::all();
         return view('back.team.index', $data);
@@ -30,6 +33,20 @@ class TeamBackController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function generateJabatan(Request $request)
+    {
+        $data['ref_divisi'] = RefDivisi::where('ref_periode_id', $request->ref_periode_id)->get();
+
+        return view('back.team.generate_jabatan', $data)->render();
+    }
+
+    public function generateEditJabatan(Request $request)
+    {
+        $data['ref_divisi'] = RefDivisi::where('ref_periode_id', $request->ref_periode_id)->get();
+
+        return view('back.team.generate_edit_jabatan', $data)->render();
+    }
+    
     public function create()
     {
         //
@@ -50,6 +67,7 @@ class TeamBackController extends Controller
             'photo' => $photo,
             'description' => $request->description,
             'instagram' => $request->instagram,
+            'ref_periode_id' => $request->ref_periode_id,
             'ref_divisi_id' => $request->ref_divisi_id,
         ];
 
@@ -104,6 +122,7 @@ class TeamBackController extends Controller
             'photo' => $request->hasFile('edit_team_photo') ? $edit_photo : $team->photo, 
             'description' => $request->edit_description ? $request->edit_description : $team->description, 
             'instagram' => $request->edit_instagram ? $request->edit_instagram : $team->instagram, 
+            'ref_periode_id' => $request->edit_ref_periode_id ? $request->edit_ref_periode_id : $team->ref_periode_id, 
             'ref_divisi_id' => $request->edit_ref_divisi_id ? $request->edit_ref_divisi_id : $team->ref_divisi_id, 
         ];
 

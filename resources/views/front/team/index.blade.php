@@ -160,8 +160,17 @@
         <div id="loadTeam">
             <br><br>
             <div class="form-group">
-                <select name="tahun" class="form-control" style="border-color: #ffd800 !important">
-                    <option value="2022">2022</option>
+                <select name="tahun" class="form-control" style="border-color: #ffd800 !important" onchange="byYear(this.value)">
+                    @foreach($ref_periode as $data)
+                    @php
+                        $date = Date('Y');
+                    @endphp
+                        @if($date == $data->tahun_mulai || $date == $data->tahun_akhir)
+                            <option value="{{ $data->id }}" selected>{{ $data->tahun_mulai }} - {{ $data->tahun_akhir }}</option>
+                        @else
+                            <option value="{{ $data->id }}">{{ $data->tahun_mulai }} - {{ $data->tahun_akhir }}</option>
+                        @endif
+                    @endforeach
                 </select>
             </div>
             <br><br>
@@ -267,6 +276,7 @@
             container.scrollLeft = scrollLeft - walkX;
         }
     }
+
     $.ajax({
         url: "{{ route('team.ref-divisi') }}",
         method: "POST",
@@ -297,8 +307,6 @@
                 wrap_team_object.push(team_object);
             }
 
-
-            console.log(wrap_team_object);
 
             var level = [];
 
@@ -398,6 +406,182 @@
 
         }
     });
+
+
+    function byYear(ref_periode_id) {
+        const container = document.querySelector('#container');
+
+let startY;
+let startX;
+let scrollLeft;
+let scrollTop;
+let isDown;
+
+let scrollElement = document.querySelector('#container');
+    scrollElement.scrollLeft = (scrollElement.scrollWidth - scrollElement.clientWidth) / 2;
+container.addEventListener('mousedown', e => mouseIsDown(e));
+container.addEventListener('mouseup', e => mouseUp(e))
+container.addEventListener('mouseleave', e => mouseLeave(e));
+container.addEventListener('mousemove', e => mouseMove(e));
+
+function mouseIsDown(e) {
+    isDown = true;
+    startY = e.pageY - container.offsetTop;
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+    scrollTop = container.scrollTop;
+}
+
+function mouseUp(e) {
+    isDown = false;
+}
+
+function mouseLeave(e) {
+    isDown = false;
+}
+
+function mouseMove(e) {
+    if (isDown) {
+        e.preventDefault();
+        //Move vertcally
+        const y = e.pageY - container.offsetTop;
+        const walkY = y - startY;
+        container.scrollTop = scrollTop - walkY;
+
+        const x = e.pageX - container.offsetLeft;
+        const walkX = x - startX;
+        container.scrollLeft = scrollLeft - walkX;
+    }
+}
+        $.ajax({
+            url: "{{ route('team.ref-divisi') }}",
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                ref_periode_id: ref_periode_id
+            },
+            success: function (result) {
+
+                var data = JSON.parse(result);
+
+                var team = data[0];
+
+                var ref_divisi = data[1];
+
+
+                var wrap_team_object = [];
+
+                for (const [key, value] of Object.entries(team)) {
+                    var team_object = {};
+
+                    team_object['id'] = value[3] != null ? value[3].toString() : '';
+
+                    team_object['title'] = value[2];
+                    team_object['name'] = value[0];
+                    team_object['image'] = value[1];
+                
+                    team_object['info'] = value[4];
+                    wrap_team_object.push(team_object);
+                }
+
+
+                console.log(wrap_team_object);
+
+                var level = [];
+
+                for (const [key, value] of Object.entries(ref_divisi)) {
+                    // if(key > 5) {
+                    //     break;
+                    // }
+
+                    let levelid = value.id != null ? value.id.toString() : '';
+                    let levelinduk = value.id_induk != null ? value.id_induk.toString() : '6';
+                    level[key] = [levelinduk, levelid];
+                }
+
+                console.log(level.sort(function(a,b) {
+                    return a[0]-b[0]
+                }));
+
+
+                Highcharts.chart('container', {
+                    chart: {
+                        height: 1000,
+                        width: 6000,
+                        inverted: true
+                    },
+                    title: {
+                        text: 'PENGURUS TAHUNGODING 2022-2023'
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    series: [{
+                        type: 'organization',
+                        name: 'Highsoft',
+                        keys: ['from', 'to'],
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    $("#team").modal('show');
+                                    $("#modalImage").attr('src', '');
+                                    $("#modalName").html('');
+                                    $("#titleModalPengurus").html('');
+                                    $("#descriptionModal").html('');
+                                    $("#modalImage").attr('src', this.image);
+                                    $("#modalName").html(this.name);
+                                    $("#titleModalPengurus").html(this.title);
+                                    if(this.info.description == '') {
+                                        $("#descriptionModal").html('-');
+                                    } else {
+                                        $("#descriptionModal").html(this.info.description);
+                                    }
+                                }
+                            }
+                        },
+                        data: level,
+                        levels: [{
+                            level: 0,
+                            color: '#fff9d8',
+                            dataLabels: {
+                                color: 'black'
+                            },
+                            height: 25
+                        }, {
+                            level: 1,
+                            color: 'red',
+                            dataLabels: {
+                                color: 'black'
+                            },
+                            height: 25
+                        }, {
+                            level: 2,
+                            color: '#980104'
+                        }, {
+                            level: 4,
+                            color: '#359154'
+                        }],
+                        nodes: wrap_team_object,
+                        colorByPoint: false,
+                        color: '#007ad0',
+                        dataLabels: {
+                            color: 'white'
+                        },
+                        borderColor: 'white',
+                        nodeWidth: 100,
+                        nodeHeight: 500,
+                    }],
+                    exporting: {
+                        allowHTML: true,
+                        sourceWidth: 800,
+                        sourceHeight: 600
+                    }
+
+                });
+            }
+        });
+    }
 
 </script>
 <script>

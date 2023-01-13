@@ -82,6 +82,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::resource('team-back', TeamBackController::class);
         Route::post('team-back/hapus', [TeamBackController::class, 'hapus'])->name('team-back.hapus');
+        Route::post('team-back/generate-jabatan', [TeamBackController::class, 'generateJabatan'])->name('team-back.generate-jabatan');
+        Route::post('team-back/generate-edit-jabatan', [TeamBackController::class, 'generateEditJabatan'])->name('team-back.generate-edit-jabatan');
 
         //Modul Ref Periode
         Route::resource('ref-periode', RefPeriodeController::class);
@@ -90,12 +92,14 @@ Route::group(['middleware' => ['auth']], function () {
 
         //Modul Ref Divis
         Route::get('ref-divisi', [RefDivisiController::class, 'index'])->name('ref-divisi.index');
-        Route::get('ref-divisi-induk/{id}', [RefDivisiController::class, 'RefDivisiInduk'])->name('ref-divisi.induk-modal');
+        Route::get('ref-divisi-induk/{id}/{ref_periode_id}', [RefDivisiController::class, 'RefDivisiInduk'])->name('ref-divisi.induk-modal');
         Route::get('ref-divisi-detail/{id}', [RefDivisiController::class, 'RefDivisiDetail'])->name('ref-divisi.detail-modal');
         Route::post('ref-divisi-store', [RefDivisiController::class, 'RefDivisiStore'])->name('ref-divisi.store-modal');
         Route::post('ref-divisi-update', [RefDivisiController::class, 'RefDivisiUpdate'])->name('ref-divisi.update-modal');
         Route::post('ref-divisi-delete', [RefDivisiController::class, 'RefDivisiDelete'])->name('ref-divisi.delete-modal');
-
+        Route::post('ref-divisi-generate', [RefDivisiController::class, 'generateDivisi'])->name('ref-divisi.generate');
+        Route::post('ref-divisi-generate-add-modal', [RefDivisiController::class, 'generateAddModal'])->name('ref-divisi.generate-add-modal');
+        Route::post('ref-divisi-generate-edit-modal', [RefDivisiController::class, 'generateEditModal'])->name('ref-divisi.generate-edit-modal');
 
         Route::get('user-livewire', ManajemenUserComponent::class);
         Route::resource('manajemen-akun-user', UserController::class);

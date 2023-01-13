@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\RefDivisi;
+use App\Models\RefPeriode;
 use Illuminate\Support\Facades\Storage;
 
 class TeamController extends Controller
@@ -18,6 +19,7 @@ class TeamController extends Controller
     public function getTeam(Request $request)
     {
         $data['team'] = Team::paginate(20);
+        $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
 
     	if ($request->ajax()) {
     		$view = view('front.team.load_team', $data)->render();
@@ -95,11 +97,31 @@ class TeamController extends Controller
 
     public function ref_divisi(Request $request)
     {
-        $ref_divisi = RefDivisi::where('status', '=', 'Y')->get();
+
+        if(isset($request->ref_periode_id)) {
+                $ref_divisi = RefDivisi::where('status', '=', 'Y')->where('ref_periode_id', $request->ref_periode_id)->get();
+                $team = Team::where('ref_periode_id', $request->ref_periode_id)->get();
+        } else {
+            if(RefPeriode::where(function($q) {
+                $q->where('tahun_mulai', Date('Y'))
+                  ->orWhere('tahun_akhir', Date('Y'));
+            })->exists()) {
+                $ref_periode = RefPeriode::where(function($q) {
+                    $q->where('tahun_mulai', Date('Y'))
+                      ->orWhere('tahun_akhir', Date('Y'));
+                })->first();
+    
+                $ref_divisi = RefDivisi::where('status', '=', 'Y')->where('ref_periode_id', $ref_periode->id)->get();
+                $team = Team::where('ref_periode_id', $ref_periode->id)->get();
+            } else {
+                $ref_divisi = RefDivisi::where('status', '=', 'Y')->get();
+            }
+        }
+
+        
 
         // return json_encode($ref_divisi);
 
-        $team = Team::all();
         $wrap = [];
         $team_name = null;
         $id_induk = null;

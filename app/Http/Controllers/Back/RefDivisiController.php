@@ -17,19 +17,55 @@ class RefDivisiController extends Controller
     public function index()
     { 
         if(RefDivisi::with('children')->where('level', 1)->exists()) {
-            $data['list'] = RefDivisi::with('children')->where('level', 1)->get();
-            $data['ref_periode'] = RefPeriode::all();
+            $ref_periode = RefPeriode::where(function($q) {
+                $q->where('tahun_mulai', Date('Y'))
+                  ->orWhere('tahun_akhir', Date('Y'));
+            })->first();
+            $data['list'] = RefDivisi::with('children')->where('level', 1)->where('ref_periode_id', $ref_periode->id)->get();
+            $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
         } else {
-            $data['list'] = RefDivisi::all();
-            $data['ref_periode'] = RefPeriode::all();
+            $ref_periode = RefPeriode::where(function($q) {
+                $q->where('tahun_mulai', Date('Y'))
+                  ->orWhere('tahun_akhir', Date('Y'));
+            })->first();
+            $data['list'] = RefDivisi::where('ref_periode_id', $ref_periode->id)->get();
+            $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
         }
         // dd($data['list']);die;
         return view('back.ref_divisi.index', $data);
     }
 
-    public function RefDivisiInduk($id)
+    public function generateDivisi(Request $request)
     {
-        $data = RefDivisi::where('level', $id)->get();
+        if(RefDivisi::with('children')->where('level', 1)->exists()) {
+            $data['list'] = RefDivisi::with('children')->where('level', 1)->where('ref_periode_id', $request->ref_periode_id)->get();
+        } else {
+            $data['list'] = RefDivisi::where('ref_periode_id', $request->ref_periode_id)->get();
+        }
+
+        return view('back.ref_divisi.generate', $data);
+    }
+
+    public function generateAddModal(Request $request)
+    {
+        $data['ref_periode'] = RefPeriode::where('id', $request->ref_periode_id)->first();
+
+        return view('back.ref_divisi.generate_add', $data);
+    }
+
+    public function generateEditModal(Request $request)
+    {
+        $data['ref_periode_all'] = RefPeriode::orderBy('tahun_mulai')->get();
+        $data['ref_periode'] = RefPeriode::where('id', $request->ref_periode_id)->first();
+        $data['ref_divisi'] = RefDivisi::where('id', $request->ref_divisi_id)->first();
+        $data['induk'] = RefDivisi::where('id', $data['ref_divisi']->id_induk)->get();
+
+        return view('back.ref_divisi.generate_edit', $data);
+    }
+
+    public function RefDivisiInduk($id, $ref_periode_id)
+    {
+        $data = RefDivisi::where('level', $id)->where('ref_periode_id', $ref_periode_id)->get();
         return json_encode($data);
     }
 
@@ -46,7 +82,9 @@ class RefDivisiController extends Controller
            'nama' => $request->nama,
            'level' => $request->level,
            'id_induk' => $request->id_induk,
-           'status' => $request->status
+           'status' => $request->status,
+           'ref_periode_id' => $request->ref_periode_id
+           
        ]);
 
        if ($insert->save()) {
@@ -92,7 +130,7 @@ class RefDivisiController extends Controller
         $update->level = $request->level;
         $update->id_induk = $request->id_induk;
         $update->status = $request->status;
- 
+        
         if ($update->save()) {
              return response()->json([
                  'status' => 'success',
