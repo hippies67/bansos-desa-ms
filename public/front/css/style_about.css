@@ -20,6 +20,7 @@ p {
   font-family: 'Poppins', sans-serif;
   margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 16px !important;
 }
 
 span {
@@ -201,6 +202,10 @@ nav a:hover {
   .content {
     margin: auto;
     padding: 0 27px !important;
+  }
+
+  #mobileLogo {
+    display: block !important;
   }
 }
 

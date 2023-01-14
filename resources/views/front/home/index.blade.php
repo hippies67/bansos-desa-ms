@@ -46,16 +46,21 @@ and (max-width: 1366px)
       <a href="{{ url('/') }}"><img src="{{ asset('front/img/tahu_ngoding.png') }}" alt=""></a>
     </div>
     <ul class="menu-list">
+      <a href="{{ url('/') }}" id="mobileLogo" style="display: none;
+      position: absolute;
+      left: 45px;
+      top: 25px;
+  "><img src="{{ asset('front/img/tahu_ngoding.png') }}" alt=""></a>
       <div class="icon cancel-btn">
         <i class="fas fa-times"></i>
       </div>
 
-      <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important;">Home</a></li>
-      <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important;">About</a></li>
-      <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important;">Projects</a></li>
-      <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important;">Teams</a></li>
-      <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important;">Blog</a></li>
-      <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important;">Contact</a></li>
+      <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Home</a></li>
+      <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">About</a></li>
+      <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Projects</a></li>
+      <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Teams</a></li>
+      <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Blog</a></li>
+      <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Contact</a></li>
 
       @php
         $web_profile = App\Models\WebProfile::all();
@@ -131,7 +136,7 @@ and (max-width: 1366px)
         <div class="col-md-6">
           <img class="img-about" src="{{ asset('Team_Working.png') }}" alt="">
         </div>
-        <div class="col-md-6 text-end mt-5 pt-5">
+        <div class="col-md-6 text-end mt-5 pt-5" id="whoWeAre">
           <div class="text">
             <h2><span>WHO WE ARE?</span></h2>
             <p>Tahungoding is a community engaged in technology, especially multi-platform programming such as mobile,
@@ -156,7 +161,7 @@ and (max-width: 1366px)
             adding them to our portfolio</p>
           <a class="button btn" href="{{ url('/projects') }}">View All</a>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7" id="cardProject">
           <div class="row justify-content-around">
             @foreach($project_1 as $data)
             <div class="col-md-3 project-card">
@@ -230,7 +235,7 @@ and (max-width: 1366px)
   <div id="expertise" class="jumbotron jumbotron-fluid expertise mt-5 pt-5">
     <div class="content container-fluid" style="max-width: 1300px;">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" id="expertise2">
           <h2><span>AREA OF EXPERTISE</span> </h2>
           <p>Area of expertise at Tahungoding includes several elements such as:</p>
 
@@ -239,7 +244,7 @@ and (max-width: 1366px)
         <div class="col-md-7">
           <div class="row justify-content-around">
             <div class="col-md-3 expertise-card">
-              <div class="card">
+              <div class="card" id="webDev">
                 <img src="{{ asset('front/img/Icon_webdev.svg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h4 class="text-center">WEB <br> DEVELOPMENT</h4>
@@ -250,7 +255,7 @@ and (max-width: 1366px)
             </div>
 
             <div class="col-md-3 expertise-card">
-              <div class="card">
+              <div class="card" id="Mic">
                 <img src="{{ asset('front/img/Icon IoT.svg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h4 class="text-center">MICROSOFT <br> OFFICE</h4>
@@ -271,7 +276,7 @@ and (max-width: 1366px)
     <div class="content container-fluid" style="max-width: 1300px;">
       <div class="row">
         <div class="col-md-4">
-          <h2><span>TEAM</span> </h2>
+          <h2 id="teamTitle"><span>TEAM</span> </h2>
           <p>We are young and creative people who are trying to find and develop our talents. We can only do small
             things on our own, but together we can do extraordinary things.</p>
             <div class="row swiper swiper-teams swiper-mobile" style="display: none">
@@ -382,7 +387,7 @@ and (max-width: 1366px)
   <div id="join-us-mobile" class="jumbotron jumbotron-fluid join-us">
     <div class="content container-fluid" style="max-width: 1300px;">
       <div class="row">
-        <div class="col-md-12 mt-12 pt-5">
+        <div class="col-md-12 mt-12 pt-5" id="family">
           <h2> <span>JOIN THE FAMILY</span></h2>
           <p>Let's join us so that you can increase your horizons and develop your skills, especially in
             multi-platform programming.</p>

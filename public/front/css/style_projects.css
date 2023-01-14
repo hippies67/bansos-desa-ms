@@ -35,6 +35,7 @@ p {
   font-family: 'Poppins', sans-serif;
   margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 16px !important;
 }
 
 h2 {
@@ -151,6 +152,11 @@ h4 {
 
 /* ---------------------------------------------------------- */
 
+@media (max-width: 768px) {
+  #mobileLogo {
+    display: block !important;
+  }
+}
 /* TABLET VERSION */
 @media (min-width: 768px) {
   .card {
@@ -281,4 +287,5 @@ h4 {
     .modal-img img {
     max-width: 250px;
   }
+}
 }

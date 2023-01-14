@@ -15,6 +15,7 @@ h3,
 h4,
 p {
   font-family: 'Roboto', sans-serif;
+  font-size: 16px !important;
 }
 
 h2 {
@@ -122,6 +123,12 @@ nav a:hover {
 
 
 /* ------------------------------------------------ */
+
+@media (max-width: 768px) {
+  #mobileLogo {
+    display: block !important;
+  }
+}
 
 /* TABLET VERSION */
 @media (max-width: 800px) {

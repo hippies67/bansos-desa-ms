@@ -31,7 +31,7 @@ class TeamController extends Controller
 
     public function allTeam(Request $request)
     {
-        $data['team'] = Team::all();
+        $data['team'] = Team::groupBy('fullname')->get();
         $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
 
         if ($request->ajax()) {

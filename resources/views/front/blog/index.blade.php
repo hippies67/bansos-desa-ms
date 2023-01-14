@@ -33,16 +33,21 @@
             <a href="{{ url('/') }}"><img src="{{ asset('front/img/tahu_ngoding.png') }}" alt=""></a>
         </div>
         <ul class="menu-list">
+            <a href="{{ url('/') }}" id="mobileLogo" style="display: none;
+      position: absolute;
+      left: 45px;
+      top: 25px;
+  "><img src="{{ asset('front/img/tahu_ngoding.png') }}" alt=""></a>
             <div class="icon cancel-btn">
                 <i class="fas fa-times"></i>
             </div>
 
-            <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important;">Home</a></li>
-            <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important;">About</a></li>
-            <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important;">Projects</a></li>
-            <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important;">Teams</a></li>
-            <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important;">Blog</a></li>
-            <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important;">Contact</a></li>
+            <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Home</a></li>
+            <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">About</a></li>
+            <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Projects</a></li>
+            <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Teams</a></li>
+            <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Blog</a></li>
+            <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Contact</a></li>
 
             @php
                 $web_profile = App\Models\WebProfile::all();
@@ -72,11 +77,11 @@
 
 @section('content')
 <!-- Blog -->
-<div class="jumbotron jumbotron-fluid blog mt-5 pt-5" style="font-family: 'Poppins', sans-serif !important;">
+<div class="jumbotron jumbotron-fluid blog mt-5 pt-5" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">
     <div class="content container-fluid" style="max-width: 1300px;">
         <div class="text">
             <h2 class="text-center"><span>BLOG</span></h2>
-            <p class="text-center mt-5 mb-5" style="font-family: 'Poppins', sans-serif !important;">We strive to share what we have learned in research activities. Besides we
+            <p class="text-center mt-5 mb-5" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">We strive to share what we have learned in research activities. Besides we
                 want
                 to be beneficial to others, we also believe that the best way to learn is to teach.</p>
         </div>

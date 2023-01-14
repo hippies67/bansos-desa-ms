@@ -33,17 +33,23 @@
             <a href="{{ url('/') }}"><img src="{{ asset('front/img/tahu_ngoding.png') }}" alt=""></a>
         </div>
         <ul class="menu-list">
+            <a href="{{ url('/') }}" id="mobileLogo" style="display: none;
+      position: absolute;
+      left: 45px;
+      top: 25px;
+  "><img src="{{ asset('front/img/tahu_ngoding.png') }}" alt=""></a>
             <div class="icon cancel-btn">
                 <i class="fas fa-times"></i>
             </div>
 
-            <li><a href="{{ url('/') }}">Home</a></li>
-            <li><a href="{{ url('/about') }}">About</a></li>
-            <li><a href="{{ url('/projects') }}">Projects</a></li>
-            <li><a href="{{ url('/teams') }}">Teams</a></li>
-            <li><a href="{{ url('/blog') }}">Blog</a></li>
-            <li><a href="{{ url('/contact') }}">Contact</a></li>
+            <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Home</a></li>
+            <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">About</a></li>
+            <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Projects</a></li>
+            <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Teams</a></li>
+            <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Blog</a></li>
+            <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Contact</a></li>
 
+            
             @php
                 $web_profile = App\Models\WebProfile::all();
             @endphp

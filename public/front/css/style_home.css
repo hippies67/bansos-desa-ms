@@ -16,11 +16,11 @@ h4 {
 
 h1 {
   color: #000;
-  font-size: 50px;
+  font-size: 36px;
 }
 
 h2 {
-  font-size: 50px;
+  font-size: 36px;
 }
 
 h4,
@@ -29,7 +29,7 @@ h5 {
 }
 
 p {
-  font-size: 20px;
+  font-size: 16px;
   color: #555555;
   line-height: 35px !important;
   font-family: 'Poppins', sans-serif;
@@ -379,7 +379,7 @@ h4 {
   /* HEADER */
   .header .img-header {
     display: flex;
-    width: 670px;
+    width: 500px;
     height: auto;
     margin-left: 80px !important;
     margin-top: -50px !important;
@@ -536,6 +536,70 @@ h4 {
 
   #join-us {
     display: none;
+  }
+
+  #whoWeAre {
+    text-align: left !important;
+  }
+
+  #projects {
+    padding-top: 0px !important;
+  }
+
+  #cardProject {
+    padding-top: 40px;
+  }
+
+  .card-text {
+    font-size: 16px !important;
+  }
+  
+  h4 {
+    font-size: 20px !important;
+  }
+
+  #expertise {
+    padding-top: 0px !important;
+  }
+
+  #expertise2 {
+    padding-bottom: 40px !important;
+  }
+
+  #teams {
+    padding-top: 0px !important;
+  }
+
+  .btn-view-all {
+    margin-top: 35px;
+  }
+
+  #teamTitle {
+    text-align: center !important;
+  }
+
+  .join-us-mobile {
+    padding-top: 0px !important;
+  }
+
+  #family {
+    padding-top: 0px !important;
+  }
+
+  #webDev {
+    height: 520px !important;
+  }
+
+  #Mic {
+    height: 420px !important;
+  }
+
+  .header {
+    padding-top: 95px !important;
+  }
+
+  #mobileLogo {
+    display: block !important;
   }
 }
 
