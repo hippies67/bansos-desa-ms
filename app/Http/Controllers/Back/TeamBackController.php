@@ -43,7 +43,7 @@ class TeamBackController extends Controller
     public function generateEditJabatan(Request $request)
     {
         $data['ref_divisi'] = RefDivisi::where('ref_periode_id', $request->ref_periode_id)->get();
-
+        $data['choosed_ref_divisi_id'] = $request->ref_divisi_id;
         return view('back.team.generate_edit_jabatan', $data)->render();
     }
     

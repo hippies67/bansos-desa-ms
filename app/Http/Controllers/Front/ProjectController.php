@@ -16,7 +16,7 @@ class ProjectController extends Controller
     public function getProject(Request $request)
     {
 
-        $data['project'] = Project::paginate(6);
+        $data['project'] = Project::latest()->paginate(6);
 
     	if ($request->ajax()) {
     		$view = view('front.project.load_project', $data)->render();

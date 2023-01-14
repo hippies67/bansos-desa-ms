@@ -17,8 +17,8 @@ class ProjectBackController extends Controller
      */
     public function index()
     {
-        $data['project'] = Project::paginate(6);
-        $data['allProject'] = Project::all();
+        $data['project'] = Project::latest()->paginate(6);
+        $data['allProject'] = Project::latest()->get();
         return view('back.project.index', $data);
     }
 
@@ -40,7 +40,7 @@ class ProjectBackController extends Controller
     function projectPagination(Request $request)
     {
         if($request->ajax()) {
-            $project = Project::paginate(6);
+            $project = Project::latest()->paginate(6);
             return view('back.project.pagination', compact('project'))->render();
         }
     }

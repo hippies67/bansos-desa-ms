@@ -249,7 +249,7 @@
 
                     <div class="form-group">
                         <label for="position">Periode Jabatan</label>
-                        <select name="edit_ref_periode_id" class="form-control" onchange="periodeEditSelect(this.value)">
+                        <select name="edit_ref_periode_id" class="form-control" onchange="periodeEditSelect(this.value, '')">
                             <option value="">Pilih Periode</option>
                             @foreach($ref_periode as $item)
                                 <option value="{{ $item->id }}" {{ $item->id == $teams->ref_periode_id ? 'selected' : '' }}>{{ $item->tahun_mulai }} - {{ $item->tahun_akhir }}</option>
@@ -263,7 +263,7 @@
                             <select name="edit_ref_divisi_id" class="form-control" id="editRefDivisiId">
                                 <option value="">Pilih Jabatan</option>
                                 @foreach($ref_divisi as $item)
-                                <option value="{{ $item->id }}" {{ $item->id == $teams->ref_divisi_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -303,29 +303,6 @@
         </div>
     </div>
 </div>
-
-{{-- <div class="modal fade" tabindex="-1" role="dialog" id="deleteAllConfirm">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Hapus Semua</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('team-back.destroyAll') }}" method="post" id="destroyAllForm">
-@csrf
-<div class="modal-body">
-    Apakah anda yakin untuk <b>menghapus semua</b> team ?
-</div>
-<div class="modal-footer bg-whitesmoke br">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-    <button type="button" class="btn btn-primary" id="deleteAllModalButton">Ya, Hapus Semua</button>
-</div>
-</form>
-</div>
-</div>
-</div> --}}
 
 @endsection
 
@@ -368,18 +345,18 @@
             }
         } 
 
-        function periodeEditSelect(data) {
-            if(data != "") {
+        function periodeEditSelect(period_id, divisi_id) {
+            if(period_id != "") {
                 $(".edit-jabatan").css("display", "block");
                 $.ajax({
                     url: "{{ route('team-back.generate-edit-jabatan') }}",
                     method: "POST",
                     data: {
                         _token: "{{ csrf_token() }}",
-                        ref_periode_id: data,
+                        ref_periode_id: period_id,
+                        ref_divisi_id: divisi_id
                     },
                     success: function (result) {
-                        console.log(result);
                         $(".edit-jabatan").html(result);
                     }
                 });
@@ -440,6 +417,7 @@
     });
 
     function validateEditTeam(data) {
+        periodeEditSelect(data.ref_periode_id, data.ref_divisi_id);
         $("#editTeamForm" + data.id).validate({
             rules: {
                 edit_team_fullname: {
