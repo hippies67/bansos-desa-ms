@@ -46,7 +46,7 @@ and (max-device-width : 283px)
 { 
 
     .wrapContent img{
-        max-width: 23g0px !important;
+        max-width: 230px !important;
     }
 
   .logo a img {
