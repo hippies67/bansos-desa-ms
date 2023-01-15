@@ -45,6 +45,57 @@ and (max-device-width : 1028px)
     max-width: 350px !important;
   }
 }
+
+/* Galaxy Fold */
+@media only screen   
+and (min-device-width : 280px)   
+and (max-device-width : 283px)  
+{ 
+  .logo a img {
+    width: 90px !important;
+  }
+
+ .card {
+    width: 15rem !important;
+ }
+
+  #mobileLogo img {
+    width: 90px !important
+  }
+
+  .text h1 {
+    font-size: 26px;
+  }
+
+  .text p {
+    font-size: 14px;
+  }
+
+
+  h2 {
+    font-size: 26px !important;
+  }
+
+  .content h1 {
+    font-size: 26px !important;
+  }
+
+  .contact-us-footer p {
+    font-size: 16px !important; 
+  }
+
+  .menu-footer a {
+    font-size: 16px !important;
+  }
+
+  .identity p {
+    font-size: 16px !important;
+  }
+
+  .about video {
+    width: 230px !important;
+  }
+}  
 </style>
 @endsection
 

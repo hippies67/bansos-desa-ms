@@ -40,6 +40,9 @@ and (max-width: 1366px)
 and (min-device-width : 1024px)   
 and (max-device-width : 1028px)  
 { 
+  .card {
+    min-height: 620px !important;
+  }
   .img-header {
         margin-top: -80px !important;
         width: 480px !important;
@@ -87,6 +90,84 @@ and (max-device-width : 1028px)
     #teams {
       height: 580px !important;
     }
+}  
+
+/* Galaxy Fold */
+@media only screen   
+and (min-device-width : 280px)   
+and (max-device-width : 283px)  
+{ 
+  .logo a img {
+    width: 90px !important;
+  }
+
+  .text h1 {
+    font-size: 26px;
+  }
+
+  .text p {
+    font-size: 14px;
+  }
+
+  .button-header a:nth-child(2) {
+    margin-top: 10px; 
+  }
+
+  #header {
+    padding-top: 70px !important;
+  }
+
+  .card {
+    width: 230px;
+  }
+
+  .card img {
+    width: 210px;
+  }
+
+  .card-text {
+    font-size: 14px !important; 
+  }
+
+  #webDev {
+    height: 610px !important;
+  }
+
+  #webDev img {
+    width: 180px;
+  }
+
+  #Mic {
+    height: 500px !important;
+  }
+
+  #Mic img {
+    width: 180px;
+  }
+
+  h2 {
+    font-size: 26px !important;
+  }
+
+  .content h1 {
+    font-size: 26px !important;
+  }
+
+  .contact-us-footer p {
+    font-size: 16px !important; 
+  }
+
+  .menu-footer a {
+    font-size: 16px !important;
+  }
+
+  .identity p {
+    font-size: 16px !important;
+  }
+
+  .swiper-mobile {
+    display: none !important;
+  }
 }  
 
 </style>
@@ -218,11 +299,12 @@ and (max-device-width : 1028px)
           <div class="row justify-content-around">
             @foreach($project_1 as $data)
             <div class="col-md-3 project-card">
-              <div class="card">
+              <div class="card" style="min-height: 600px;">
                 <img src="{{ Storage::url($data->image) }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h4 class="text-center">{{ strtoupper($data->name) }}</h4>
-                  <p class="card-text" style="font-size: 20px;">{{ substr($data->description, 0, 50) }}</p>
+                  <h4 class="text-center" style="font-size: 17px;">{{ strtoupper($data->name) }}</h4>
+                  <p class="card-text" style="font-size: 16px;padding-top: 0px;
+                  margin-top: 0px;">{{ substr($data->description, 0, 150) }}</p>
                 </div>
               </div>
             </div>
@@ -230,11 +312,12 @@ and (max-device-width : 1028px)
 
             @foreach($project_2 as $data)
             <div class="col-md-3 project-card">
-              <div class="card">
+              <div class="card" style="min-height: 600px;">
                 <img src="{{ Storage::url($data->image) }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h4 class="text-center">{{ strtoupper($data->name) }}</h4>
-                  <p class="card-text" style="font-size: 20px;">{{ substr($data->description, 0, 50) }}</p>
+                  <h4 class="text-center" style="font-size: 17px;">{{ strtoupper($data->name) }}</h4>
+                  <p class="card-text" style="font-size: 16px;padding-top: 0px;
+                  margin-top: 0px;">{{ substr($data->description, 0, 150) }}</p>
                 </div>
               </div>
             </div>
@@ -333,7 +416,7 @@ and (max-device-width : 1028px)
           <p>We are young and creative people who are trying to find and develop our talents. We can only do small
             things on our own, but together we can do extraordinary things.</p>
             <div class="row swiper swiper-teams swiper-mobile" style="display: none">
-              <div class="swiper-wrapper swiper-wrapper-teams">
+              <div class="swiper-wrapper swiper-wrapper-teams" id="iqbalMobileCard">
   
                 <div class="card swiper-slide swiper-slide-teams swiper-mobile">
                   <div class="card-body mt-3 text-center">
@@ -344,7 +427,7 @@ and (max-device-width : 1028px)
                     </div>
                   </div>
                 </div>
-                <div class="card swiper-slide swiper-slide-teams">
+                <div class="card swiper-slide swiper-slide-teams" id="jajangMobileCard">
                   <div class="card-body mt-3 text-center">
                     <h5>Jajang Jamaludin</h5>
                     {{-- <p class="card-text-teams text-start" style="margin-top: -5px;font-size: 15px;">Back End Developer</p> --}}
