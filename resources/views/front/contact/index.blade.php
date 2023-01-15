@@ -23,6 +23,22 @@
         border: 1px solid #F94687;
     }
 
+   
+  @media only screen   
+and (min-device-width : 1024px)   
+and (max-device-width : 1028px)  
+{ 
+    .join-us {
+        min-width: 900px !important
+    }
+}  
+
+@media (max-width: 768px) {
+  .join-us {
+    max-width: 350px !important;
+  }
+}
+
 </style>
 @endsection
 
@@ -47,7 +63,7 @@
             <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Projects</a></li>
             <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Teams</a></li>
             <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Blog</a></li>
-            <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Contact</a></li>
+            <li><a href="{{ url('/contact') }}" class="active" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Contact</a></li>
 
             @php
                 $web_profile = App\Models\WebProfile::all();

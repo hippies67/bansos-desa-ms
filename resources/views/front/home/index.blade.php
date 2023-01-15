@@ -36,6 +36,59 @@ and (max-width: 1366px)
       }
 }  
 
+@media only screen   
+and (min-device-width : 1024px)   
+and (max-device-width : 1028px)  
+{ 
+  .img-header {
+        margin-top: -80px !important;
+        width: 480px !important;
+      }
+
+    .header {
+        padding-top: 100px !important;
+    }
+
+    .card-text {
+      font-size: 14px !important;
+    }
+
+    #webDev {
+      min-height: 500px !important;
+      width: 220px !important;
+    }
+
+    #Mic {
+      min-height: 500px !important;
+      width: 220px !important;
+    }
+
+    #iqbal {
+      width: 200px !important;
+    }
+
+    #jajang {
+      width: 150px !important;
+      margin-left: 80px !important;
+    }
+
+    .card-text-teams {
+      font-size: 12px !important;
+    }
+
+    .swiper-slide-teams {
+      height: 420px !important;
+    }
+
+   .swiper-slide-teams {
+      min-height: 200px !important;
+    }
+
+    #teams {
+      height: 580px !important;
+    }
+}  
+
 </style>
 @endsection
 
@@ -121,7 +174,7 @@ and (max-width: 1366px)
           @endforeach
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" id="wrapImageBouncer">
           <img class="img-header bouncer" src="{{ asset('View_Angle_1.png') }}" alt="">
         </div>
       </div>
@@ -323,21 +376,21 @@ and (max-width: 1366px)
           <div class="row swiper swiper-teams swiper-pc">
             <div class="swiper-wrapper swiper-wrapper-teams">
 
-              <div class="card swiper-slide swiper-slide-teams">
+              <div class="card swiper-slide swiper-slide-teams" id="iqbalCard">
                 <div class="card-body mt-3 text-center">
                   <h5>Muhammad Iqbal Rivaldi</h5>
                   <p class="card-text-teams text-center" style="margin-top: -5px;font-size: 15px;">Founder Of Tahungoding</p>
                   <div class="img-teams text-end">
-                    <img src="{{ asset('founder_1.png') }}" class="text-end" alt="..." style="width: 265px;">
+                    <img src="{{ asset('founder_1.png') }}" class="text-end" id="iqbal" alt="..." style="width: 265px;">
                   </div>
                 </div>
               </div>
-              <div class="card swiper-slide swiper-slide-teams">
+              <div class="card swiper-slide swiper-slide-teams" id="jajangCard">
                 <div class="card-body mt-3 text-center">
                   <h5>Jajang <br> Jamaludin</h5>
                   <p class="card-text-teams text-center" style="margin-top: -5px;font-size: 15px;">Founder Of Tahungoding</p>
                   <div class="img-teams text-center">
-                    <img src="{{ asset('founder_2.png') }}" class="text-center" alt="..." style="width: 190px;margin-left: 110px;">
+                    <img src="{{ asset('founder_2.png') }}" class="text-center" id="jajang" alt="..." style="width: 190px;margin-left: 110px;">
                   </div>
                 </div>
               </div>

@@ -111,7 +111,11 @@
 
 
     rect {
-        fill: #ffeb79 !important;
+        fill: #ffd800 !important;
+    }
+
+    text {
+        fill: #555555 !important;
     }
 
     image {
@@ -174,7 +178,7 @@
 <div class="jumbotron jumbotron-fluid teams mt-5 pt-5">
     <div class="content container-fluid" style="max-width: 1300px;">
         <div class="text">
-            <h2 class="text-center"><span id="teamSpan">TEAMS</span></h2>
+            <h2 class="text-center"><span>TEAMS</span></h2>
             <p class="text-center mt-5 mb-5">We are young and creative people who are trying to find and develop our
                 talents. We can only do small things on our own, but together we can do extraordinary things.</p>
         </div>
@@ -197,22 +201,7 @@
             </div>
             <br><br>
 
-            <select style="position: absolute;right: 30px;top: 30px;font-size: 14px;padding: 10px;background-color: #F57C00;color: #ffffff;width: 100px;z-index:2;" id="selectTemplate">
-                <option>olivia</option>
-                <option>diva</option>
-                <option>mila</option>
-                <option>polina</option>
-                <option>mery</option>
-                <option>rony</option>
-                <option>belinda</option>
-                <option>ula</option>
-                <option>ana</option>
-                <option>isla</option>
-                <option>deborah</option>
-            </select>
-            
             <div id="tree"></div>        
-            
             
         </div>
 

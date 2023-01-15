@@ -2,7 +2,50 @@
 @section('title', 'About')
 @section('css')
 <link rel="stylesheet" href="{{ asset('front/css/style_about.css') }}">
+<style>
+  @media only screen   
+and (min-device-width : 1024px)   
+and (max-device-width : 1028px)  
+{ 
+  .rectangle {
+    max-width: 260px !important;
+  }
 
+  .about video {
+    width: 344px !important;
+  }
+
+  .card-field {
+    padding-right: 60px !important;
+  }
+
+  .card-field p {
+    font-size: 14px !important;
+  }
+
+  .join-us {
+    min-width: 900px !important;
+  }
+
+  .card-our-program {
+    min-width: 200px !important;
+  }
+}  
+
+@media (max-width: 768px) {
+  .card-text-our-program {
+    margin-top: 140px !important;
+  }
+
+  .card-text-our-program p {
+    font-size: 14px !important;
+  }
+
+  .join-us {
+    max-width: 350px !important;
+  }
+}
+</style>
 @endsection
 
 @section('navbar')

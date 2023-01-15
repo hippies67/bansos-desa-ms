@@ -23,6 +23,23 @@
       transform: scale(1.07);
   }
 
+
+  @media only screen   
+and (min-device-width : 1024px)   
+and (max-device-width : 1028px)  
+{ 
+    .wrapContent img{
+        max-width: 800px !important;
+    }
+}  
+
+@media (max-width: 768px) {
+    .wrapContent img{
+        max-width: 340px !important;
+    }
+}
+
+
 </style>
 @endsection
 
@@ -46,7 +63,7 @@
             <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">About</a></li>
             <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Projects</a></li>
             <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Teams</a></li>
-            <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Blog</a></li>
+            <li><a href="{{ url('/blog') }}" class="active" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Blog</a></li>
             <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Contact</a></li>
 
             
@@ -96,7 +113,9 @@
                 <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important">{{ $blog->updated_at->format('d M Y')}}</small>
             </div>
             <img src="{{ asset('artikel/'. $blog->thumbnail) }}" class="img-fluid mt-3" style="border-radius: 10px;">
-            <p>{!! $blog->konten !!}</p>
+            <div class="wrapContent">
+                {!! $blog->konten !!}
+            </div>
         </div>
 
         {{-- <div id="loadBlog">

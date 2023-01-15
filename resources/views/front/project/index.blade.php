@@ -2,7 +2,25 @@
 @section('title', 'Project')
 @section('css')
 <link rel="stylesheet" href="{{ asset('front/css/style_projects.css') }}">
+<style>
+    @media only screen   
+and (min-device-width : 1024px)   
+and (max-device-width : 1028px)  
+{ 
+  .card {
+    min-width: 260px !important;
+  }
+  
+  .img-desktop { 
+    min-width: 200px !important;
+  }
 
+  .card-body h4 {
+    font-size: 21px !important;
+    line-height: 30px !important;
+  }
+}  
+</style>
 @endsection
 
 @section('navbar')

@@ -23,6 +23,17 @@
       transform: scale(1.07);
   }
 
+  @media only screen   
+and (min-device-width : 1024px)   
+and (max-device-width : 1028px)  
+{ 
+    .text h2 {
+        font-size: 40px !important;
+    }
+}  
+.text h2 {
+        font-size: 40px !important;
+    }
 </style>
 @endsection
 
