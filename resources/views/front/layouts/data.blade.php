@@ -97,36 +97,36 @@ $web_profile = App\Models\WebProfile::all();
     @yield('content')
     <!-- Footer -->
     <div class="jumbotron jumbotron-fluid footer">
-        <div class="content container-fluid" style="max-width: 1300px;">
+        <div class="content container-fluid" style="max-width: 1300px; ">
             <div class="row">
                 <div class="col-md-2 mt-5 identity">
                     <img class="logo-footer" src="{{ asset('front/img/logo_tahungoding.png') }}" alt="">
-                    <h5>TAHUNGODING HEADQUARTER</h5>
+                    <h5 style="font-family: 'Poppins', sans-serif !important;">TAHUNGODING HEADQUARTER</h5>
                     @foreach($web_profile as $data)
-                        <p>{{ $data->address }}</p>
+                        <p style="font-family: 'Poppins', sans-serif !important;">{{ $data->address }}</p>
                     @endforeach
                 </div>
                 <div class="col-md-2 mt-5 menu">
-                    <h5>Menu</h5>
+                    <h5 style="font-family: 'Poppins', sans-serif !important;">Menu</h5>
                     <div class="menu-footer" style="">
-                        <a href="{{ url('teams') }}" >Teams</a>
-                        <a href="{{ url('about') }}">About</a>
-                        <a href="{{ url('projects') }}">Projects</a>
-                        <a href="{{ url('blog') }}">Blog</a>
+                        <a href="{{ url('teams') }}" style="font-family: 'Poppins', sans-serif !important;">Teams</a>
+                        <a href="{{ url('about') }}" style="font-family: 'Poppins', sans-serif !important;">About</a>
+                        <a href="{{ url('projects') }}" style="font-family: 'Poppins', sans-serif !important;">Projects</a>
+                        <a href="{{ url('blog') }}" style="font-family: 'Poppins', sans-serif !important;">Blog</a>
                     </div>
                 </div>
                 <div class="col-md-2 mt-5 contact-us">
-                    <h5>Contact Us</h5>
+                    <h5 style="font-family: 'Poppins', sans-serif !important;">Contact Us</h5>
                     <div class="contact-us-footer mt-4">
                         @foreach($web_profile as $data)
-                        <p>{{ $data->phone }}</p>
-                        <p>tahungoding.com</p>
-                        <p>{{ $data->email }}</p>
+                        <p style="font-family: 'Poppins', sans-serif !important;">{{ $data->phone }}</p>
+                        <p style="font-family: 'Poppins', sans-serif !important;">tahungoding.com</p>
+                        <p style="font-family: 'Poppins', sans-serif !important;">{{ $data->email }}</p>
                         @endforeach
                     </div>
                 </div>
                 <div class="col-md-2 mt-5 sosial-media">
-                    <h5>Sosial Media</h5>
+                    <h5 style="font-family: 'Poppins', sans-serif !important;">Sosial Media</h5>
                     @foreach($web_profile as $data)
                         <div class="icon-sosmed-footer mt-4">
                             <a href="https://www.instagram.com/{{ $data->instagram }}" target="_blank"><img

@@ -198,15 +198,15 @@ and (max-device-width : 1028px)
   <!-- Join Us -->
   <div class="jumbotron jumbotron-fluid join-us">
     <div class="container">
-      <h2><span>Interest to join us?</span></h2>
+      <h2 style="font-family: 'Poppins', sans-serif !important;"><span>Interest to join us?</span></h2>
       <div class="row">
         <div class="col-md-6">
-          <p>Let's join us so that you can increase your horizons and develop your skills, especially in multi-platform
+          <p style="font-family: 'Poppins', sans-serif !important;">Let's join us so that you can increase your horizons and develop your skills, especially in multi-platform
             programming.</p>
         </div>
 
         <div class="col-md-6 text-end">
-          <a class="button btn" href="https://www.open.tahungoding.my.id">Join Us</a>
+          <a class="button btn" href="https://www.open.tahungoding.my.id" style="font-family: 'Poppins', sans-serif !important;">Join Us</a>
         </div>
       </div>
     </div>

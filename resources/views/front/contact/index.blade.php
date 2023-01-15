@@ -145,7 +145,7 @@ and (max-device-width : 1028px)
         <h2><span>Interest to join us?</span></h2>
         <div class="row">
             <div class="col-md-6">
-                <p>Let's join us so that you can increase your horizons and develop your skills, especially in
+                <p style="line-height: 30px;">Let's join us so that you can increase your horizons and develop your skills, especially in
                     multi-platform
                     programming.</p>
             </div>
