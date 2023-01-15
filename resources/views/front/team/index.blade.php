@@ -116,7 +116,10 @@
 
     text {
         fill: #555555 !important;
+        font-family: 'Poppins', sans-serif !important;
     }
+
+    
 
     image {
         height: initial;
