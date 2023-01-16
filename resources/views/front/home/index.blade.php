@@ -170,6 +170,109 @@ and (max-device-width : 283px)
   }
 }  
 
+/* tablet and large mobiles */
+@media only screen   
+and (min-device-width : 820px)   
+and (max-device-width : 825px)  
+{   
+  #header {
+    padding-top: 90px !important;
+  }
+  
+  .img-header {
+    width: 400px !important;
+    margin-top: -20px !important;
+  }
+
+  .img-about {
+    width: 300px !important;
+  }
+
+  .button-header a:nth-child(2) {
+    margin-top: 10px; 
+  }
+
+  h1 {
+    font-size: 30px !important;
+  }
+
+  h2 {
+    font-size: 30px !important;
+  }
+
+  .card {
+    width: 170px !important;
+    min-height: 730px !important;
+  }
+
+  .card-text {  
+    font-size: 14px !important;
+  }
+
+  h3 {
+    font-size: 20px !important;
+  }
+
+  .do-text {
+    font-size: 14px !important;
+  }
+
+  .card-body h4 {
+    font-size: 16px !important;
+  }
+
+  #webDev {
+    min-height: 630px !important;
+  }
+
+  #Mic {
+    min-height: 630px !important;
+  }
+
+  .teams h5 {
+    font-size: 16px !important;
+  }
+
+  .card-text-teams {
+    margin-top: 20px !important;
+    font-size: 12px !important;
+    line-height: 20px !important;
+  }
+
+  #iqbal {
+    width: 180px !important;
+    margin-left: 19px !important;  
+  }
+
+  #jajang {
+    width: 130px !important;
+    margin-left: 66px !important;
+  }
+
+  #iqbalCard {
+    min-height: 100px !important;
+  }
+
+  #jajangCard {
+    min-height: 100px !important;
+  }
+
+  #mobileLogo {
+    display: block !important;
+  }
+
+  .footer {
+    height: 119vh !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+} 
+
 </style>
 @endsection
 
@@ -347,19 +450,19 @@ and (max-device-width : 283px)
         <div class="col-md-4">
           <img class="mb-5" src="{{ asset('front/img/Illustrasi_field-1.svg') }}" style="padding: 10px 0;" alt="">
           <h3 style="font-weight: bold;">RESEARCH AND DEVELOPMENT</h3>
-          <p style="padding: 10px;">We conducts research and development in the field of demand chosen by the member,
+          <p style="padding: 10px;" class="do-text">We conducts research and development in the field of demand chosen by the member,
             we will facilitate the needs of members who carry out RnD.</p>
         </div>
         <div class="col-md-4">
           <img class="mb-5" src="{{ asset('front/img/Illustrasi_field-2.svg') }}" style="padding: 10px;" alt="">
           <h3 style="font-weight: bold;">SHARING <br> KNOWLEDGE</h3>
-          <p style="padding: 10px;">We can help each other and share knowledge in the field of technology, such as
+          <p style="padding: 10px;" class="do-text">We can help each other and share knowledge in the field of technology, such as
             college assignments, business ideas, product ideas, and much more.</p>
         </div>
         <div class="col-md-4">
           <img class="mb-5" src="{{ asset('front/img/Illustrasi_field-3.svg') }}" style="padding: 5px;" alt="">
           <h3 style="font-weight: bold;">BUILDING TECH <br> PRODUCTS</h3>
-          <p style="padding: 10px;">We create, build, and develop technology products that we will and have ever made
+          <p style="padding: 10px;" class="do-text">We create, build, and develop technology products that we will and have ever made
             from product ideas as outlined by tahungoding members or tahungoding clients.</p>
         </div>
       </div>

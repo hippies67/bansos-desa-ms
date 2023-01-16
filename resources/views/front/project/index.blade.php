@@ -67,6 +67,78 @@ and (max-device-width : 283px)
     font-size: 16px !important;
   }
 }  
+
+/* tablet and large mobiles */
+@media only screen   
+and (min-device-width : 820px)   
+and (max-device-width : 825px)  
+{   
+  #header {
+    padding-top: 90px !important;
+  }
+  
+  .img-header {
+    width: 400px !important;
+    margin-top: -20px !important;
+  }
+
+  .img-about {
+    width: 300px !important;
+  }
+
+  .button-header a:nth-child(2) {
+    margin-top: 10px; 
+  }
+
+  h1 {
+    font-size: 30px !important;
+  }
+
+  h2 {
+    font-size: 30px !important;
+  }
+  
+  .card-text {  
+    font-size: 14px !important;
+  }
+
+  h3 {
+    font-size: 20px !important;
+  }
+
+  .do-text {
+    font-size: 14px !important;
+  }
+
+  .card-body h4 {
+    font-size: 16px !important;
+  }
+
+  .teams h5 {
+    font-size: 16px !important;
+  }
+
+  .card-text-teams {
+    margin-top: 20px !important;
+    font-size: 12px !important;
+    line-height: 20px !important;
+  }
+
+  .footer {
+    height: 119vh !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+  
+  .card-text-our-program {
+    margin-top: 20px !important;
+  }
+} 
 </style>
 @endsection
 

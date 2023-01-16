@@ -207,6 +207,14 @@ nav a:hover {
   #mobileLogo {
     display: block !important;
   }
+
+  .logo a img {
+    width: 120px !important;
+  }
+
+  #mobileLogo img {
+    width: 120px !important;
+  }
 }
 
 

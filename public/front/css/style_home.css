@@ -601,6 +601,14 @@ h4 {
   #mobileLogo {
     display: block !important;
   }
+
+  .logo a img {
+    width: 120px !important;
+  }
+
+  #mobileLogo img {
+    width: 120px !important;
+  }
 }
 
 @media (max-width: 375px) {

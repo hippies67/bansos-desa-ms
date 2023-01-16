@@ -183,7 +183,7 @@
 
                     <div class="form-group">
                         <label for="instagram">Instagram</label>
-                        <input type="text" class="form-control" name="instagram" placeholder="Link Instagram">
+                        <input type="text" class="form-control" name="instagram" placeholder="User Instagram Tanpa @">
                     </div>
 
                     <div class="form-group">

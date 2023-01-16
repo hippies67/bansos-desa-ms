@@ -321,7 +321,7 @@ and (max-device-width : 283px)
         url: "{{ route('team.ref-divisi') }}",
         method: "POST",
         data: {
-            _token: "{{ csrf_token() }}",
+            _token: "{{ csrf_token() }}" 
         },
         success: function (result) {
 
@@ -373,7 +373,7 @@ and (max-device-width : 283px)
 
             chart.on('click', function(sender, args){ 
                 var data = sender.get(args.node.id);
-                console.log(data.name);
+                console.log(data.description);
                 $("#team").modal('show');
                                 $("#modalImage").attr('src', '');
                                 $("#modalName").html('');
@@ -455,7 +455,7 @@ and (max-device-width : 283px)
 
             chart.on('click', function(sender, args){ 
                 var data = sender.get(args.node.id);
-                console.log(data.name);
+                console.log(data.description);
                 $("#team").modal('show');
                                 $("#modalImage").attr('src', '');
                                 $("#modalName").html('');

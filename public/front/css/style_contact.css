@@ -123,6 +123,15 @@ nav a:hover{
 
 
 
+  @media (max-width: 768px) {
+    .logo a img {
+      width: 120px !important;
+    }
+  
+    #mobileLogo img {
+      width: 120px !important;
+    }
+  }
 
 /* TABLET VERSION */
 @media (min-width: 400px){
