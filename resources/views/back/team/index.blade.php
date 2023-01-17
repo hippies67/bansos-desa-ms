@@ -183,7 +183,7 @@
 
                     <div class="form-group">
                         <label for="instagram">Instagram</label>
-                        <input type="text" class="form-control" name="instagram" placeholder="User Instagram Tanpa @">
+                        <input type="text" class="form-control" name="instagram" placeholder="Username Instagram Tanpa @">
                     </div>
 
                     <div class="form-group">
@@ -244,7 +244,7 @@
 
                     <div class="form-group">
                         <label for="instagram">Instagram</label>
-                        <input type="text" class="form-control" name="edit_instagram" value="{{ $teams->instagram }}" placeholder="Link Instagram">
+                        <input type="text" class="form-control" name="edit_instagram" value="{{ $teams->instagram }}" placeholder="Username Instagram Tanpa @">
                     </div>
 
                     <div class="form-group">
