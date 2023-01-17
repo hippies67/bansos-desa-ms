@@ -112,18 +112,21 @@
 
     rect {
         fill: #ffd800 !important;
+        cursor: pointer !important;
     }
 
     text {
         fill: #555555 !important;
         font-family: 'Poppins', sans-serif !important;
+        cursor: pointer !important;
     }
 
     
 
     image {
         height: initial;
-    }
+        cursor: pointer !important;
+            }
 
     /* Galaxy Fold */
 @media only screen   
@@ -296,8 +299,8 @@ and (max-device-width : 283px)
                             <p class="text-white" id="descriptionModal">
                                 -
                             </p>
-                            <div class="icon-sosmed-footer mt-4">
-                                <a href="https://www.instagram.com/tahungoding/" target="_blank"><img
+                            <div class="icon-sosmed-footer mt-4" id="instagramWrap">
+                                <a href="https://www.instagram.com/tahungoding/" id="instagramLink" target="_blank"><img
                                         src="{{ asset('front/img/icon-instagram.svg') }}" alt=""></a>
                             </div>
                         </div>
@@ -347,7 +350,8 @@ and (max-device-width : 283px)
                 team_object['name'] = value[0];
                 team_object['img'] = value[1];
                 team_object['description'] = value[5];
-             
+                team_object['instagram'] = value[6];
+
                 wrap_team_object.push(team_object);
             }
 
@@ -387,7 +391,13 @@ and (max-device-width : 283px)
                                 } else {
                                     $("#descriptionModal").html(data.description);
                                 }
-            });   
+                                if(data.instagram == '' || data.instagram == null) {
+                                    $("#instagramWrap").css('cssText', 'display: none !important');
+                                } else {
+                                    $("#instagramWrap").css('cssText', 'display: inline-block !important');
+                                    $("#instagramLink").attr('href', 'https://www.instagram.com/' + data.instagram + '/');
+                                }
+                            });   
 
 
 
@@ -430,7 +440,8 @@ and (max-device-width : 283px)
                 team_object['name'] = value[0];
                 team_object['img'] = value[1];
                 team_object['description'] = value[5];
-             
+                team_object['instagram'] = value[6];
+
                 wrap_team_object.push(team_object);
             }
 
@@ -469,7 +480,13 @@ and (max-device-width : 283px)
                                 } else {
                                     $("#descriptionModal").html(data.description);
                                 }
-            });   
+                                if(data.instagram == '' || data.instagram == null) {
+                                    $("#instagramWrap").css('cssText', 'display: none !important');
+                                } else {
+                                    $("#instagramWrap").css('cssText', 'display: inline-block !important');
+                                    $("#instagramLink").attr('href', 'https://www.instagram.com/' + data.instagram + '/');
+                                }
+                            });   
             }
         });
     }

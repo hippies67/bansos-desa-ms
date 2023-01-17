@@ -150,7 +150,7 @@ class TeamController extends Controller
             //     break;
             // }
             
-            $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data->ref_divisi->id_induk, $data->description];
+            $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data->ref_divisi->id_induk, $data->description, $data->instagram];
             // $team_name = $data->fullname;
             // $induk_name = $data->ref_divisi->nama;
             // $induk_id = $data->ref_divisi->id_induk;

@@ -27,20 +27,20 @@ h4 {
 }
 
 .icon-sosmed-footer {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  margin: 0 11px 0 0;
-  background-color: #ffd800;
-  border-radius: 50px;
-  box-shadow: 2px 1px 0.1px 1px rgba(0, 0, 0, 0.1);
+  display: inline-block !important;
+  width: 50px !important;
+  height: 50px !important;
+  margin: 0 11px 0 0 !important;
+  background-color: #ffd800 !important;
+  border-radius: 50px !important;
+  box-shadow: 2px 1px 0.1px 1px rgba(0, 0, 0, 0.1) !important;
 }
 
 .icon-sosmed-footer img {
-  width: 28px;
-  top: 50%;
-  left: 50%;
-  transform: translate(37%, 35%);
+  width: 28px !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(37%, 35%) !important;
 }
 
 .footer {

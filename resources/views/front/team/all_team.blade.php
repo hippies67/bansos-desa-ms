@@ -24,7 +24,7 @@
             <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">About</a></li>
             <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Projects</a>
             </li>
-            <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Teams</a></li>
+            <li><a href="{{ url('/teams') }}" class="active" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Teams</a></li>
             <li><a href="{{ url('/blog') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Blog</a></li>
             <li><a href="{{ url('/contact') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Contact</a></li>
 
@@ -65,9 +65,9 @@
 
         <div id="loadTeam">
         @foreach($team as $data)
-            <img class="rounded-circle mb-3" alt="avatar1" style="border-radius: 50%; 
+            <img class="rounded-circle mb-3" alt="avatar1" onclick="modalDetail({{ $data }}, '{{ $data->ref_divisi ? $data->ref_divisi->nama : '' }}', '{{ Storage::url($data->photo) }}')" style="border-radius: 50%; 
             width: 100px;
-            height: 100px;object-fit: contain;" src="{{ Storage::url($data->photo) }}" />
+            height: 100px;object-fit: contain;cursor: pointer;" src="{{ Storage::url($data->photo) }}" />
         @endforeach
     {{-- 
             <div class="text-center mt-5 mb-5">
@@ -100,8 +100,8 @@
                             <p class="text-white" id="descriptionModal">
                                 -
                             </p>
-                            <div class="icon-sosmed-footer mt-4">
-                                <a href="https://www.instagram.com/tahungoding/" target="_blank"><img
+                            <div class="icon-sosmed-footer mt-4" id="instagramWrap">
+                                <a href="https://www.instagram.com/tahungoding/" id="instagramLink" disabled target="_blank"><img
                                         src="{{ asset('front/img/icon-instagram.svg') }}" alt=""></a>
                             </div>
                         </div>
@@ -114,197 +114,26 @@
 @endsection
 @section('js')
 <script>
-    $.ajax({
-        url: "{{ route('team.ref-divisi') }}",
-        method: "POST",
-        data: {
-            _token: "{{ csrf_token() }}",
-        },
-        success: function (result) {
-
-            var data = JSON.parse(result);
-
-            var team = data[0];
-
-            var ref_divisi = data[1];
-
-
-            var wrap_team_object = [];
-
-            for (const [key, value] of Object.entries(team)) {
-                var team_object = {};
-
-                if(value[4] != null) {
-                    team_object['pid'] = value[4] != null ? value[4].toString() : '';
-                }
-                
-                team_object['id'] = value[3] != null ? value[3].toString() : '';
-
-                team_object['title'] = value[2];
-                team_object['name'] = value[0];
-                team_object['img'] = value[1];
-                team_object['description'] = value[5];
-             
-                wrap_team_object.push(team_object);
-            }
-
-            console.log(wrap_team_object);
-
-            //JavaScript
-
-            var chart = new OrgChart(document.getElementById("tree"), {
-                template: 'polina',    
-                mouseScrool: OrgChart.none,
-                layout: OrgChart.mixed,
-                enableSearch: false,
-                nodeMouseClick: OrgChart.action.none,
-                nodeBinding: {
-                    img_0: "img",
-                    field_0: "name",
-                    field_1: "title"
-                }
-            });
-
-            chart.load(wrap_team_object);
-
-
-            chart.on('click', function(sender, args){ 
-                var data = sender.get(args.node.id);
-                console.log(data.name);
-                $("#team").modal('show');
-                                $("#modalImage").attr('src', '');
-                                $("#modalName").html('');
-                                $("#titleModalPengurus").html('');
-                                $("#descriptionModal").html('');
-                                $("#modalImage").attr('src', data.img);
-                                $("#modalName").html(data.name);
-                                $("#titleModalPengurus").html(data.title);
-                                if(data.description == '') {
-                                    $("#descriptionModal").html('-');
-                                } else {
-                                    $("#descriptionModal").html(data.description);
-                                }
-            });   
-
-
-
-
-
+    function modalDetail(data, divisi, photo) {
+        $("#team").modal('show');
+        $("#modalImage").attr('src', '');
+        $("#modalName").html('');
+        $("#titleModalPengurus").html('');
+        $("#descriptionModal").html('');
+        $("#modalImage").attr('src', photo);
+        $("#modalName").html(data.fullname);
+        $("#titleModalPengurus").html(divisi);
+        if(data.description == '') {
+            $("#descriptionModal").html('-');
+        } else {
+            $("#descriptionModal").html(data.description);
         }
-    });
-
-
-    function byYear(ref_periode_id) {
-       
-        $.ajax({
-            url: "{{ route('team.ref-divisi') }}",
-            method: "POST",
-            data: {
-                _token: "{{ csrf_token() }}",
-                ref_periode_id: ref_periode_id
-            },
-            success: function (result) {
-
-                var data = JSON.parse(result);
-
-            var team = data[0];
-
-            var ref_divisi = data[1];
-
-
-            var wrap_team_object = [];
-
-            for (const [key, value] of Object.entries(team)) {
-                var team_object = {};
-
-                if(value[4] != null) {
-                    team_object['pid'] = value[4] != null ? value[4].toString() : '';
-                }
-                
-                team_object['id'] = value[3] != null ? value[3].toString() : '';
-
-                team_object['title'] = value[2];
-                team_object['name'] = value[0];
-                team_object['img'] = value[1];
-                team_object['description'] = value[5];
-             
-                wrap_team_object.push(team_object);
-            }
-
-            console.log(wrap_team_object);
-
-            //JavaScript
-
-            var chart = new OrgChart(document.getElementById("tree"), {
-                template: 'polina',    
-                mouseScrool: OrgChart.none,
-                layout: OrgChart.mixed,
-                enableSearch: false,
-                nodeMouseClick: OrgChart.action.none,
-                nodeBinding: {
-                    img_0: "img",
-                    field_0: "name",
-                    field_1: "title"
-                }
-            });
-
-            chart.load(wrap_team_object);
-
-            chart.on('click', function(sender, args){ 
-                var data = sender.get(args.node.id);
-                console.log(data.name);
-                $("#team").modal('show');
-                                $("#modalImage").attr('src', '');
-                                $("#modalName").html('');
-                                $("#titleModalPengurus").html('');
-                                $("#descriptionModal").html('');
-                                $("#modalImage").attr('src', data.img);
-                                $("#modalName").html(data.name);
-                                $("#titleModalPengurus").html(data.title);
-                                if(data.description == '') {
-                                    $("#descriptionModal").html('-');
-                                } else {
-                                    $("#descriptionModal").html(data.description);
-                                }
-            });   
-            }
-        });
+        if(data.instagram == '' || data.instagram == null) {
+            $("#instagramWrap").css('cssText', 'display: none !important');
+        } else {
+            $("#instagramWrap").css('cssText', 'display: inline-block !important');
+            $("#instagramLink").attr('href', 'https://www.instagram.com/' + data.instagram + '/');
+        }
     }
-
-</script>
-<script>
-
-
-</script>
-<script type="text/javascript">
-    var page = 1;
-
-    function loadContent() {
-        page++;
-        loadMoreData(page);
-    }
-
-
-    function loadMoreData(page) {
-        $.ajax({
-                url: '?page=' + page,
-                type: "get",
-                beforeSend: function () {
-                    $('.ajax-load').show();
-                }
-            })
-            .done(function (data) {
-                if (data.html == " ") {
-                    $('.ajax-load').html("No more records found");
-                    return;
-                }
-                $('.ajax-load').hide();
-                $("#loadProject").append(data.html);
-            })
-            .fail(function (jqXHR, ajaxOptions, thrownError) {
-                alert('server not responding...');
-            });
-    }
-
 </script>
 @endsection
