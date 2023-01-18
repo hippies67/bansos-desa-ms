@@ -313,16 +313,17 @@ and (max-device-width : 283px)
 @endsection
 @section('js')
 <script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
     </script>
 <script>
     $.ajax({
         url: "{{ route('team.ref-divisi') }}",
         method: "POST",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         data: {
             _token: "{{ csrf_token() }}" 
         },
