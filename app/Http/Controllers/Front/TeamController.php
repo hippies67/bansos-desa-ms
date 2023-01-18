@@ -18,13 +18,55 @@ class TeamController extends Controller
      */
     public function getTeam(Request $request)
     {
-        $data['team'] = Team::paginate(20);
-        $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
+       
 
-    	if ($request->ajax()) {
-    		$view = view('front.team.load_team', $data)->render();
-            return response()->json(['html'=>$view]);
+        if($ref_periode_var = RefPeriode::where(function($q) {
+            $q->where('tahun_mulai', Date('Y'))
+              ->orWhere('tahun_akhir', Date('Y'));
+        })->exists()) {
+            $ref_periode_var = RefPeriode::where(function($q) {
+                $q->where('tahun_mulai', Date('Y'))
+                  ->orWhere('tahun_akhir', Date('Y'));
+            })->first();
         }
+       
+
+    	if(isset($ref_periode_var->id)) {
+            
+            $ref_divisi = RefDivisi::where('status', '=', 'Y')->where('ref_periode_id', $ref_periode_var->id)->get();
+            $team = Team::where('ref_periode_id', $ref_periode_var->id)->get();
+        } else {
+            if(RefPeriode::where(function($q) {
+                $q->where('tahun_mulai', Date('Y'))
+                ->orWhere('tahun_akhir', Date('Y'));
+            })->exists()) {
+                $ref_periode_var = RefPeriode::where(function($q) {
+                    $q->where('tahun_mulai', Date('Y'))
+                    ->orWhere('tahun_akhir', Date('Y'));
+                })->first();
+
+                $ref_divisi = RefDivisi::where('status', '=', 'Y')->where('ref_periode_id', $ref_periode_var->id)->get();
+                $team = Team::where('ref_periode_id', $ref_periode_var->id)->get();
+            } else {
+                $ref_divisi = RefDivisi::where('status', '=', 'Y')->get();
+            }
+        }
+
+        $wrap = [];
+
+        foreach($team as $key => $data) {
+            if($data->ref_divisi_id == '') {
+                continue;
+            }
+            
+            $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data->ref_divisi->id_induk, $data->description, $data->instagram];
+        }
+
+        $data['final'] = [$wrap, $ref_divisi];
+
+        $data['team'] = Team::paginate(20);
+        
+        $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
 
         return view('front.team.index', $data);
     }
@@ -109,12 +151,19 @@ class TeamController extends Controller
         //
     }
 
-    public function ref_divisi(Request $request)
+    public function by_year(Request $request)
     {
-
-        if(isset($request->ref_periode_id)) {
-                $ref_divisi = RefDivisi::where('status', '=', 'Y')->where('ref_periode_id', $request->ref_periode_id)->get();
-                $team = Team::where('ref_periode_id', $request->ref_periode_id)->get();
+        $year = explode("-", $request->year);
+        if($ref_periode_var = RefPeriode::where('tahun_mulai', $year[0])
+            ->orWhere('tahun_akhir', $year[1])->exists()) {
+            $ref_periode_var = RefPeriode::where('tahun_mulai', $year[0])
+                  ->orWhere('tahun_akhir',  $year[1])->first();
+            $data['ref_periode_id'] = $ref_periode_var->id;
+        }
+        
+        if(isset($ref_periode_var->id)) {
+                $ref_divisi = RefDivisi::where('status', '=', 'Y')->where('ref_periode_id', $ref_periode_var->id)->get();
+                $team = Team::where('ref_periode_id', $ref_periode_var->id)->get();
         } else {
             if(RefPeriode::where(function($q) {
                 $q->where('tahun_mulai', Date('Y'))
@@ -132,32 +181,23 @@ class TeamController extends Controller
             }
         }
 
-        
-
-        // return json_encode($ref_divisi);
-
         $wrap = [];
-        $team_name = null;
-        $id_induk = null;
-        $obj = null;
 
         foreach($team as $key => $data) {
             if($data->ref_divisi_id == '') {
                 continue;
             }
-
-            // if($key > 10) {
-            //     break;
-            // }
             
             $wrap[] = [$data->fullname, Storage::url($data->photo), $data->ref_divisi->nama, $data->ref_divisi->id, $data->ref_divisi->id_induk, $data->description, $data->instagram];
-            // $team_name = $data->fullname;
-            // $induk_name = $data->ref_divisi->nama;
-            // $induk_id = $data->ref_divisi->id_induk;
         }
 
-        $final = [$wrap, $ref_divisi];
-        return json_encode($final);
+        $data['final'] = [$wrap, $ref_divisi];
+
+        $data['team'] = Team::paginate(20);
+        
+        $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
+
+        return view('front.team.index', $data);
 
     }
 }
