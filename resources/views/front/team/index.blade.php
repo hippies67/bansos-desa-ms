@@ -323,7 +323,7 @@ and (max-device-width : 283px)
     $.ajax({
         url: "{{ route('team.ref-divisi') }}",
         method: "POST",
-        headers: {'X-CSRF-TOKEN': {{ csrf_token() }}},
+        headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
         data: {
             _token: "{{ csrf_token() }}" 
         },
@@ -413,7 +413,7 @@ and (max-device-width : 283px)
         $.ajax({
             url: "{{ route('team.ref-divisi') }}",
             method: "POST",
-            headers: {'X-CSRF-TOKEN': {{ csrf_token() }}},
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             data: {
                 _token: "{{ csrf_token() }}",
                 ref_periode_id: ref_periode_id
