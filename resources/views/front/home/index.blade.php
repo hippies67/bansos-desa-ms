@@ -19,14 +19,14 @@
     position: absolute;
   }
 
-  @media only screen   
+  /* @media only screen   
 and (min-device-width : 768px)   
 and (max-device-width : 1024px)  
 { 
   .img-header {
         width: 540px !important;
       }
-}  
+}   */
 @media only screen   
 and (min-width: 1030px)   
 and (max-width: 1366px)  
@@ -200,11 +200,6 @@ and (max-device-width : 825px)
     font-size: 30px !important;
   }
 
-  .card {
-    width: 170px !important;
-    min-height: 730px !important;
-  }
-
   .card-text {  
     font-size: 14px !important;
   }
@@ -241,7 +236,7 @@ and (max-device-width : 825px)
 
   #iqbal {
     width: 180px !important;
-    margin-left: 19px !important;  
+    margin-left: 10px !important;  
   }
 
   #jajang {
@@ -262,7 +257,7 @@ and (max-device-width : 825px)
   }
 
   .footer {
-    height: 119vh !important;
+    height: 76vh !important;
   }
 
   ul li a.active {
@@ -271,8 +266,220 @@ and (max-device-width : 825px)
     padding-bottom: 5px;
     transition: 0.6s;
   }
+
+  #projects {
+    display: none !important;
+  }
+
+  #projectsTablet { 
+    display: block !important;
+  }
+
+  #projectsTablet #cardProjectTablet {
+    margin-top: 40px !important;
+  }
+
+  #project1Tablet {
+    height: 460px !important;
+    min-height: 460px !important;
+  }
+  #project2Tablet {
+    height: 460px !important;
+    min-height: 460px !important;
+  }
+
+  #expertise {
+    display: none;
+  }
+
+  #expertiseTablet {
+    display: block !important;
+  }
+
+  #wrapSubExpertiseTablet {
+    margin-top: 40px !important;
+  }
+
+  #webDevTablet {
+    height: 430px !important;
+    min-height: 430px !important;
+  }
+
+  #MicTablet {
+    height: 430px !important;
+    min-height: 430px !important;
+  }
+
+  #teams {
+    display: none;
+  }
+
+  #teamsTablet {
+    display: block !important;
+  }
+
+  .btn-view-all-tablet {
+    margin-top: 40px !important;
+  }
+
+  #wrapSubTeamTablet {
+    margin-top: 40px !important;
+  }
+
+  #iqbalTabletWrap {
+    margin-left: 0px !important;
+  }
 } 
 
+@media (min-width: 767px) and (max-width: 780px){
+  .img-header {
+    width: 350px !important;
+    margin-top: -20px !important;
+  }
+  
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  #projects {
+    display: none !important;
+  }
+
+  #projectsTablet { 
+    display: block !important;
+  }
+
+  /* .card img {
+    width: 250px !important;
+  } */
+
+  .card {
+    height: 560px;
+  }
+
+  #expertise {
+    display: none;
+  }
+
+  #expertiseTablet {
+    display: block !important;
+  }
+  
+  #webDevTablet {
+    height: 530px !important;
+  }
+
+  #webDevTablet img {
+    width: 200px !important;
+  }
+
+  #MicTablet {
+    height: 530px !important;
+  }
+
+  #MicTablet img {
+    width: 200px !important;
+  }
+
+  #iqbalTablet {
+    width: 200px !important;
+    margin-bottom: 200px !important;
+  }
+
+  #join-us-mobile {
+    margin-top: 100px !important;
+  }
+
+  #teams {
+    display: none;
+  }
+  
+  .footer {
+    height: 76vh !important;
+  }
+
+  .project-card .card {
+    height: 260px !important;
+  }
+
+  #teamsTablet {
+    display: block !important;
+  }
+
+  #cardProjectTablet {
+    margin-top: 50px !important;
+  }
+}
+
+@media (min-width: 912px) and (max-width: 915px){
+  h1 {
+    font-size: 30px !important;
+  }
+
+  h2 {
+    font-size: 30px !important;
+  }
+  
+  .header .img-header {    
+    width: 420px !important;
+    margin-top: 0px !important;
+  }
+
+  #projects {
+    display: none !important;
+  }
+
+  #projectsTablet { 
+    display: block !important;
+  }
+
+  #cardProjectTablet {
+    margin-top: 50px !important;
+  }
+
+  #expertise {
+    display: none;
+  }
+
+  #expertiseTablet {
+    display: block !important;
+  }
+
+  #wrapSubExpertiseTablet {
+    margin-top: 50px !important;
+  }
+
+  #teams {
+    display: none;
+  }
+
+  #teamsTablet {
+    display: block !important;
+  }
+
+  #wrapSubTeamTablet {
+    margin-top: 35px !important;
+  }
+
+  .btn-view-all-tablet {
+    margin-top: 40px !important;
+  }
+
+  .container, .container-md, .container-sm {
+    max-width: 950px !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+}
 </style>
 @endsection
 
@@ -292,7 +499,7 @@ and (max-device-width : 825px)
         <i class="fas fa-times"></i>
       </div>
 
-      <li><a href="{{ url('/') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Home</a></li>
+      <li><a href="{{ url('/') }}" class="active" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Home</a></li>
       <li><a href="{{ url('/about') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">About</a></li>
       <li><a href="{{ url('/projects') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Projects</a></li>
       <li><a href="{{ url('/teams') }}" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">Teams</a></li>
@@ -440,6 +647,48 @@ and (max-device-width : 825px)
       </div>
     </div>
   </div>
+
+  <div id="projectsTablet" class="jumbotron jumbotron-fluid projects mt-5 pt-5" style="display: none;">
+    <div class="content container-fluid" style="max-width: 1300px;">
+      <div class="row">
+        <div class="col-md-12">
+          <h2><span>OUR PROJECTS</span></h2>
+          <p>These products are some of the applications that we have created in collaboration with clients and we are
+            adding them to our portfolio</p>
+          <a class="button btn" href="{{ url('/projects') }}">View All</a>
+        </div>
+        <div class="col-md-12" id="cardProjectTablet">
+          <div class="row justify-content-around">
+            @foreach($project_1 as $data)
+            <div class="col-md-6 project-card">
+              <div class="card" style="width: 100% !important;" id="project1Tablet">
+                <img src="{{ Storage::url($data->image) }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="text-center" style="font-size: 17px;">{{ strtoupper($data->name) }}</h4>
+                  <p class="card-text" style="font-size: 16px;padding-top: 0px;
+                  margin-top: 0px;">{{ substr($data->description, 0, 150) }}</p>
+                </div>
+              </div>
+            </div>
+            @endforeach
+
+            @foreach($project_2 as $data)
+            <div class="col-md-6 project-card">
+              <div class="card" style="width: 100% !important;" id="project2Tablet">
+                <img src="{{ Storage::url($data->image) }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="text-center" style="font-size: 17px;">{{ strtoupper($data->name) }}</h4>
+                  <p class="card-text" style="font-size: 16px;padding-top: 0px;
+                  margin-top: 0px;">{{ substr($data->description, 0, 150) }}</p>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Akhir Projects -->
 
   <!-- Field -->
@@ -478,7 +727,7 @@ and (max-device-width : 825px)
           <h2><span>AREA OF EXPERTISE</span> </h2>
           <p>Area of expertise at Tahungoding includes several elements such as:</p>
 
-          <a class="button btn" href="#">View All</a>
+          {{-- <a class="button btn" href="#">View All</a> --}}
         </div>
         <div class="col-md-7">
           <div class="row justify-content-around">
@@ -495,6 +744,44 @@ and (max-device-width : 825px)
 
             <div class="col-md-3 expertise-card">
               <div class="card" id="Mic">
+                <img src="{{ asset('front/img/Icon IoT.svg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="text-center">MICROSOFT <br> OFFICE</h4>
+                  <p class="card-text" style="font-size: 17px;">Microsoft Office division has two areas of interest, some of which are
+                    Word and Excel.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="expertiseTablet" class="jumbotron jumbotron-fluid expertise mt-5 pt-5" style="display: none;">
+    <div class="content container-fluid" style="max-width: 1300px;">
+      <div class="row">
+        <div class="col-md-12" id="expertise2">
+          <h2><span>AREA OF EXPERTISE</span> </h2>
+          <p>Area of expertise at Tahungoding includes several elements such as:</p>
+
+          <a class="button btn" href="#">View All</a>
+        </div>
+        <div class="col-md-12" id="wrapSubExpertiseTablet">
+          <div class="row justify-content-around">
+            <div class="col-md-6 expertise-card">
+              <div class="card" id="webDevTablet" style="width: 100% !important;">
+                <img src="{{ asset('front/img/Icon_webdev.svg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h4 class="text-center">WEB <br> DEVELOPMENT</h4>
+                  <p class="card-text" style="font-size: 17px;">Web development division has three areas of specialization, some of which are
+                    UI/UX Design, Frontend Development, and Backend Development.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 expertise-card">
+              <div class="card" id="MicTablet" style="width: 100% !important;">
                 <img src="{{ asset('front/img/Icon IoT.svg') }}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h4 class="text-center">MICROSOFT <br> OFFICE</h4>
@@ -596,6 +883,49 @@ and (max-device-width : 825px)
             </div>
 
           </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="teamsTablet" class="jumbotron jumbotron-fluid teams mt-5 pt-5" style="display: none;">
+    <div class="content container-fluid" style="max-width: 1300px;">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 id="teamTitle"><span>TEAM</span> </h2>
+          <p>We are young and creative people who are trying to find and develop our talents. We can only do small
+            things on our own, but together we can do extraordinary things.</p>
+           <div class="row mt-4" id="wrapSubTeamTablet">
+            <div class="col-md-12">
+              <div class="row justify-content-around">
+                <div class="col-md-6 expertise-card">
+                  <div class="card" style="width: 100% !important;height: 400px !important;">
+                    <div class="card-body text-center">
+                      <h5>Muhammad Iqbal <br> Rivaldi</h5>
+                      <p class="card-text-teams text-center" style="margin-top: -5px;font-size: 13px;">Founder Of Tahungoding</p>
+                      <div class="img-teams text-end">
+                        <img src="{{ asset('founder_1.png') }}" class="text-end" id="iqbalTabletWrap" alt="..." style="width: 270px;margin-left: -25px;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-6 expertise-card">
+                  <div class="card" style="width: 100% !important;height: 400px !important;">
+                    <div class="card-body text-center">
+                      <h5>Jajang <br> Jamaludin</h5>
+                      <p class="card-text-teams text-center" style="margin-top: -5px;font-size: 13px;">Founder Of Tahungoding</p>
+                      <div class="img-teams text-center" id="jajangTabletWrap">
+                        <img src="{{ asset('founder_2.png') }}" class="text-center" alt="..." style="width: 197px;margin-left: 110px;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </div>
+          <a class="button btn btn-view-all btn-view-all-tablet" href="{{ url('/teams') }}">View All</a>
         </div>
       </div>
     </div>

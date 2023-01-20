@@ -159,7 +159,7 @@ and (max-device-width : 825px)
   }
 
   .footer {
-    height: 119vh !important;
+    height: 76vh !important;
   }
 
   ul li a.active {
@@ -172,7 +172,71 @@ and (max-device-width : 825px)
   .card-text-our-program {
     margin-top: 20px !important;
   }
+
+  .join-us {
+    width: 650px !important;
+  }
+
+  #mobileLogo {
+    display: block !important;
+  }
+  
+  .icon-sosmed-navbar {
+    display: block !important;
+  }
+  
 } 
+
+@media (min-width: 767px) and (max-width: 780px){
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .footer {
+    height: 76vh !important;
+  }
+
+  .project-card .card {
+    height: 260px !important;
+  }
+
+  .card-text-our-program {
+    margin-top: 90px !important;
+  }
+
+  .join-us {
+    max-width: 650px !important;
+  }
+}
+
+@media (min-width: 912px) and (max-width: 915px){
+  h1 {
+    font-size: 30px !important;
+  }
+
+  h2 {
+    font-size: 30px !important;
+  }
+
+  .container, .container-md, .container-sm {
+    max-width: 950px !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+
+  .card-text-our-program {
+    margin-top: 50px !important;
+  }
+}
 </style>
 @endsection
 
@@ -254,8 +318,8 @@ and (max-device-width : 825px)
   <div class="jumbotron jumbotron-fluid field mt-5 pt-5">
     <div class="content container-fluid" style="max-width: 1300px;">
       <h2 class="text-center"><span>WHAT WE DO</span></h2>
-      <p class="text-center mt-5">CodeLabs members from various generations have succeeded in creating many good quality
-        products. CodeLabs also collaborates with other Startup to build more complex products.</p>
+      <p class="text-center mt-5">Tahungoding members from various generations have succeeded in creating many good quality
+        products. Tahungoding also collaborates with other Startup to build more complex products.</p>
       <div class="row text-center mt-5">
         <div class="col-md-4">
           <div class="card-field">

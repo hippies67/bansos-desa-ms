@@ -89,6 +89,115 @@ and (max-device-width : 283px)
     display: none !important;
   }
 }  
+
+
+@media (min-width: 767px) and (max-width: 780px){
+  h1 {
+    font-size: 30px !important;
+  }
+
+  .text h2 {
+    font-size: 30px !important;
+  }
+
+  .footer {
+    height: 70vh !important;
+  }
+  
+  .join-us {
+    max-width: 650px !important;
+  }
+
+}
+
+@media only screen   
+and (min-device-width : 820px)   
+and (max-device-width : 825px)  
+{   
+  #header {
+    padding-top: 90px !important;
+  }
+  
+  .img-header {
+    width: 400px !important;
+    margin-top: -20px !important;
+  }
+
+  .img-about {
+    width: 300px !important;
+  }
+
+  .button-header a:nth-child(2) {
+    margin-top: 10px; 
+  }
+
+  h1 {
+    font-size: 30px !important;
+  }
+
+  .text h2 {
+    font-size: 30px !important;
+  }
+
+  h3 {
+    font-size: 20px !important;
+  }
+
+  .footer {
+    height: 72vh !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+  
+  .card-text-our-program {
+    margin-top: 20px !important;
+  }
+
+  .join-us {
+    width: 650px !important;
+  }
+
+  #mobileLogo {
+    display: block !important;
+  }
+  
+  .icon-sosmed-navbar {
+    display: block !important;
+  }
+
+  .wrapContent img{
+        max-width: 400px !important;
+    }
+}
+@media (min-width: 912px) and (max-width: 915px){
+  h1 {
+    font-size: 30px !important;
+  }
+
+  h2 {
+    font-size: 30px !important;
+  }
+
+  .container, .container-md, .container-sm {
+    max-width: 950px !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+}
+ 
+ p {
+  line-height: 30px !important;
+ }
 </style>
 @endsection
 

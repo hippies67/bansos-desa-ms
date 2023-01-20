@@ -125,7 +125,7 @@ and (max-device-width : 825px)
   }
 
   .footer {
-    height: 119vh !important;
+    height: 76vh !important;
   }
 
   ul li a.active {
@@ -138,7 +138,77 @@ and (max-device-width : 825px)
   .card-text-our-program {
     margin-top: 20px !important;
   }
+
+  #mobileLogo {
+    display: block !important;
+  }
+  
+  .icon-sosmed-navbar {
+    display: block !important;
+  }
 } 
+@media (min-width: 767px) and (max-width: 780px){
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .footer {
+    height: 76vh !important;
+  }
+
+  .project-card .card {
+    height: 260px !important;
+  }
+
+  .card-text-our-program {
+    margin-top: 90px !important;
+  }
+
+  #projectAll {
+    display: none;
+  }
+
+  #projectTabletWrap {
+    display: flex !important;
+  }
+
+  .card {
+    width: 350px !important;
+  }
+}
+
+@media (min-width: 912px) and (max-width: 915px){
+  h1 {
+    font-size: 30px !important;
+  }
+
+  h2 {
+    font-size: 30px !important;
+  }
+
+  .container, .container-md, .container-sm {
+    max-width: 950px !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+
+  .card-text-our-program {
+    margin-top: 50px !important;
+  }
+
+  h4 {
+    font-size: 18px !important;
+  }
+}
 </style>
 @endsection
 

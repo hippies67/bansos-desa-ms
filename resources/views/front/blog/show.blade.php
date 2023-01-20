@@ -90,6 +90,96 @@ and (max-device-width : 283px)
     font-size: 16px !important;
   }
 }  
+
+@media only screen   
+and (min-device-width : 820px)   
+and (max-device-width : 825px)  
+{   
+  #header {
+    padding-top: 90px !important;
+  }
+  
+  .img-header {
+    width: 400px !important;
+    margin-top: -20px !important;
+  }
+
+  .img-about {
+    width: 300px !important;
+  }
+
+  .button-header a:nth-child(2) {
+    margin-top: 10px; 
+  }
+
+  h1 {
+    font-size: 30px !important;
+  }
+
+  .text h2 {
+    font-size: 30px !important;
+  }
+
+  h3 {
+    font-size: 20px !important;
+  }
+
+  .footer {
+    height: 72vh !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+  
+  .card-text-our-program {
+    margin-top: 20px !important;
+  }
+
+  .join-us {
+    width: 650px !important;
+  }
+
+  #mobileLogo {
+    display: block !important;
+  }
+  
+  .icon-sosmed-navbar {
+    display: block !important;
+  }
+
+  .wrapContent img{
+        max-width: 400px !important;
+    }
+}
+
+@media (min-width: 912px) and (max-width: 915px){
+  h1 {
+    font-size: 30px !important;
+  }
+
+  .text h2 {
+    font-size: 30px !important;
+  }
+
+  .container, .container-md, .container-sm {
+    max-width: 950px !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+
+  .wrapContent img{
+        max-width: 400px !important;
+    }
+}
 </style>
 @endsection
 
@@ -162,7 +252,7 @@ and (max-device-width : 283px)
                 <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important;">&#8226;</small>
                 <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important">{{ $blog->updated_at->format('d M Y')}}</small>
             </div>
-            <img src="{{ asset('artikel/'. $blog->thumbnail) }}" class="img-fluid mt-3" style="border-radius: 10px;">
+            <img src="{{ asset('artikel/'. $blog->thumbnail) }}" class="img-fluid mt-3 mb-4" style="border-radius: 10px;">
             <div class="wrapContent">
                 {!! $blog->konten !!}
             </div>
