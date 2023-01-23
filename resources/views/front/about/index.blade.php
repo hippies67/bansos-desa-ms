@@ -197,7 +197,11 @@ and (max-device-width : 825px)
   }
 
   .footer {
-    height: 76vh !important;
+    height: 86vh !important;
+  }
+
+  .content {
+    max-width: 700px !important;
   }
 
   .project-card .card {

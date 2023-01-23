@@ -181,12 +181,16 @@
     font-size: 30px;
   }
 
+  .content {
+    max-width: 700px !important;
+  }
+
   h2 {
     font-size: 30px;
   }
 
   .footer {
-    height: 76vh !important;
+    height: 86vh !important;
   }
 
   .pengurus-img {

@@ -95,8 +95,12 @@ and (max-device-width : 283px)
     font-size: 30px !important;
   }
 
+  .content {
+    max-width: 700px !important;
+  }
+
   .footer {
-    height: 70vh !important;
+    height: 86vh !important;
   }
 
   #loadTeam img {
@@ -190,6 +194,12 @@ and (max-device-width : 825px)
 p {
   line-height: 30px !important;
  }
+
+ @media screen and (min-width: 1900px) {
+  .footer {
+    height: 40vh !important;
+  }
+}
 </style>
 @endsection
 

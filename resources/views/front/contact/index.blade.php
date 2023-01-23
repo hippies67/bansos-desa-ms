@@ -101,9 +101,13 @@ and (max-device-width : 283px)
   }
 
   .footer {
-    height: 70vh !important;
+    height: 86vh !important;
   }
   
+  .content {
+    max-width: 700px !important;
+  }
+
   .join-us {
     max-width: 650px !important;
   }
@@ -198,6 +202,12 @@ and (max-device-width : 825px)
  p {
   line-height: 30px !important;
  }
+
+ @media screen and (min-width: 1900px) {
+  .footer {
+    height: 30vh !important;
+  }
+}
 </style>
 @endsection
 

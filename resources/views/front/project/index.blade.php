@@ -156,6 +156,10 @@ and (max-device-width : 825px)
     font-size: 30px;
   }
 
+  .content {
+    max-width: 700px !important;
+  }
+  
   .footer {
     height: 76vh !important;
   }

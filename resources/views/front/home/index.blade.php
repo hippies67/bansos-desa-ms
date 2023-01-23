@@ -329,14 +329,34 @@ and (max-device-width : 825px)
   #iqbalTabletWrap {
     margin-left: 0px !important;
   }
+   
+  .icon-sosmed-navbar {
+    display: block !important;
+  }
+
 } 
 
 @media (min-width: 767px) and (max-width: 780px){
+  .content {
+    max-width: 700px !important;
+  }
   .img-header {
     width: 350px !important;
     margin-top: -20px !important;
   }
   
+  .about .img-about {
+    margin: 80px 0 0 -47px !important;
+  }
+
+  .button-header a:nth-child(2) {
+    margin-top: 15px; 
+  }
+  
+  .footer {
+    height: 86vh !important;
+  }
+
   h1 {
     font-size: 30px;
   }
@@ -396,10 +416,6 @@ and (max-device-width : 825px)
 
   #teams {
     display: none;
-  }
-  
-  .footer {
-    height: 76vh !important;
   }
 
   .project-card .card {
