@@ -1029,10 +1029,10 @@ and (max-device-width : 825px)
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script>
   function loop() {
-    $('.bouncer').animate({'top': '180'}, {
+    $('.bouncer').animate({'top': '170'}, {
         duration: 2300, 
         complete: function() {
-            $('.bouncer').animate({top: 150}, {
+            $('.bouncer').animate({top: 190}, {
                 duration: 2300, 
                 complete: loop});
         }});
