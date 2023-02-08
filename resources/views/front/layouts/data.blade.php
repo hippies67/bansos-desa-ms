@@ -85,7 +85,17 @@ $web_profile = App\Models\WebProfile::all();
 
     </script>
 
-    <title>Home</title>
+     <!-- Google tag (gtag.js) -->
+     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-256701616-1"></script>
+     
+     <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+ 
+     gtag('config', 'UA-256701616-1');
+     </script>
+
 </head>
 
 <body style='display: none'>
@@ -156,6 +166,7 @@ $web_profile = App\Models\WebProfile::all();
 
     <!-- Slider Teams & Clients -->
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
     <script>
         // Slider Teams
         const swiperTeams = new Swiper('.swiper-teams', {
