@@ -44,6 +44,8 @@ let dataSet = [
     "use strict"
     //example 1
     var table = $('#example').DataTable({
+        pageLength : 5,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 100]],
         createdRow: function ( row, data, index ) {
            $(row).addClass('selected')
         } 

@@ -8,8 +8,11 @@ use App\Models\User;
 use App\Models\Artikel;
 use App\Models\Project;
 use App\Models\Team;
-
 use Auth;
+use Analytics;
+use App\Models\Contact;
+use Spatie\Analytics\Period;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -25,7 +28,36 @@ class DashboardController extends Controller
         $data['total_artikel'] = Artikel::count();
         $data['total_project'] = Project::count();
         $data['total_team'] = Team::count();
+        $data['total_contact'] = Contact::count();
 
+        //retrieve visitors and pageview data for the current day and the last seven days
+
+        // $data['total_visitors'] = Analytics::fetchVisitorsAndPageViews(Period::create(Carbon::now()->subYear(), Carbon::now()));
+
+        // //retrieve visitors and pageviews since the 6 months ago
+        // $data['top_browsers'] = Analytics::fetchTopBrowsers(Period::create(Carbon::now()->subYear(), Carbon::now()));
+
+        // $data['user_types'] = Analytics::fetchUserTypes(Period::create(Carbon::now()->subYear(), Carbon::now()));
+
+        //retrieve sessions and pageviews with yearMonth dimension since 1 year ago
+        $data['devices'] = Analytics::performQuery(
+            Period::create(Carbon::now()->subYear(), Carbon::now()),
+            'ga:sessions',
+            [
+                'metrics' => 'ga:sessions',
+                'dimensions' => 'ga:operatingSystem,ga:operatingSystemVersion,ga:browser,ga:browserVersion'
+            ]
+        );
+
+        $data['visitor_unique'] = Analytics::performQuery(
+            Period::create(Carbon::now(), Carbon::now()),
+            'ga:users'
+        );
+
+        $data['page_views'] = Analytics::fetchVisitorsAndPageViews(Period::create(Carbon::now()->subYear(), Carbon::now()));
+
+        // dd($data['top']);
+        
         return view('back.dashboard.data', $data);
     }
 

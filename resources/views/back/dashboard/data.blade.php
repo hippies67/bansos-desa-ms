@@ -11,6 +11,7 @@ Dashboard
 @section('css')
 <link href="{{ asset('vendor/owl-carousel/owl.carousel.css" rel="stylesheet') }}">
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
 
@@ -43,7 +44,7 @@ SVG Icons - svgicons.sparkk.fr
 
 @section('content')
 <div class="row">
-    <div class="col-xl-3 col-xxl-6 col-sm-6">
+    <div class="col-xl-4 col-xxl-4 col-sm-4">
         <div class="card gradient-bx text-white bg-danger rounded">
             <div class="card-body">
                 <div class="media align-items-center">
@@ -62,7 +63,7 @@ SVG Icons - svgicons.sparkk.fr
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-xxl-6 col-sm-6">
+    <div class="col-xl-4 col-xxl-4 col-sm-4">
         <div class="card gradient-bx text-white bg-success rounded">
             <div class="card-body">
                 <div class="media align-items-center">
@@ -81,7 +82,7 @@ SVG Icons - svgicons.sparkk.fr
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-xxl-6 col-sm-6">
+    <div class="col-xl-4 col-xxl-4 col-sm-4">
         <div class="card gradient-bx text-white bg-info rounded">
             <div class="card-body">
                 <div class="media align-items-center">
@@ -105,7 +106,7 @@ SVG Icons - svgicons.sparkk.fr
             <div class="card-body">
                 <div class="media align-items-center">
                     <div class="media-body">
-                        <p class="mb-1">Team</p>
+                        <p class="mb-1">Total Team</p>
                         <div class="d-flex flex-wrap">
                             <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_team }}</h2>
                         </div>
@@ -115,6 +116,79 @@ SVG Icons - svgicons.sparkk.fr
 							<path d="M15.573,11.624c0.568-0.478,0.947-1.219,0.947-2.019c0-1.37-1.108-2.569-2.371-2.569s-2.371,1.2-2.371,2.569c0,0.8,0.379,1.542,0.946,2.019c-0.253,0.089-0.496,0.2-0.728,0.332c-0.743-0.898-1.745-1.573-2.891-1.911c0.877-0.61,1.486-1.666,1.486-2.812c0-1.79-1.479-3.359-3.162-3.359S4.269,5.443,4.269,7.233c0,1.146,0.608,2.202,1.486,2.812c-2.454,0.725-4.252,2.998-4.252,5.685c0,0.218,0.178,0.396,0.395,0.396h16.203c0.218,0,0.396-0.178,0.396-0.396C18.497,13.831,17.273,12.216,15.573,11.624 M12.568,9.605c0-0.822,0.689-1.779,1.581-1.779s1.58,0.957,1.58,1.779s-0.688,1.779-1.58,1.779S12.568,10.427,12.568,9.605 M5.06,7.233c0-1.213,1.014-2.569,2.371-2.569c1.358,0,2.371,1.355,2.371,2.569S8.789,9.802,7.431,9.802C6.073,9.802,5.06,8.447,5.06,7.233 M2.309,15.335c0.202-2.649,2.423-4.742,5.122-4.742s4.921,2.093,5.122,4.742H2.309z M13.346,15.335c-0.067-0.997-0.382-1.928-0.882-2.732c0.502-0.271,1.075-0.429,1.686-0.429c1.828,0,3.338,1.385,3.535,3.161H13.346z"></path>
 						</svg>
                     </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-xxl-6 col-sm-6">
+        <div class="card gradient-bx text-white bg-secondary rounded">
+            <div class="card-body">
+                <div class="media align-items-center">
+                    <div class="media-body">
+                        <p class="mb-1">Total Contact</p>
+                        <div class="d-flex flex-wrap">
+                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_contact }}</h2>
+                        </div>
+                    </div>
+                    <span class="border rounded-circle p-4">
+                        <svg class="svg-icon" viewBox="0 0 20 20">
+							<path d="M15.573,11.624c0.568-0.478,0.947-1.219,0.947-2.019c0-1.37-1.108-2.569-2.371-2.569s-2.371,1.2-2.371,2.569c0,0.8,0.379,1.542,0.946,2.019c-0.253,0.089-0.496,0.2-0.728,0.332c-0.743-0.898-1.745-1.573-2.891-1.911c0.877-0.61,1.486-1.666,1.486-2.812c0-1.79-1.479-3.359-3.162-3.359S4.269,5.443,4.269,7.233c0,1.146,0.608,2.202,1.486,2.812c-2.454,0.725-4.252,2.998-4.252,5.685c0,0.218,0.178,0.396,0.395,0.396h16.203c0.218,0,0.396-0.178,0.396-0.396C18.497,13.831,17.273,12.216,15.573,11.624 M12.568,9.605c0-0.822,0.689-1.779,1.581-1.779s1.58,0.957,1.58,1.779s-0.688,1.779-1.58,1.779S12.568,10.427,12.568,9.605 M5.06,7.233c0-1.213,1.014-2.569,2.371-2.569c1.358,0,2.371,1.355,2.371,2.569S8.789,9.802,7.431,9.802C6.073,9.802,5.06,8.447,5.06,7.233 M2.309,15.335c0.202-2.649,2.423-4.742,5.122-4.742s4.921,2.093,5.122,4.742H2.309z M13.346,15.335c-0.067-0.997-0.382-1.928-0.882-2.732c0.502-0.271,1.075-0.429,1.686-0.429c1.828,0,3.338,1.385,3.535,3.161H13.346z"></path>
+						</svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-sm-4">
+        <div class="card active_users">
+            <div class="card-header bg-success border-0 pb-4 d-block">
+                <h4 class="card-title text-white">Total Pengunjung (Unik)</h4>
+                <h2 class="fs-30 font-w600 text-white mb-0 mr-3" style="margin-top: 20px ;">{{ $visitor_unique[0][0] }}</h2>
+            </div>
+            
+            <div class="card-body pt-0">
+                <div class="list-group-flush mt-4">
+                    <div class="list-group-item bg-transparent d-flex justify-content-between px-0 py-1 font-weight-semi-bold border-top-0">
+                        <p class="mb-0">Halaman Teratas</p>
+                        <p class="mb-0">View</p>
+                    </div>
+                    @foreach($page_views as $data)
+                    <div class="list-group-item bg-transparent d-flex justify-content-between px-0 py-1">
+                        <p class="mb-0">{{ $data['pageTitle'] }}</p>
+                        <p class="mb-0">{{ $data['visitors'] }}</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8 col-xxl-8 col-sm-8">
+        <div class="card rounded">
+            <div class="card-body">
+                <h4 class="card-title">Perangkat dan Browser Pengunjung</h4>
+                <div class="table-responsive mt-4">
+                    <table id="example" class="display min-w850">
+                        <thead>
+                            <tr>
+                                <th>Perangkat</th>
+                                <th>Versi</th>
+                                <th>Browser</th>
+                                <th>Versi</th>
+                                <th>Melihat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($devices as $data)
+                            <tr>
+                                <td>{{ $data[0] }}</td>
+                                <td>{{ $data[1] }}</td>
+                                <td>{{ $data[2] }}</td>
+                                <td>{{ $data[3] }}</td>
+                                <td>{{ $data[4] }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -133,4 +207,72 @@ SVG Icons - svgicons.sparkk.fr
 
 <!-- Chart piety plugin files -->
 <script src="{{ asset('vendor/peity/jquery.peity.min.js') }}"></script>
+
+<script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
+
+<script>
+    var data = {
+				labels: ["0", "1", "2", "3", "4", "5", "6", "0", "1", "2", "3", "4", "5", "6"],
+				datasets: [{
+					label: "My First dataset",
+					backgroundColor: "rgba(105,255,147,1)",
+					strokeColor: "rgba(105,255,147,1)",
+					pointColor: "rgba(0,0,0,0)",
+					pointStrokeColor: "rgba(105,255,147,1)",
+					pointHighlightFill: "rgba(105,255,147,1)",
+					pointHighlightStroke: "rgba(105,255,147,1)",
+					data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40]
+				}]
+			};
+
+			var ctx = document.getElementById("activeUser").getContext("2d");
+			var chart = new Chart(ctx, {
+				type: "bar",
+				data: data,
+				options: {
+					responsive: !0,
+					maintainAspectRatio: false,
+					legend: {
+						display: !1
+					},
+					tooltips: {
+						enabled: false
+					},
+					scales: {
+						xAxes: [{
+							display: !1,
+							gridLines: {
+								display: !1
+							},
+							barPercentage: 1,
+							categoryPercentage: 0.5
+						}],
+						yAxes: [{
+							display: !1,
+							ticks: {
+								padding: 10,
+								stepSize: 20,
+								max: 100,
+								min: 0
+							},
+							gridLines: {
+								display: !0,
+								drawBorder: !1,
+								lineWidth: 1,
+								zeroLineColor: "#48f3c0"
+							}
+						}]
+					}
+				}
+			});
+			
+			setInterval(function() {
+				chart.config.data.datasets[0].data.push(
+					Math.floor(10 + Math.random() * 80)
+				);
+				chart.config.data.datasets[0].data.shift();
+				chart.update();
+			}, 2000);
+</script>
 @endsection
