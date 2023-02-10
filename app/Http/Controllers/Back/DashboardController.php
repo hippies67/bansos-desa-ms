@@ -54,11 +54,57 @@ class DashboardController extends Controller
             'ga:users'
         );
 
-        $data['page_views'] = Analytics::fetchVisitorsAndPageViews(Period::create(Carbon::now()->subYear(), Carbon::now()));
+        $page_views = Analytics::fetchVisitorsAndPageViews(Period::create(Carbon::now()->subYear(), Carbon::now()));
+       
+        $page_title = array();
 
-        // dd($data['top']);
-        
-        return view('back.dashboard.data', $data);
+        $home = 0;
+        $about = 0;
+        $project = 0;
+        $team = 0;
+        $contact = 0;
+
+        $page_view_wrap = array();
+
+        foreach($page_views as $key => $item) {
+            if($item['pageTitle'] == "Tahungoding - Home") {
+                $page_title['home'] = $item['pageTitle'];
+                $home += $item['visitors'];
+            } else if($item['pageTitle'] == "Tahungoding - About") {
+                $page_title['about'] = $item['pageTitle'];
+                $about += $item['visitors'];
+            } else if($item['pageTitle'] == "Tahungoding - Project") {
+                $page_title['project'] = $item['pageTitle'];
+                $project += $item['visitors'];
+            } else if($item['pageTitle'] == "Tahungoding - Team") {
+                $page_title['team'] = $item['pageTitle'];
+                $team += $item['visitors'];
+            } else if($item['pageTitle'] == "Tahungoding - Contact") {
+                $page_title['contact'] = $item['pageTitle'];
+                $contact += $item['visitors'];
+            }
+        }
+
+        foreach($page_title as $key => $item) {
+            if($item == "Tahungoding - Home") {
+                $page_view_wrap[$key]['pageTitle'] = $item;
+                $page_view_wrap[$key]['visitors'] = $home;
+            } else if($item == "Tahungoding - About") {
+                $page_view_wrap[$key]['pageTitle'] = $item;
+                $page_view_wrap[$key]['visitors'] = $about;
+            } else if($item == "Tahungoding - Project") {
+                $page_view_wrap[$key]['pageTitle'] = $item;
+                $page_view_wrap[$key]['visitors'] = $project;
+            } else if($item == "Tahungoding - Team") {
+                $page_view_wrap[$key]['pageTitle'] = $item;
+                $page_view_wrap[$key]['visitors'] = $team;
+            } else if($item == "Tahungoding - Contact") {
+                $page_view_wrap[$key]['pageTitle'] = $item;
+                $page_view_wrap[$key]['visitors'] = $contact;
+            }
+        }
+
+        return view('back.dashboard.data', $data, compact('page_view_wrap'));
     }
 
     /**

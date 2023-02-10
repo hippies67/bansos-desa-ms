@@ -39,7 +39,7 @@
     } */
 
     #container img {
-        object-fit: contain !important;
+        object-fit: contain !important; 
     }
 
     /* h4 {
@@ -126,6 +126,7 @@
     image {
         height: initial;
         cursor: pointer !important;
+        filter: saturate(0%) !important;
     }
 
     /* Galaxy Fold */
@@ -389,7 +390,7 @@ and (max-device-width : 825px)
         @foreach($team as $data)
         <img class="rounded-circle mb-3 pengurus-img" alt="avatar1" style="border-radius: 50%; 
             width: 100px;
-            height: 100px;object-fit: contain;" src="{{ Storage::url($data->photo) }}" />
+            height: 100px;object-fit: contain;filter: saturate(0%) !important;" src="{{ Storage::url($data->photo) }}" />
         @endforeach
 
         <div class="text-center mt-5 mb-5">

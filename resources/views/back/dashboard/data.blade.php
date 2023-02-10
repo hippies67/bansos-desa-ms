@@ -152,7 +152,10 @@ SVG Icons - svgicons.sparkk.fr
                         <p class="mb-0">Halaman Teratas</p>
                         <p class="mb-0">View</p>
                     </div>
-                    @foreach($page_views as $data)
+                    @foreach($page_view_wrap as $data)
+                        {{-- @php
+                            dd($data['pageTitle'])
+                        @endphp --}}
                     <div class="list-group-item bg-transparent d-flex justify-content-between px-0 py-1">
                         <p class="mb-0">{{ $data['pageTitle'] }}</p>
                         <p class="mb-0">{{ $data['visitors'] }}</p>

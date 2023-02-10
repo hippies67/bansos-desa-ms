@@ -186,11 +186,20 @@ and (max-device-width : 825px)
         </div>
 
         <div id="loadTeam">
-        @foreach($team as $data)
-            <img class="rounded-circle mb-3" alt="avatar1" onclick="modalDetail({{ $data }}, '{{ $data->ref_divisi ? $data->ref_divisi->nama : '' }}', '{{ Storage::url($data->photo) }}')" style="border-radius: 50%; 
-            width: 100px;
-            height: 100px;object-fit: contain;cursor: pointer;" src="{{ Storage::url($data->photo) }}" />
-        @endforeach
+          <div class="row">
+            @foreach($team as $data)
+              @if($data->fullname == 'Dicky')
+                @continue
+              @endif
+            <div class="col-sm-2">
+              <img class="mb-3" alt="avatar1" onclick="modalDetail({{ $data }}, '{{ $data->ref_divisi ? $data->ref_divisi->nama : '' }}', '{{ Storage::url($data->photo) }}')" style="
+              width: 160px;height:220px; object-fit: cover;object-position: 50% -20%;
+              cursor: pointer;filter: saturate(0%) !important;" src="{{ Storage::url($data->photo) }}" />
+            </div>
+            @endforeach
+          </div>
+      </div>
+
     {{-- 
             <div class="text-center mt-5 mb-5">
                 <a href="{{ url('all-team') }}" type="button" class="button btn" >View More</a>
