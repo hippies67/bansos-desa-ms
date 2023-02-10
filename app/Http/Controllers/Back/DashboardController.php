@@ -50,7 +50,7 @@ class DashboardController extends Controller
         );
 
         $data['visitor_unique'] = Analytics::performQuery(
-            Period::create(Carbon::now(), Carbon::now()),
+            Period::create(Carbon::now()->subYear(), Carbon::now()),
             'ga:users'
         );
 

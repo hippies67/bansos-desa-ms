@@ -143,7 +143,7 @@ SVG Icons - svgicons.sparkk.fr
         <div class="card active_users">
             <div class="card-header bg-success border-0 pb-4 d-block">
                 <h4 class="card-title text-white">Total Pengunjung (Unik)</h4>
-                <h2 class="fs-30 font-w600 text-white mb-0 mr-3" style="margin-top: 20px ;">{{ $visitor_unique[0][0] }}</h2>
+                <h2 class="fs-30 font-w600 text-white mb-0 mr-3" style="margin-top: 20px ;">{{ isset($visitor_unique[0][0]) ? $visitor_unique[0][0] : '-' }}</h2>
             </div>
             
             <div class="card-body pt-0">
