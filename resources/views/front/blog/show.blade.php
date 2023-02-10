@@ -3,6 +3,11 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('front/css/style_blog.css') }}">
 <style>
+.wrapContent img{
+  max-width: 800px !important;
+  border-radius: 10px !important;
+  margin-bottom: 20px !important;
+}
   .image-hover {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -30,12 +35,16 @@ and (max-device-width : 1028px)
 { 
     .wrapContent img{
         max-width: 800px !important;
+        border-radius: 10px !important;
+        margin-bottom: 20px !important;
     }
 }  
 
 @media (max-width: 768px) {
     .wrapContent img{
         max-width: 340px !important;
+        border-radius: 10px !important;
+        margin-bottom: 20px !important;
     }
 }
 
@@ -47,6 +56,8 @@ and (max-device-width : 283px)
 
     .wrapContent img{
         max-width: 230px !important;
+        border-radius: 10px !important;
+        margin-bottom: 20px !important;
     }
 
   .logo a img {
@@ -153,6 +164,8 @@ and (max-device-width : 825px)
 
   .wrapContent img{
         max-width: 400px !important;
+        border-radius: 10px !important;
+        margin-bottom: 20px !important;
     }
 }
 
@@ -178,8 +191,12 @@ and (max-device-width : 825px)
 
   .wrapContent img{
         max-width: 400px !important;
+        border-radius: 10px !important;
+        margin-bottom: 20px !important;
     }
 }
+
+
 </style>
 @endsection
 
@@ -242,12 +259,12 @@ and (max-device-width : 825px)
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-dark">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ url('/blog') }}" class="text-dark">Blog</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tentang Gunung Surian di Bendungan Jatigede</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $blog->judul }}</li>
                 </ol>
             </nav>
             <h2 class="text-left"><span>{{ $blog->judul }}</span></h2>
             <div class="d-flex mt-4">
-                <img src="http://127.0.0.1:8000/tahu.png" class="author" width="35" height="35" alt="author">
+                <img src="{{ asset('default_profile.png') }}" class="author" width="35" height="35" alt="author">
                 <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important;">Admin</small>
                 <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important;">&#8226;</small>
                 <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important">{{ $blog->updated_at->format('d M Y')}}</small>

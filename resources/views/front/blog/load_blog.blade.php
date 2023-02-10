@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex">
-                        <img src="http://127.0.0.1:8000/tahu.png" class="author" width="35" height="35" alt="author">
+                        <img src="{{ asset('default_profile.png') }}" class="author" width="35" height="35" alt="author">
                         <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important;">ADMIN</small>
                         <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important;">&#8226;</small>
                         <small style="text-decoration: none; color: #acacac; padding-top: 5px; padding-left: 10px !important">{{ $data->updated_at->format('d M Y')}}</small>
