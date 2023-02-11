@@ -1,3 +1,19 @@
+
+  .modal-content {
+    background-color: rgba(54, 54, 54, 0.6);
+    width: 1000px;
+    height: auto;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .modal-img img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  
 .our-projects {
   position: relative;
 }
