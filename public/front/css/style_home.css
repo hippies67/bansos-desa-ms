@@ -237,6 +237,62 @@ h4 {
   filter: grayscale(0) !important;
 }
 
+@media only screen   
+and (min-width : 1024px)   
+and (max-width : 1270px)  
+{ 
+  .card {
+    min-height: 620px !important;
+  }
+  .img-header {
+        margin-top: -80px !important;
+        width: 480px !important;
+      }
+
+    .header {
+        padding-top: 100px !important;
+    }
+
+    .card-text {
+      font-size: 14px !important;
+    }
+
+    #webDev {
+      min-height: 500px !important;
+      width: 220px !important;
+    }
+
+    #Mic {
+      min-height: 500px !important;
+      width: 220px !important;
+    }
+
+    #iqbal {
+      width: 200px !important;
+    }
+
+    #jajang {
+      width: 150px !important;
+      margin-left: 80px !important;
+    }
+
+    .card-text-teams {
+      font-size: 12px !important;
+    }
+
+    .swiper-slide-teams {
+      height: 420px !important;
+    }
+
+   .swiper-slide-teams {
+      min-height: 200px !important;
+    }
+
+    #teams {
+      height: 580px !important;
+    }
+}  
+
 /* ------------------------------------------------------------ */
 
 /* TABLET VERSION */

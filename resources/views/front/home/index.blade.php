@@ -37,8 +37,8 @@ and (max-width: 1366px)
 }  
 
 @media only screen   
-and (min-device-width : 1024px)   
-and (max-device-width : 1270px)  
+and (min-width : 1024px)   
+and (max-width : 1270px)  
 { 
   .card {
     min-height: 620px !important;
