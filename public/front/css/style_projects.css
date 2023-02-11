@@ -158,7 +158,7 @@ h4 {
   }
 }
 /* TABLET VERSION */
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 915px){
   .card {
     width: 200px;
     min-height: 500px;
@@ -186,6 +186,24 @@ h4 {
     width: 400px;
     height: auto;
     border-radius: 10px;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  h4 {
+    font-size: 20px;
+  }
+  .card {
+    min-height: 520px;
   }
 }
 

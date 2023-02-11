@@ -209,7 +209,7 @@ and (max-device-width : 825px)
   }
 
   .card-text-our-program {
-    margin-top: 90px !important;
+    margin-top: 40px !important;
   }
 
   .join-us {

@@ -1,3 +1,110 @@
+h4 {
+  font-size: 18px;
+}
+
+#join-us-mobile {
+  display: none;
+}
+
+#join-us {
+  display: block;
+}
+
+.header .img-header {
+  display: flex;
+  width: 380px;
+  height: auto;
+  padding: 0;
+  margin: 7% 0 auto;
+}
+
+/* ABOUT */
+.about .img-about {
+  display: flex;
+  width: 380px;
+  height: auto;
+  margin: 80px 0 0 0;
+}
+
+.about .text {
+  padding-left: 25px;
+}
+
+/* Projects */
+.projects .card-text {
+  font-size: 15px;
+}
+
+.card {
+  margin: 0;
+  width: 200px;
+  /* min-height: 500px; */
+}
+
+.card img {
+  width: 160px;
+  height: auto;
+  margin: auto;
+  padding-top: 20px;
+}
+
+.card-body .card-text {
+  font-size: 16px;
+}
+
+.project-card,
+.expertise-card {
+  margin: 0;
+}
+
+/* EKSPERTISE */
+.expertise img {
+  /* width: 100px; */
+  height: auto;
+}
+
+/* TEAMS */
+.teams h5 {
+  font-size: 20px;
+}
+
+.teams .card-text-teams {
+  font-size: 14px;
+}
+
+.teams img {
+  bottom: 0;
+  transform: translate(-100%, 0);
+}
+
+.swiper-teams {
+  position: relative;
+  transform: translate(5%, -20%);
+  max-width: 490px;
+  height: 530px;
+  padding: 20px 0 !important;
+}
+
+.swiper-slide-teams {
+  width: 220px !important;
+  height: auto;
+  margin: 0 10px 0 0 !important;
+}
+
+/* JOIN US */
+.join-us .img-join-us {
+  display: flex;
+  margin-top: 50px;
+  width: 320px;
+  height: auto;
+}
+
+/* CLIENTS */
+.clients .text-clients {
+  margin: auto;
+  width: 600px;
+  height: auto;
+}
 /* ALL VERSION */
 
 h1,
@@ -143,8 +250,8 @@ nav a:hover {
   position: relative;
   margin: auto;
   border-radius: 25px;
-  width: 300px;
-  height: 500px;
+  /* width: 300px;
+  height: 500px; */
   border: none;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -161,7 +268,7 @@ h4 {
 }
 
 .card img {
-  width: 250px;
+  /* width: 250px; */
   height: auto;
   margin: auto;
   padding-top: 20px;
@@ -240,7 +347,7 @@ h4 {
 /* ------------------------------------------------------------ */
 
 /* TABLET VERSION */
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 915px){
   h4 {
     font-size: 18px;
   }
@@ -255,69 +362,78 @@ h4 {
 
   .header .img-header {
     display: flex;
-    width: 380px;
+    width: 450px;
     height: auto;
     padding: 0;
     margin: 7% 0 auto;
+    margin-top: -20px;
   }
 
-  /* ABOUT */
-  .about .img-about {
-    display: flex;
-    width: 380px;
-    height: auto;
-    margin: 80px 0 0 0;
+  .text h1{
+    font-size: 30px;
   }
 
-  .about .text {
-    padding-left: 25px;
+  h1 {
+    font-size: 30px;
   }
 
-  /* Projects */
-  .projects .card-text {
-    font-size: 15px;
+  h2 {
+    font-size: 30px;
   }
 
-  .card {
-    margin: 0;
-    width: 200px;
-    min-height: 500px;
-  }
-
-  .card img {
-    width: 160px;
-    height: auto;
-    margin: auto;
-    padding-top: 20px;
-  }
-
-  .card-body .card-text {
-    font-size: 16px;
-  }
-
-  .project-card,
-  .expertise-card {
-    margin: 0;
-  }
-
-  /* EKSPERTISE */
-  .expertise img {
-    width: 100px;
-    height: auto;
-  }
-
-  /* TEAMS */
-  .teams h5 {
+  h3 {
     font-size: 20px;
   }
 
-  .teams .card-text-teams {
-    font-size: 14px;
+  #projects {
+    display: none !important;
   }
 
-  .teams img {
-    bottom: 0;
-    transform: translate(-100%, 0);
+  #projectsTablet { 
+    display: block !important;
+  }
+
+  #cardProjectTablet {
+    margin-top: 50px !important;
+  }
+
+  #expertise {
+    display: none;
+  }
+
+  #expertiseTablet {
+    display: block !important;
+  }
+
+  #wrapSubExpertiseTablet {
+    margin-top: 50px !important;
+  }
+
+  #teams {
+    display: none;
+  }
+
+  #teamsTablet {
+    display: block !important;
+  }
+
+  #wrapSubTeamTablet {
+    margin-top: 35px !important;
+  }
+  
+  .btn-view-all-tablet {
+    margin-top: 40px !important;
+  }
+
+  ul li a.active {
+    color: #ffd800;
+    border-bottom: 2.5px solid #ffd800;
+    padding-bottom: 5px;
+    transition: 0.6s;
+  }
+  
+  .container, .container-md, .container-sm {
+    max-width: 950px !important;
   }
 
   .swiper-teams {
@@ -347,6 +463,18 @@ h4 {
     margin: auto;
     width: 600px;
     height: auto;
+  }
+
+  .card {
+    min-height: 490px !important;
+  }
+
+  .about .img-about {
+    width: 350px;
+  }
+
+  #joinUsImage {
+    width: 350px;
   }
 }
 

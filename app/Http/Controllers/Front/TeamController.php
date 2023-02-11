@@ -64,7 +64,7 @@ class TeamController extends Controller
 
         $data['final'] = [$wrap, $ref_divisi];
 
-        $data['team'] = Team::paginate(20);
+        $data['team'] = Team::limit(13)->get();
         
         $data['ref_periode'] = RefPeriode::orderBy('tahun_mulai')->get();
 

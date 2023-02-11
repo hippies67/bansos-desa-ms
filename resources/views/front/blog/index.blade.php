@@ -31,9 +31,6 @@ and (max-device-width : 1028px)
         font-size: 40px !important;
     }
 }  
-.text h2 {
-        font-size: 40px !important;
-    }
 
 /* Galaxy Fold */
 @media only screen   
@@ -257,7 +254,7 @@ p {
 <div class="jumbotron jumbotron-fluid blog mt-5 pt-5" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">
     <div class="content container-fluid" style="max-width: 1300px;">
         <div class="text">
-            <h2 class="text-center"><span>BLOG</span></h2>
+            <h2 class="text-center text-blog"><span>BLOG</span></h2>
             <p class="text-center mt-5 mb-5" style="font-family: 'Poppins', sans-serif !important; font-size: 16px;">We strive to share what we have learned in research activities. Besides we
                 want
                 to be beneficial to others, we also believe that the best way to learn is to teach.</p>

@@ -963,7 +963,7 @@ and (max-device-width : 825px)
         </div>
         <div class="col-md-5 d-flex">
           {{-- <img class="" src="{{ asset('phone.png') }}" alt="" width="300"> --}}
-          <img class="" src="{{ asset('phone.png') }}" alt="" width="400">
+          <img class="" src="{{ asset('phone.png') }}" alt="" width="400" id="joinUsImage">
         </div>
       </div>
     </div>

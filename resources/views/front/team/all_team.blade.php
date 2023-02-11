@@ -3,6 +3,18 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('front/css/style_teams.css') }}">
 <style>
+ @media only screen   
+and (min-device-width : 1024px)   
+and (max-device-width : 1028px)  
+{ 
+#desktopWrap {
+      display: none  !important;
+    }
+
+    #tabletWrap {
+      display: flex  !important;
+    }
+  }
        @media (min-width: 767px) and (max-width: 780px){
   h1 {
     font-size: 30px;
@@ -186,12 +198,25 @@ and (max-device-width : 825px)
         </div>
 
         <div id="loadTeam">
-          <div class="row">
+          <div class="row" id="desktopWrap">
             @foreach($team as $data)
               @if($data->fullname == 'Dicky')
                 @continue
               @endif
-            <div class="col-sm-2">
+            <div class="col-sm-2 text-center">
+              <img class="mb-3" alt="avatar1" onclick="modalDetail({{ $data }}, '{{ $data->ref_divisi ? $data->ref_divisi->nama : '' }}', '{{ Storage::url($data->photo) }}')" style="
+              width: 160px;height:220px; object-fit: cover;object-position: 50% -20%;
+              cursor: pointer;filter: saturate(0%) !important;" src="{{ Storage::url($data->photo) }}" />
+            </div>
+            @endforeach
+          </div>
+
+          <div class="row" id="tabletWrap" style="display: none;">
+            @foreach($team as $data)
+              @if($data->fullname == 'Dicky')
+                @continue
+              @endif
+            <div class="col-sm-4 text-center">
               <img class="mb-3" alt="avatar1" onclick="modalDetail({{ $data }}, '{{ $data->ref_divisi ? $data->ref_divisi->nama : '' }}', '{{ Storage::url($data->photo) }}')" style="
               width: 160px;height:220px; object-fit: cover;object-position: 50% -20%;
               cursor: pointer;filter: saturate(0%) !important;" src="{{ Storage::url($data->photo) }}" />

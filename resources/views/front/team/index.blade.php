@@ -5,6 +5,19 @@
 <script src="{{ asset('orgchart.js') }}"></script>
 
 <style>
+     @media only screen   
+and (min-device-width : 1024px)   
+and (max-device-width : 1028px)  
+{ 
+    #desktopWrapMain {
+      display: none  !important;
+    }
+
+    #tabletWrapMain {
+      display: flex  !important;
+    }
+
+}
     #container {
         min-width: 1000px;
         max-height: 500px;
@@ -387,11 +400,31 @@ and (max-device-width : 825px)
         </div>
 
         <br><br>
-        @foreach($team as $data)
-        <img class="rounded-circle mb-3 pengurus-img" alt="avatar1" style="border-radius: 50%; 
-            width: 100px;
-            height: 100px;object-fit: contain;filter: saturate(0%) !important;" src="{{ Storage::url($data->photo) }}" />
-        @endforeach
+        <div class="row" id="desktopWrapMain">
+            @foreach($team as $data)
+            @if($data->fullname == 'Dicky')
+                @continue
+              @endif
+            <div class="col-sm-1 text-center">
+                <img class="rounded-circle mb-3 pengurus-img" alt="avatar1" style="border-radius: 50%; 
+                    width: 100px;
+                    height: 100px;object-fit: contain;filter: saturate(0%) !important;" src="{{ Storage::url($data->photo) }}" />
+            </div>
+            @endforeach
+        </div>
+
+        <div class="row" id="tabletWrapMain" style="display: none;">
+            @foreach($team as $data)
+            @if($data->fullname == 'Dicky')
+                @continue
+              @endif
+            <div class="col-sm-2 text-center">
+                <img class="rounded-circle mb-3 pengurus-img" alt="avatar1" style="border-radius: 50%; 
+                    width: 100px;
+                    height: 100px;object-fit: contain;filter: saturate(0%) !important;" src="{{ Storage::url($data->photo) }}" />
+            </div>
+            @endforeach
+          </div>
 
         <div class="text-center mt-5 mb-5">
             <a href="{{ url('all-team') }}" type="button" class="button btn">View More</a>

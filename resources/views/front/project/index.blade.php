@@ -146,6 +146,10 @@ and (max-device-width : 825px)
   .icon-sosmed-navbar {
     display: block !important;
   }
+
+  .card {
+    min-height: 495px !important;
+  }
 } 
 @media (min-width: 767px) and (max-width: 780px){
   h1 {
@@ -161,7 +165,7 @@ and (max-device-width : 825px)
   }
   
   .footer {
-    height: 76vh !important;
+    height: 85vh !important;
   }
 
   .project-card .card {
@@ -182,7 +186,9 @@ and (max-device-width : 825px)
 
   .card {
     width: 350px !important;
+    min-height: 460px !important;
   }
+
 }
 
 @media (min-width: 912px) and (max-width: 915px){

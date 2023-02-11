@@ -57,9 +57,9 @@ span{
   color: #000;
 }
 
-a:hover{
+/* a:hover{
   color: #000;
-}
+} */
 
 /* Navbar */
 nav .nav-link{
@@ -130,6 +130,19 @@ nav a:hover{
   
     #mobileLogo img {
       width: 120px !important;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 915px){
+    ul li a.active {
+      color: #ffd800;
+      border-bottom: 2.5px solid #ffd800;
+      padding-bottom: 5px;
+      transition: 0.6s;
+    }
+  
+    .text h2 {
+      font-size: 30px !important;
     }
   }
 

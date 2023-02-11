@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="{{ asset('front/css/style_blog.css') }}">
 <style>
 .wrapContent img{
-  max-width: 800px !important;
-  border-radius: 10px !important;
-  margin-bottom: 20px !important;
+  max-width: 800px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
   .image-hover {
     -webkit-transform: scale(1);
@@ -48,6 +48,27 @@ and (max-device-width : 1028px)
     }
 }
 
+
+
+@media only screen   
+and (min-device-width : 768px)   
+and (max-device-width : 770px) {
+    .wrapContent img{
+        max-width: 400px !important;
+        border-radius: 10px !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+@media only screen   
+and (min-device-width : 540px)   
+and (max-device-width : 560px) {
+    .wrapContent img{
+        max-width: 400px !important;
+        border-radius: 10px !important;
+        margin-bottom: 20px !important;
+    }
+}
     /* Galaxy Fold */
     @media only screen   
 and (min-device-width : 280px)   
@@ -196,7 +217,13 @@ and (max-device-width : 825px)
     }
 }
 
-
+@media (min-device-width : 800px)   
+and (max-device-width : 1000px)   {
+  #wrapImageBouncer > img {
+    width: 10px !important;
+    margin-top: -20px !important;
+  }
+}
 </style>
 @endsection
 
