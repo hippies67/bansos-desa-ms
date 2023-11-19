@@ -305,14 +305,11 @@ Daftar Manajemen Akun
                     <div class="form-group">
                         <div class="col-12">
                             <label for="tanggal_lahir">Jenis Kelamin</label>
-                            <div class="dropdown bootstrap-select form-control form-control-lg">
-                                <select name="jenis_kelamin" class="form-control form-control-lg" id="jenis_kelamin"
-                                    tabindex="-98">
-                                    <option value="">Pilih Jenis Kelamin</option>
-                                    <option value="laki_laki">Laki-Laki</option>
-                                    <option value="perempuan">Perempuan</option>
-                                </select>
-                            </div>
+                            <select name="jenis_kelamin" class="form-control form-control-lg" id="jenis_kelamin">
+                            <option value="">Pilih Jenis Kelamin</option>
+                            <option value="laki_laki">Laki-Laki</option>
+                            <option value="perempuan">Perempuan</option>
+                        </select>
                         </div>
                     </div>
             </div>
@@ -402,14 +399,11 @@ Daftar Manajemen Akun
                     <div class="form-group">
                         <div class="col-12">
                             <label for="tanggal_lahir">Jenis Kelamin</label>
-                            <div class="dropdown bootstrap-select form-control form-control-lg">
-                                <select name="edit_jenis_kelamin" class="form-control form-control-lg" id="edit_jenis_kelamin"
-                                    tabindex="-98">
+                            <select name="edit_jenis_kelamin" class="form-control form-control-lg" id="edit_jenis_kelamin">
                                     <option value="">Pilih Jenis Kelamin</option>
                                     <option value="laki_laki">Laki-Laki</option>
                                     <option value="perempuan">Perempuan</option>
                                 </select>
-                            </div>
                         </div>
                     </div>
 
