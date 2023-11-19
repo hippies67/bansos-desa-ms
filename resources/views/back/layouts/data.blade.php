@@ -1,7 +1,3 @@
-@php
-$web_profile = App\Models\WebProfile::all();
-@endphp
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,10 +6,10 @@ $web_profile = App\Models\WebProfile::all();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @foreach($web_profile as $data)
-    <title>{{ $data->name }} - @yield('title')</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ Storage::url($data->logo) }}">
-    @endforeach
+    
+    <title>Bansos Desa Ms - @yield('title')</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bansos_desa_ms.png') }}">
+
     <!-- Favicon icon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
@@ -25,22 +21,10 @@ $web_profile = App\Models\WebProfile::all();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    @foreach($web_profile as $data)
-    <style>
-        body {
-            --primary: {{ $data->primary_color }};
+        
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-            --primary-dark: {{ $data->dark_primary_color }};
-
-            --primary-light: {{ $data->light_primary_color }};
-        }
-    </style>
-    @endforeach
     @yield('css')
-
-    <livewire:styles />
-    <livewire:scripts />
 </head>
 
 <body>
@@ -70,9 +54,10 @@ $web_profile = App\Models\WebProfile::all();
         <div class="nav-header">
 
             <a href="{{ route('dashboard.index') }}" class="brand-logo">
-                <img class="logo-abbr" src="{{ asset('tahu.png') }}" style="width: 200px !important;">
-                <img class="logo-compact" src="{{ asset('tahu.png') }}" alt="">
-                <span class="brand-title" style="font-weight: bold; color: rgb(150, 155, 160);">TAHUNGODING</span>
+                {{-- <img class="logo-abbr" src="{{ asset('tahu.png') }}" style="width: 200px !important;">
+                <img class="logo-compact" src="{{ asset('tahu.png') }}" alt=""> --}}
+                <i class="bi bi-egg-fill" style="color: #f4cf00; font-size: 35px;"></i>
+                <span class="brand-title" style="font-weight: bold; color: rgb(150, 155, 160);">BANSOS DESA MS</span>
             </a>
 
 
@@ -174,36 +159,44 @@ $web_profile = App\Models\WebProfile::all();
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <li class="{{ Request::routeIs('web-profile.*') ? 'mm-active active-no-child' : '' }}">
+                    {{-- <li class="{{ Request::routeIs('web-profile.*') ? 'mm-active active-no-child' : '' }}">
                         <a href="{{ route('web-profile.index') }}"
                             class="ai-icon {{ Request::routeIs('web-profile.*') ? 'mm-active' : '' }}"
                             aria-expanded="false">
                             <i class="bi bi-gear-wide"></i>
                             <span class="nav-text">Web Profile</span>
                         </a>
-                    </li>
-                    <li class="{{ Request::routeIs('artikel.*') ? 'mm-active active-no-child' : '' }}">
-                        <a href="{{ route('artikel.index') }}"
-                            class="ai-icon {{ Request::routeIs('artikel.*') ? 'mm-active' : '' }}"
+                    </li> --}}
+                    <li class="{{ Request::routeIs('penduduk.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('penduduk.index') }}"
+                            class="ai-icon {{ Request::routeIs('penduduk.*') ? 'mm-active' : '' }}"
                             aria-expanded="false">
                             <i class="bi bi-journals"></i>
-                            <span class="nav-text">Artikel</span>
+                            <span class="nav-text">Penduduk</span>
                         </a>
                     </li>
-                    <li class="{{ Request::routeIs('project-back.*') ? 'mm-active active-no-child' : '' }}">
-                        <a href="{{ route('project-back.index') }}"
-                            class="ai-icon {{ Request::routeIs('project-back.*') ? 'mm-active' : '' }}"
+                    <li class="{{ Request::routeIs('jenis-bantuan.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('jenis-bantuan.index') }}"
+                            class="ai-icon {{ Request::routeIs('jenis-bantuan.*') ? 'mm-active' : '' }}"
                             aria-expanded="false">
                             <i class="bi bi-gear-wide-connected"></i>
-                            <span class="nav-text">Project</span>
+                            <span class="nav-text">Jenis Bantuan</span>
                         </a>
                     </li>
-                    <li class="{{ Request::routeIs('contact-back.*') ? 'mm-active active-no-child' : '' }}">
-                        <a href="{{ route('contact-back.index') }}"
-                            class="ai-icon {{ Request::routeIs('contact-back.*') ? 'mm-active' : '' }}"
+                    <li class="{{ Request::routeIs('bantuan.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('bantuan.index') }}"
+                            class="ai-icon {{ Request::routeIs('bantuan.*') ? 'mm-active' : '' }}"
                             aria-expanded="false">
                             <i class="bi bi-inbox"></i>
-                            <span class="nav-text">Contact</span>
+                            <span class="nav-text">Bantuan</span>
+                        </a>
+                    </li>
+                    <li class="{{ Request::routeIs('penerima-bantuan.*') ? 'mm-active active-no-child' : '' }}">
+                        <a href="{{ route('penerima-bantuan.index') }}"
+                            class="ai-icon {{ Request::routeIs('penerima-bantuan.*') ? 'mm-active' : '' }}"
+                            aria-expanded="false">
+                            <i class="bi bi-people"></i>
+                            <span class="nav-text">Penerimaan</span>
                         </a>
                     </li>
                     {{-- <li class="{{ Request::routeIs('team-back.*') ? 'mm-active active-no-child' : '' }}">
@@ -214,7 +207,7 @@ $web_profile = App\Models\WebProfile::all();
                             <span class="nav-text">Team</span>
                         </a>
                     </li> --}}
-                    <li class="{{ Request::routeIs('team-back.*') || Request::routeIs('ref-divisi.*')  || Request::routeIs('ref-periode.*') ? 'mm-active' : '' }}"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    {{-- <li class="{{ Request::routeIs('team-back.*') || Request::routeIs('ref-divisi.*')  || Request::routeIs('ref-periode.*') ? 'mm-active' : '' }}"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="bi bi-people"></i>
                             <span class="nav-text">Team</span>
                         </a>
@@ -223,7 +216,7 @@ $web_profile = App\Models\WebProfile::all();
                             <li><a href="{{ route('ref-divisi.index') }}" class="{{ Request::routeIs('ref-divisi.*')  ? 'mm-active' : '' }}">Ref. Divisi</a></li>
                             <li><a href="{{ route('team-back.index') }}" class="{{ Request::routeIs('team-back.*') ? 'mm-active' : '' }}">Anggota</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="bi bi-person-lines-fill"></i>
                             <span class="nav-text">Manajemen Akun</span>
@@ -258,7 +251,7 @@ $web_profile = App\Models\WebProfile::all();
 
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a><i><b>TAHUNGODING</b></i></a> 2022</p>
+                <p>Copyright © Designed &amp; Developed by <a><i><b>TEAM INGENIOUS</b></i></a> 2023</p>
             </div>
         </div>
         <!--**********************************

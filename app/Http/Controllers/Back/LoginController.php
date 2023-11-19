@@ -4,6 +4,13 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as RequestInfo;
+use Jenssegers\Agent\Facades\Agent;
+use App\Models\User;
+use App\Models\UserAuthInfo;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoginAnomalyMail;
 use Alert;
 use Auth;
 
@@ -52,6 +59,49 @@ class LoginController extends Controller
         ]);
 
             if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']), $remember)) {
+               
+                // Get browser information
+                $browser = Agent::browser();
+
+                // Get device information
+                $device = Agent::device();
+
+                // Accessing browser and device information
+                $browserName = $browser ?: 'Unknown Browser';
+                $deviceType = $device ?: 'Unknown Device';
+                $ipAddress = RequestInfo::ip();
+
+                if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', "!=", null)->where('status', '=', 'verified')->exists()) {
+                   
+                    UserAuthInfo::create([
+                        'user_id' => Auth::user()->id,
+                        'browser' => $browserName,
+                        'device' => $deviceType,
+                        'ip_address' => $ipAddress,
+                        'status' => 'verified',
+                    ]);
+
+                } else {
+
+                    $user_auth_info = UserAuthInfo::where('user_id', Auth::user()->id)->first();
+
+                    if($user_auth_info->ip_address != $ipAddress) {
+                        try {
+                            $user = User::where('id', Auth::user()->id)->first();
+    
+                            Mail::to(Auth::user()->email)->queue(new LoginAnomalyMail($user));
+
+                            Alert::html('Peringatan', 'Kami telah mendeteksi adanya <b>anomali</b> login pada akun Anda! Silahkan cek email untuk konfirmasi akun Anda.', 'info')
+                            ->autoclose(false);
+
+                        } catch (Throwable $e) {
+                            Alert::error('Error', 'Terdapat error pada sistem! anda dapat mencoba untuk login kembali.');
+                            return redirect()->back();
+                        }
+                    } 
+                    
+                }
+            
                 return redirect()->route('dashboard.index');
             } else {
                 Alert::error('Error', 'Email atau Password salah!');
@@ -110,7 +160,7 @@ class LoginController extends Controller
        
         Auth::logout();
         
-        return redirect()->route('admin.login');
+        return redirect()->route('login.index');
     }
     
 }

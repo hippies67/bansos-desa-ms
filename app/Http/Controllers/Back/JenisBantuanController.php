@@ -4,52 +4,22 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin;
-use App\Models\User;
-use Alert;
-use Auth;
+use App\Models\JenisBantuan;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class ManajemenUserController extends Controller
+class JenisBantuanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
-        //
+        $data['jenis_bantuan'] = JenisBantuan::all();
+
+        return view('back.jenis_bantuan.index', $data);
     }
-
-    public function user()
-    {
-        $data['user'] = User::all();
-        return view('back.manajemen_akun.admin', $data);
-    }
-
-    public function user_setting()
-    {
-        return view('back.manajemen_akun.pengaturan_akun');
-    }
-
-    public function update_account(Request $request, $id)
-    {
-        // dd($request->username);
-
-        $data = [
-            'nama_lengkap' => $request->nama_lengkap,
-            'username' => $request->username,
-            'email' => $request->email,
-        ];
-
-        User::where('id', $id)->first()->update($data);
-
-        Alert::success('Success', 'Profil telah berhasil di perbaharui!');
-
-        return redirect()->back();
-    }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -69,7 +39,16 @@ class ManajemenUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'nama_jenis_bantuan' => $request->nama_jenis_bantuan,
+            'status' => $request->status
+        ];
+
+        JenisBantuan::create($data)
+        ? Alert::success('Sukses', "Data Jenis Bantuan berhasil ditambahkan.")
+        : Alert::error('Error', "Data Jenis Bantuan gagal ditambahkan!");
+
+        return redirect()->back();
     }
 
     /**
@@ -103,7 +82,18 @@ class ManajemenUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $penduduk = JenisBantuan::find($id);
+       
+        $data = [
+            'nama_jenis_bantuan' => $request->edit_nama_jenis_bantuan ? $request->edit_nama_jenis_bantuan : $penduduk->nama_jenis_bantuan,
+            'status' => $request->edit_status ? $request->edit_status : $penduduk->status,
+        ];
+
+        $penduduk->update($data)
+            ? Alert::success('Sukses', "Data Jenis Bantuan telah berhasil diubah.")
+            : Alert::error('Error', "Data Jenis Bantuan telah gagal diubah!");
+
+        return redirect()->back();
     }
 
     /**
@@ -114,6 +104,12 @@ class ManajemenUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $penduduk = JenisBantuan::find($id);
+
+        $penduduk->delete()
+        ? Alert::success('Sukses', "Data Jenis Bantuan berhasil dihapus.")
+        : Alert::error('Error', "Data Jenis Bantuan gagal dihapus!");
+
+        return redirect()->back();
     }
 }

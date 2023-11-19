@@ -98,11 +98,22 @@ Daftar Manajemen Akun
             <div class="card-header">
                 <h4 class="card-title">Data User</h4>
                 <div class="button-list">
-                    <button type="button" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary btn-xs"
+                    
+                    @php
+                        $user_atuh_info = App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->first();
+                    @endphp
+
+                    @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                        <button type="button" onclick="loginAnomalyAlert()"
+                            class="btn btn-primary btn-xs" data-animation="slide"
+                            data-overlaySpeed="200" data-overlayColor="#36404a"><i class="fa fa-plus-circle mr-1"></i>
+                            Tambah</button>
+                    @else
+                        <button type="button" data-toggle="modal" data-target="#addUserModal" class="btn btn-primary btn-xs"
                         data-animation="slide" data-plugin="custommodal" data-overlaySpeed="200"
                         data-overlayColor="#36404a"><i class="fa fa-plus-circle mr-1"></i> Tambah</button>
-                    {{-- <button type="button" class="btn btn-danger btn-xs"
-                            id="clearAll"><i class="fa fa-trash-o mr-1"></i> Bersihkan</button> --}}
+                    @endif
+                    
                 </div>
             </div>
             <div class="card-body">
@@ -140,26 +151,48 @@ Daftar Manajemen Akun
                             <td>
                                 
                                 <div class="form-group" style="display: block;">
-                                    <button type="button" data-toggle="modal" data-target="#editUserModal" style="padding-bottom:2px;"
+                                    @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                                        <button type="button" onclick="loginAnomalyAlert()" class="btn btn-warning btn-xs text-white"><i
+                                            class="fa fa-edit mr-1"></i>
+                                        Edit</button>
+                                    @else
+                                        <button type="button" data-toggle="modal" data-target="#editUserModal" style="padding-bottom:2px;"
                                         data-ids="{{ $user->id }}" onclick="setEditData({{ $user }})"
                                         class="btn btn-warning btn-xs text-white"><i class="fa fa-edit mr-1"></i>
                                         Edit</button>
-                                    <form style="margin-top:15px;"
-                                        action="{{ route('manajemen-akun-user.destroy', $user) }}" method="post">
-                                        @csrf
-                                        @method('delete')
+                                    @endif
+
+                                    @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
                                         <button type="button"
                                             class="btn btn-danger btn-xs rounded waves-light waves-effect"
-                                            onclick="deleteAlert(this)"><i class="fa fa-trash-o mr-1"></i> Hapus
+                                            onclick="loginAnomalyAlert()"><i class="fa fa-trash-o mr-1"></i> Hapus
                                         </button>
-                                    </form>
+                                    @else
+                                        <form style="margin-top:15px;"
+                                            action="{{ route('manajemen-akun-user.destroy', $user) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="button"
+                                                class="btn btn-danger btn-xs rounded waves-light waves-effect"
+                                                onclick="deleteAlert(this)"><i class="fa fa-trash-o mr-1"></i> Hapus
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                                 <div class="form-group" style="display: block;">
-                                    <a href="{{ route('edit_password', $user->id) }}"
-                                        class="btn btn-dark btn-xs waves-effect waves-light" id="update-password"><i
-                                            class="fa fa-key mr-1"></i> Ubah
-                                        Password
-                                    </a>
+                                    @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                                        <a href="javascript:void(0)" onclick="loginAnomalyAlert()"
+                                            class="btn btn-dark btn-xs waves-effect waves-light" id="update-password"><i
+                                                class="fa fa-key mr-1"></i> Ubah
+                                            Password
+                                        </a>
+                                    @else
+                                        <a href="{{ route('edit_password', $user->id) }}"
+                                            class="btn btn-dark btn-xs waves-effect waves-light" id="update-password"><i
+                                                class="fa fa-key mr-1"></i> Ubah
+                                            Password
+                                        </a>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -409,6 +442,20 @@ Daftar Manajemen Akun
 
     {{-- Sweetalert --}}
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+
+    <script>
+        function loginAnomalyAlert() {
+                Swal.fire({
+                    title: "Peringatan!",
+                    html: `Kami telah mendeteksi adanya <b>anomali</b> login pada akun Anda! Silahkan cek email untuk konfirmasi akun Anda.`,
+                    type: "info",
+                    showCancelButton: false,
+                    confirmButtonColor: "rgb(11, 42, 151)",
+                    confirmButtonText: "Ok",
+                })
+            }
+    </script>
+
     <script>
         $(document).ready(function () {
             $.ajaxSetup({

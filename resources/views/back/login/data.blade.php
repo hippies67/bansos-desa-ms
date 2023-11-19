@@ -1,7 +1,3 @@
-@php
-    $web_profile = App\Models\WebProfile::all();
-@endphp
-
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
@@ -9,15 +5,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    @foreach($web_profile as $data)
-    <title>{{ $data->name }} - Login</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ Storage::url($data->logo) }}">
-    @endforeach
+    
+    <title>Bansos Desa Ms - Login</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bansos_desa_ms.png') }}">
     
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
 </head>
 
 <body class="h-100">
@@ -30,14 +28,13 @@
               <div class="col-lg-12">
                 <div class="card-body p-md-5 mx-md-4">
                   <div class="text-center">
-                    @foreach($web_profile as $data)
-                    <img src="{{ Storage::url($data->logo) }}" style="width: 100px;" alt="logo">
-                    @endforeach
-                    <br><br>
-                    <h5 class="login-heading mt-3">LOGIN DASHBOARD</h5>
+                    <i class="bi bi-egg-fill" style="color: #f4cf00; font-size: 55px;"></i>
+                  {{-- <span class="brand-title" style="font-weight: bold; color: rgb(150, 155, 160);">BANSOS DESA MS</span> --}}
+                    <br>
+                    <h5 class="login-heading mt-3">LOIN BANSOS DESA MS</h5>
                   </div>
   
-                  <form action="{{ route('admin-login.store') }}" method="POST" class="mt-5">
+                  <form action="{{ route('login.store') }}" method="POST" class="mt-5">
                     @csrf
                     <div class="form-outline mb-4">
                       <label class="form-label" for="email">Email</label>

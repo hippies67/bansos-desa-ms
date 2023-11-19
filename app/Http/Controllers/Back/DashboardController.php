@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Artikel;
-use App\Models\Project;
-use App\Models\Team;
+use App\Models\Penduduk;
+use App\Models\JenisBantuan;
+use App\Models\Bantuan;
+use App\Models\PenerimaBantuan;
 use Auth;
 use Analytics;
 use App\Models\Contact;
@@ -25,10 +26,10 @@ class DashboardController extends Controller
     public function index()
     {
         $data['total_akun'] = User::count();
-        $data['total_artikel'] = Artikel::count();
-        $data['total_project'] = Project::count();
-        $data['total_team'] = Team::count();
-        $data['total_contact'] = Contact::count();
+        $data['total_penduduk'] = Penduduk::count();
+        $data['total_jenis_bantuan'] = JenisBantuan::count();
+        $data['total_bantuan'] = Bantuan::count();
+        $data['total_penerima'] = PenerimaBantuan::count();
 
         //retrieve visitors and pageview data for the current day and the last seven days
 
@@ -40,71 +41,72 @@ class DashboardController extends Controller
         // $data['user_types'] = Analytics::fetchUserTypes(Period::create(Carbon::now()->subYear(), Carbon::now()));
 
         //retrieve sessions and pageviews with yearMonth dimension since 1 year ago
-        $data['devices'] = Analytics::performQuery(
-            Period::create(Carbon::now()->subYear(), Carbon::now()),
-            'ga:sessions',
-            [
-                'metrics' => 'ga:sessions',
-                'dimensions' => 'ga:operatingSystem,ga:operatingSystemVersion,ga:browser,ga:browserVersion'
-            ]
-        );
-
-        $data['visitor_unique'] = Analytics::performQuery(
-            Period::create(Carbon::now()->subYear(), Carbon::now()),
-            'ga:users'
-        );
-
-        $page_views = Analytics::fetchVisitorsAndPageViews(Period::create(Carbon::now()->subYear(), Carbon::now()));
        
-        $page_title = array();
+        // $data['devices'] = Analytics::performQuery(
+        //     Period::create(Carbon::now()->subYear(), Carbon::now()),
+        //     'ga:sessions',
+        //     [
+        //         'metrics' => 'ga:sessions',
+        //         'dimensions' => 'ga:operatingSystem,ga:operatingSystemVersion,ga:browser,ga:browserVersion'
+        //     ]
+        // );
 
-        $home = 0;
-        $about = 0;
-        $project = 0;
-        $team = 0;
-        $contact = 0;
+        // $data['visitor_unique'] = Analytics::performQuery(
+        //     Period::create(Carbon::now()->subYear(), Carbon::now()),
+        //     'ga:users'
+        // );
 
-        $page_view_wrap = array();
+        // $page_views = Analytics::fetchVisitorsAndPageViews(Period::create(Carbon::now()->subYear(), Carbon::now()));
+       
+        // $page_title = array();
 
-        foreach($page_views as $key => $item) {
-            if($item['pageTitle'] == "Tahungoding - Home") {
-                $page_title['home'] = $item['pageTitle'];
-                $home += $item['visitors'];
-            } else if($item['pageTitle'] == "Tahungoding - About") {
-                $page_title['about'] = $item['pageTitle'];
-                $about += $item['visitors'];
-            } else if($item['pageTitle'] == "Tahungoding - Project") {
-                $page_title['project'] = $item['pageTitle'];
-                $project += $item['visitors'];
-            } else if($item['pageTitle'] == "Tahungoding - Team") {
-                $page_title['team'] = $item['pageTitle'];
-                $team += $item['visitors'];
-            } else if($item['pageTitle'] == "Tahungoding - Contact") {
-                $page_title['contact'] = $item['pageTitle'];
-                $contact += $item['visitors'];
-            }
-        }
+        // $home = 0;
+        // $about = 0;
+        // $project = 0;
+        // $team = 0;
+        // $contact = 0;
 
-        foreach($page_title as $key => $item) {
-            if($item == "Tahungoding - Home") {
-                $page_view_wrap[$key]['pageTitle'] = $item;
-                $page_view_wrap[$key]['visitors'] = $home;
-            } else if($item == "Tahungoding - About") {
-                $page_view_wrap[$key]['pageTitle'] = $item;
-                $page_view_wrap[$key]['visitors'] = $about;
-            } else if($item == "Tahungoding - Project") {
-                $page_view_wrap[$key]['pageTitle'] = $item;
-                $page_view_wrap[$key]['visitors'] = $project;
-            } else if($item == "Tahungoding - Team") {
-                $page_view_wrap[$key]['pageTitle'] = $item;
-                $page_view_wrap[$key]['visitors'] = $team;
-            } else if($item == "Tahungoding - Contact") {
-                $page_view_wrap[$key]['pageTitle'] = $item;
-                $page_view_wrap[$key]['visitors'] = $contact;
-            }
-        }
+        // $page_view_wrap = array();
 
-        return view('back.dashboard.data', $data, compact('page_view_wrap'));
+        // foreach($page_views as $key => $item) {
+        //     if($item['pageTitle'] == "Tahungoding - Home") {
+        //         $page_title['home'] = $item['pageTitle'];
+        //         $home += $item['visitors'];
+        //     } else if($item['pageTitle'] == "Tahungoding - About") {
+        //         $page_title['about'] = $item['pageTitle'];
+        //         $about += $item['visitors'];
+        //     } else if($item['pageTitle'] == "Tahungoding - Project") {
+        //         $page_title['project'] = $item['pageTitle'];
+        //         $project += $item['visitors'];
+        //     } else if($item['pageTitle'] == "Tahungoding - Team") {
+        //         $page_title['team'] = $item['pageTitle'];
+        //         $team += $item['visitors'];
+        //     } else if($item['pageTitle'] == "Tahungoding - Contact") {
+        //         $page_title['contact'] = $item['pageTitle'];
+        //         $contact += $item['visitors'];
+        //     }
+        // }
+
+        // foreach($page_title as $key => $item) {
+        //     if($item == "Tahungoding - Home") {
+        //         $page_view_wrap[$key]['pageTitle'] = $item;
+        //         $page_view_wrap[$key]['visitors'] = $home;
+        //     } else if($item == "Tahungoding - About") {
+        //         $page_view_wrap[$key]['pageTitle'] = $item;
+        //         $page_view_wrap[$key]['visitors'] = $about;
+        //     } else if($item == "Tahungoding - Project") {
+        //         $page_view_wrap[$key]['pageTitle'] = $item;
+        //         $page_view_wrap[$key]['visitors'] = $project;
+        //     } else if($item == "Tahungoding - Team") {
+        //         $page_view_wrap[$key]['pageTitle'] = $item;
+        //         $page_view_wrap[$key]['visitors'] = $team;
+        //     } else if($item == "Tahungoding - Contact") {
+        //         $page_view_wrap[$key]['pageTitle'] = $item;
+        //         $page_view_wrap[$key]['visitors'] = $contact;
+        //     }
+        // }
+
+        return view('back.dashboard.data', $data);
     }
 
     /**

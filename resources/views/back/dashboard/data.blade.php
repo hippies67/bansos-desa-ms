@@ -68,9 +68,9 @@ SVG Icons - svgicons.sparkk.fr
             <div class="card-body">
                 <div class="media align-items-center">
                     <div class="media-body">
-                        <p class="mb-1">Artikel</p>
+                        <p class="mb-1">Penduduk</p>
                         <div class="d-flex flex-wrap">
-                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_artikel }}</h2>
+                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_penduduk }}</h2>
                         </div>
                     </div>
                     <span class="border rounded-circle p-4">
@@ -87,9 +87,9 @@ SVG Icons - svgicons.sparkk.fr
             <div class="card-body">
                 <div class="media align-items-center">
                     <div class="media-body">
-                        <p class="mb-1">Project</p>
+                        <p class="mb-1">Jenis Bantuan</p>
                         <div class="d-flex flex-wrap">
-                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_project }}</h2>
+                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_jenis_bantuan }}</h2>
                         </div>
                     </div>
                     <span class="border rounded-circle p-4">
@@ -106,9 +106,9 @@ SVG Icons - svgicons.sparkk.fr
             <div class="card-body">
                 <div class="media align-items-center">
                     <div class="media-body">
-                        <p class="mb-1">Total Team</p>
+                        <p class="mb-1">Total Bantuan</p>
                         <div class="d-flex flex-wrap">
-                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_team }}</h2>
+                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_bantuan }}</h2>
                         </div>
                     </div>
                     <span class="border rounded-circle p-4">
@@ -125,9 +125,9 @@ SVG Icons - svgicons.sparkk.fr
             <div class="card-body">
                 <div class="media align-items-center">
                     <div class="media-body">
-                        <p class="mb-1">Total Contact</p>
+                        <p class="mb-1">Total Penerima Bantuan</p>
                         <div class="d-flex flex-wrap">
-                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_contact }}</h2>
+                            <h2 class="fs-40 font-w600 text-white mb-0 mr-3">{{ $total_penerima }}</h2>
                         </div>
                     </div>
                     <span class="border rounded-circle p-4">
@@ -139,63 +139,7 @@ SVG Icons - svgicons.sparkk.fr
             </div>
         </div>
     </div>
-    <div class="col-xl-4 col-lg-4 col-sm-4">
-        <div class="card active_users">
-            <div class="card-header bg-success border-0 pb-4 d-block">
-                <h4 class="card-title text-white">Total Pengunjung (Unik)</h4>
-                <h2 class="fs-30 font-w600 text-white mb-0 mr-3" style="margin-top: 20px ;">{{ isset($visitor_unique[0][0]) ? $visitor_unique[0][0] : '-' }}</h2>
-            </div>
-            
-            <div class="card-body pt-0">
-                <div class="list-group-flush mt-4">
-                    <div class="list-group-item bg-transparent d-flex justify-content-between px-0 py-1 font-weight-semi-bold border-top-0">
-                        <p class="mb-0">Halaman Teratas</p>
-                        <p class="mb-0">View</p>
-                    </div>
-                    @foreach($page_view_wrap as $data)
-                        {{-- @php
-                            dd($data['pageTitle'])
-                        @endphp --}}
-                    <div class="list-group-item bg-transparent d-flex justify-content-between px-0 py-1">
-                        <p class="mb-0">{{ $data['pageTitle'] }}</p>
-                        <p class="mb-0">{{ $data['visitors'] }}</p>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-8 col-xxl-8 col-sm-8">
-        <div class="card rounded">
-            <div class="card-body">
-                <h4 class="card-title">Perangkat dan Browser Pengunjung</h4>
-                <div class="table-responsive mt-4">
-                    <table id="example" class="display min-w850">
-                        <thead>
-                            <tr>
-                                <th>Perangkat</th>
-                                <th>Versi</th>
-                                <th>Browser</th>
-                                <th>Versi</th>
-                                <th>Melihat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($devices as $data)
-                            <tr>
-                                <td>{{ $data[0] }}</td>
-                                <td>{{ $data[1] }}</td>
-                                <td>{{ $data[2] }}</td>
-                                <td>{{ $data[3] }}</td>
-                                <td>{{ $data[4] }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 </div>
 
 
