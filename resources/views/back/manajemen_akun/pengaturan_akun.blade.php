@@ -96,18 +96,18 @@
                             </div>
                         </div>
 
-                        <div class="form-group" id="takeCameraWrap" style="display: none;">
+                        <div class="form-group" id="takeCameraWrap">
                             <label for="">Anda akan mengambil gambar yang nantinya akan digunakan untuk pemulihan
                                 akun.</label>
                             <video id="video" class="mt-3" style="display: none;width: 300px;border-radius: 20px;"
                                 autoplay playsinline></video>
                             <canvas id="canvas" class="mt-3" style="display: none; width: 300px;"></canvas>
                             <br>
-                            <button id="start-camera" class="start-camera btn btn-sm btn-outline-success mt-3">
+                            <button id="start-camera" class="start-camera btn btn-sm btn-outline-success mt-4">
                                 Mengambil Foto <sup class="text-danger">*</sup> </button>
                             <button id="click-photo" style="display: none"
                                 class="btn btn-sm btn-outline-success mt-4">Klik untuk mendapatkan foto</button>
-                            <button id="toggle-camera" class="btn btn-sm btn-outline-secondary mt-4" type="button">
+                            <button id="toggle-camera" class="btn btn-sm btn-outline-secondary mt-4" type="button" style="display: none;">
                                 Ganti Kamera</button>
                             <br><br>
                             <br><br>
@@ -156,16 +156,14 @@
             }
         });
     </script>
-
     <script>
-        let camera_button_all = document.querySelector(".start-camera");
         let camera_button = document.querySelector("#start-camera");
         let video_play = document.querySelector("#video");
         let click_button = document.querySelector("#click-photo");
         let canvas = document.querySelector("#canvas");
         let img_base64 = '';
         let streamReference = null;
-        let isFrontCamera = true; // Flag to track the active camera
+        let isFrontCamera = true;
 
         async function startCamera() {
             try {
@@ -180,36 +178,33 @@
         const constraints = {
             audio: false,
             video: {
-                facingMode: isFrontCamera ? 'user' : 'environment' // Use the front or back camera
+                facingMode: isFrontCamera ? 'user' : 'environment'
             }
         };
 
-        camera_button_all.addEventListener('click', function(e) {
+        camera_button.addEventListener('click', function(e) {
+            $("#toggle-camera").css('display', 'initial');
             $(this).prop('disabled', true);
             $(this).html('<i class="fa fa-spinner fa-spin"></i>');
             e.preventDefault();
 
-            if (img_base64) {
-                canvas.style.display = 'none';
-                click_button.style.display = 'inline';
-                camera_button.style.display = 'inline';
-            }
-
-            stopStream(); // Stop the current stream
-            startCamera(); // Start a new stream
+            clearPhoto(); // Clear the old photo
+            stopStream();
+            startCamera();
         });
 
         document.getElementById('toggle-camera').addEventListener('click', function() {
             isFrontCamera = !isFrontCamera;
             stopStream();
             constraints.video.facingMode = isFrontCamera ? 'user' : 'environment';
-            startCamera(); // Start a new stream
+            clearPhoto(); // Clear the old photo
+            startCamera();
         });
 
         function handleSuccessCamera(stream) {
             video_play.style.display = 'inline';
             let videoTracks = stream.getVideoTracks();
-            streamReference = stream; // Store the stream reference
+            streamReference = stream;
             camera_button.style.display = 'none';
             click_button.style.display = 'inline';
             click_button.style.margin = 'auto';
@@ -221,23 +216,25 @@
                 errorMsgCamera(`The resolution is not supported by your device.`);
             } else if (error.name === 'NotAllowedError') {
                 errorMsgCamera('Permissions have not been granted to use your camera and ' +
-                    'microphone, you need to allow the page access to your devices in ' +
-                    'order for the demo to work.');
+                    'microphone, you need to allow the page access to your devices.');
+            } else {
+                errorMsgCamera(`getUserMedia error: ${error.name}`, error);
             }
-            errorMsgCamera(`getUserMedia error: ${error.name}`, error);
+        }
+
+        function errorMsgCamera(message, error) {
+            console.error(message, error);
+            alert(message);
         }
 
         click_button.addEventListener('click', function(e) {
             e.preventDefault();
 
-            // Set specific values for positioning the canvas
-            const offsetX = 0; // Set the desired X-coordinate
-            const offsetY = 0; // Set the desired Y-coordinate
+            const offsetX = 0;
+            const offsetY = 0;
 
-            // Calculate the aspect ratio of the video stream
             const videoAspectRatio = video.videoWidth / video.videoHeight;
 
-            // Calculate the dimensions for the captured image
             let captureWidth, captureHeight;
             if (canvas.width / canvas.height > videoAspectRatio) {
                 captureHeight = canvas.height;
@@ -247,14 +244,11 @@
                 captureHeight = captureWidth / videoAspectRatio;
             }
 
-            // Set the canvas size to match the captured image dimensions
             canvas.width = captureWidth;
             canvas.height = captureHeight;
 
-            // Draw the video frame on the canvas with the calculated dimensions and specified offsets
             canvas.getContext('2d').drawImage(video, offsetX, offsetY, captureWidth, captureHeight);
 
-            // Set the border radius dynamically
             canvas.style.borderRadius = '20px';
 
             let image_data_url = canvas.toDataURL('image/jpeg');
@@ -264,7 +258,7 @@
                 click_button.style.display = 'none';
                 camera_button.innerHTML = 'Ambil Kembali';
                 camera_button.style.display = 'inline';
-                camera_button.disabled = false; // Enable the button
+                camera_button.disabled = false;
                 img_base64 = image_data_url;
             }
         });
@@ -277,8 +271,16 @@
             streamReference = null;
         }
 
-        // Initial start of the camera
-        startCamera();
+        // Function to clear the old photo
+        function clearPhoto() {
+            canvas.style.display = 'none';
+            click_button.style.display = 'none';
+            camera_button.style.display = 'inline';
+            video_play.style.display = 'none';
+        }
+
+        // Initial start of the camera only when the button is clicked
+        document.getElementById('start-camera').addEventListener('click', startCamera);
     </script>
 
     <script>
