@@ -81,26 +81,28 @@ class LoginController extends Controller
                         'status' => 'verified',
                     ]);
 
-                } else {
+                } 
+                
+                // else {
 
-                    $user_auth_info = UserAuthInfo::where('user_id', Auth::user()->id)->first();
+                //     $user_auth_info = UserAuthInfo::where('user_id', Auth::user()->id)->first();
 
-                    if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
-                        try {
-                            $user = User::where('id', Auth::user()->id)->first();
+                //     if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+                //         try {
+                //             $user = User::where('id', Auth::user()->id)->first();
     
-                            Mail::to(Auth::user()->email)->queue(new LoginAnomalyMail($user));
+                //             Mail::to(Auth::user()->email)->queue(new LoginAnomalyMail($user));
 
-                            Alert::html('Peringatan', 'Kami telah mendeteksi adanya <b>anomali</b> login pada akun Anda! Silahkan cek email untuk konfirmasi akun Anda.', 'info')
-                            ->autoclose(false);
+                //             Alert::html('Peringatan', 'Kami telah mendeteksi adanya <b>anomali</b> login pada akun Anda! Silahkan cek email untuk konfirmasi akun Anda.', 'info')
+                //             ->autoclose(false);
 
-                        } catch (Throwable $e) {
-                            Alert::error('Error', 'Terdapat error pada sistem! anda dapat mencoba untuk login kembali.');
-                            return redirect()->back();
-                        }
-                    } 
+                //         } catch (Throwable $e) {
+                //             Alert::error('Error', 'Terdapat error pada sistem! anda dapat mencoba untuk login kembali.');
+                //             return redirect()->back();
+                //         }
+                //     } 
                     
-                }
+                // }
             
                 return redirect()->route('dashboard.index');
             } else {

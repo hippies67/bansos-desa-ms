@@ -96,7 +96,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group" id="takeCameraWrap">
+                        <div class="form-group" id="takeCameraWrap" style="display: none;">
                             <label for="">Anda akan mengambil gambar yang nantinya akan digunakan untuk pemulihan
                                 akun.</label>
                             <video id="video" class="mt-3" style="display: none;width: 300px;border-radius: 20px;"
@@ -110,9 +110,13 @@
                             {{-- <button id="toggle-camera" class="btn btn-sm btn-outline-secondary mt-4" type="button"
                                 style="display: none;">
                                 Ganti Kamera</button> --}}
+
+                            <h5 id="prediksi" class="mt-4"></h5>
+
                             <br><br>
                             <br><br>
                             <small class="text-danger" style="margin-top: 10px !important;" id="foto_validation"></small>
+
                         </div>
 
 
@@ -141,6 +145,8 @@
     <script src="{{ asset('js/deznav-init.js') }}"></script>
 
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script>
         document.addEventListener('change', function() {
@@ -159,6 +165,80 @@
     </script>
 
     <script>
+        // let webcam
+        // let canvas
+        // let model
+
+        // async function setupWebcam() {
+        //     return new Promise((resolve, reject) => {
+        //         const navigatorAny = navigator
+        //         navigator.getUserMedia =
+        //             navigator.getUserMedia ||
+        //             navigatorAny.webkitGetUserMedia ||
+        //             navigatorAny.mozGetUserMedia ||
+        //             navigatorAny.msGetUserMedia
+
+        //         if (navigator.getUserMedia) {
+        //             navigator.getUserMedia({
+        //                     video: true
+        //                 },
+        //                 (stream) => {
+        //                     webcam.srcObject = stream
+        //                     webcam.addEventListener("loadeddata", () => resolve(), false)
+        //                 },
+        //                 (error) => reject()
+        //             )
+        //         } else {
+        //             reject()
+        //         }
+        //     })
+        // }
+
+
+        // async function init() {
+        //     webcam = document.getElementById("webcam")
+        //     canvas = document.getElementById("canvas")
+
+        //     await setupWebcam()
+        //     await loadModel()
+        // }
+
+        // async function captureImage() {
+        //     const context = canvas.getContext("2d")
+        //     context.drawImage(webcam, 0, 0, canvas.width, canvas.height)
+
+        //     const image = tf.browser.fromPixels(canvas)
+        //     const processedImage = preprocessImage(image)
+
+        //     const result = model.predict(processedImage)
+
+        //     console.log(result)
+
+        //     const classIndex = result.argMax(-1).dataSync()[0]
+        //     const classNames = ["Book", "Glass", "Pen"] // Ganti dengan label kelas Anda
+
+        //     document.getElementById(
+        //         "result"
+        //     ).innerText = `Predicted Class: ${classNames[classIndex]}`
+        // }
+
+        function preprocessImage(image) {
+            // Resize image to match model input size
+            const resizedImage = tf.image.resizeBilinear(image, [150, 150]).toFloat()
+
+            // Normalize image values to the range [0, 1]
+            const normalizedImage = resizedImage.div(tf.scalar(255.0))
+
+            // Add batch dimension
+            const batchedImage = normalizedImage.expandDims(0)
+
+            return batchedImage
+        }
+
+        // init()
+    </script>
+
+    <script>
         let camera_button_all = document.querySelector(".start-camera");
         let camera_button = document.querySelector("#start-camera");
         let video_play = document.querySelector("#video");
@@ -167,22 +247,19 @@
         let img_base64 = '';
         let streamReference = null;
 
+        async function loadModel() {
+            const baseUrl = window.location.origin;
+
+            model = await tf.loadLayersModel(baseUrl + "/tfjs_model/model.json");
+        }
+
         const constraints = {
             audio: false,
-            video: {
-                facingMode: {
-                    ideal: 'environment'
-                }, // Use 'user' for front camera, 'environment' for rear camera
-                width: {
-                    ideal: 1280
-                },
-                height: {
-                    ideal: 720
-                }
-            }
+            video: true
         };
 
         camera_button_all.addEventListener('click', async function(e) {
+
             $(this).prop('disabled', true);
             $(this).html('<i class="fa fa-spinner fa-spin"></i>');
 
@@ -193,9 +270,13 @@
                 camera_button.style.display = 'inline';
             }
             try {
+                await loadModel();
+
                 const stream = await navigator.mediaDevices.getUserMedia(constraints);
                 handleSuccessCamera(stream);
                 camera_button.disabled = true;
+
+
             } catch (e) {
                 handleErrorCamera(e);
             }
@@ -225,11 +306,14 @@
         click_button.addEventListener('click', function(e) {
             e.preventDefault();
 
-            const offsetX = 0;
-            const offsetY = 0;
+            // Set specific values for positioning the canvas
+            const offsetX = 0; // Set the desired X-coordinate
+            const offsetY = 0; // Set the desired Y-coordinate
 
-            const videoAspectRatio = video_play.videoWidth / video_play.videoHeight;
+            // Calculate the aspect ratio of the video stream
+            const videoAspectRatio = video.videoWidth / video.videoHeight;
 
+            // Calculate the dimensions for the captured image
             let captureWidth, captureHeight;
             if (canvas.width / canvas.height > videoAspectRatio) {
                 captureHeight = canvas.height;
@@ -239,21 +323,38 @@
                 captureHeight = captureWidth / videoAspectRatio;
             }
 
+            // Set the canvas size to match the captured image dimensions
             canvas.width = captureWidth;
             canvas.height = captureHeight;
-            canvas.getContext('2d').imageSmoothingQuality = 'high';
-            canvas.getContext('2d').drawImage(video_play, offsetX, offsetY, captureWidth, captureHeight);
 
-            canvas.style.borderRadius = '10px';
+            // Draw the video frame on the canvas with the calculated dimensions and specified offsets
+            canvas.getContext('2d').drawImage(video, offsetX, offsetY, captureWidth, captureHeight);
 
-            let image_data_url = canvas.toDataURL('image/jpeg', 0.9);
+            // Set the border radius dynamically
+            canvas.style.borderRadius = '20px';
+
+            const image = tf.browser.fromPixels(canvas)
+            const processedImage = preprocessImage(image)
+
+            const result = model.predict(processedImage)
+
+            console.log(result)
+
+            const classIndex = result.argMax(-1).dataSync()[0]
+            const classNames = ["Book", "Glass", "Pen"] // Ganti dengan label kelas Anda
+
+            document.getElementById(
+                "prediksi"
+            ).innerText = `Predicted Class: ${classNames[classIndex]}`
+
+            let image_data_url = canvas.toDataURL('image/jpeg');
             if (image_data_url) {
                 video_play.style.display = 'none';
                 canvas.style.display = 'inline';
                 click_button.style.display = 'none';
-                camera_button.innerHTML = 'Capture Again';
+                camera_button.innerHTML = 'Ambil Kembali';
                 camera_button.style.display = 'inline';
-                camera_button.disabled = false;
+                camera_button.disabled = false; // Enable the button
                 img_base64 = image_data_url;
             }
         });
