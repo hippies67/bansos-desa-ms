@@ -1,7 +1,7 @@
 @extends('back.layouts.data')
 
 @section('title')
-    Manajemen Akun
+    Pengaturan Profil
 @endsection
 @section('css')
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -48,12 +48,8 @@
                                 <label for="email">Email<span class="text-danger">*</span></label>
                                 <input type="email" name="email" class="form-control" id="email" value="{{ Auth::user()->email }}" placeholder="Masukkan Email">
                             </div>
-                            
-                            @php
-                                $user_atuh_info = App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->first();
-                            @endphp
 
-                            @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                            @if(!App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                                 <div class="form-group d-flex justify-content-end mt-5">
                                     <button class="btn btn-md btn-primary waves-effect waves-light mr-2" type="button" onclick="loginAnomalyAlert()"><i
                                             class="fa fa-save mr-1"></i> Simpan Perubahan</button>

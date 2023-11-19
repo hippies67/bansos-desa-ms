@@ -85,7 +85,7 @@ class LoginController extends Controller
 
                     $user_auth_info = UserAuthInfo::where('user_id', Auth::user()->id)->first();
 
-                    if($user_auth_info->ip_address != $ipAddress) {
+                    if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
                         try {
                             $user = User::where('id', Auth::user()->id)->first();
     

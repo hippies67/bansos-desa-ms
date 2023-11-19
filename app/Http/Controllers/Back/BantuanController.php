@@ -6,7 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JenisBantuan;
 use App\Models\Bantuan;
+use App\Models\LogActivity;
+use App\Models\UserAuthInfo;
+use Illuminate\Support\Facades\Request as RequestInfo;
+use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
 
 class BantuanController extends Controller
 {
@@ -19,6 +24,16 @@ class BantuanController extends Controller
     {
         $data['bantuan'] = Bantuan::all();
         $data['jenis_bantuan'] = JenisBantuan::where('status', 'Y')->get();
+
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            $data_log_activity = [
+                'user_id' => Auth::user()->id,
+                'page_title' => 'Bantuan',
+                'url' => URL::current(),
+            ];
+    
+            LogActivity::create($data_log_activity);
+        }
 
         return view('back.bantuan.index', $data);
     }

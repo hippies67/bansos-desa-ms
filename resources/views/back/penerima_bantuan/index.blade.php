@@ -101,11 +101,7 @@
                     <h4 class="card-title">Data Penerima Bantuan</h4>
                     <div class="button-list">
 
-                        @php
-                            $user_atuh_info = App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->first();
-                        @endphp
-
-                        @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                        @if(!App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                             <button type="button" onclick="loginAnomalyAlert()"
                             class="btn btn-primary btn-xs" data-animation="slide"
                             data-overlaySpeed="200" data-overlayColor="#36404a"><i class="fa fa-plus-circle mr-1"></i>
@@ -161,7 +157,7 @@
                                     <td>{{ $data->jumlah_penerimaan }}</td>
                                     <td>
                                         <div class="form-group" style="display: block;">
-                                            @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                                            @if(!App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                                                 <button type="button" onclick="loginAnomalyAlert()" class="btn btn-warning btn-xs text-white"><i
                                                     class="fa fa-edit mr-1"></i>
                                                 Edit</button>
@@ -172,7 +168,8 @@
                                                 class="btn btn-warning btn-xs text-white"><i class="fa fa-edit mr-1"></i>
                                                 Edit</button>
                                             @endif
-                                            @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+
+                                            @if(!App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                                                 <button type="button"
                                                     class="btn btn-danger btn-xs rounded waves-light waves-effect"
                                                     onclick="loginAnomalyAlert()"><i class="fa fa-trash-o mr-1"></i> Hapus

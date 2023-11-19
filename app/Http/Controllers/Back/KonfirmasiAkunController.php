@@ -4,75 +4,59 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\LogActivity;
-use Illuminate\Support\Facades\URL;
-use App\Models\Admin;
-use App\Models\User;
 use App\Models\UserAuthInfo;
 use Illuminate\Support\Facades\Request as RequestInfo;
+use Jenssegers\Agent\Facades\Agent;
 use Alert;
 use Auth;
 
-class ManajemenUserController extends Controller
+class KonfirmasiAkunController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
         //
     }
 
-    public function user()
+    public function konfirmasi_akun($user_id) 
     {
-        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+        // Get browser information
+        $browser = Agent::browser();
 
-            $data_log_activity = [
-                'user_id' => Auth::user()->id,
-                'page_title' => 'Manajemen Akun',
-                'url' => URL::current(),
+        // Get device information
+        $device = Agent::device();
+
+        // Accessing browser and device information
+        $browserName = $browser ?: 'Unknown Browser';
+        $deviceType = $device ?: 'Unknown Device';
+        $ipAddress = RequestInfo::ip();
+
+        if(!UserAuthInfo::where('user_id', $user_id)->where('ip_address', $ipAddress)->where('status', '=', 'verified')->exists()) {
+
+            $data = [
+                'user_id' => $user_id,
+                'browser' => $browserName,
+                'device' => $deviceType,
+                'ip_address' => $ipAddress,
+                'status' => 'verified',
             ];
 
-            LogActivity::create($data_log_activity);
+            UserAuthInfo::create($data);
+
+            Alert::success('Berhasil!', 'Akun telah berhasil di verifikasi, silahkan login kembali untuk masuk ke halaman dashboard.')->autoclose(false);
+      
         }
 
-        $data['user'] = User::all();
-        return view('back.manajemen_akun.admin', $data);
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
+        return redirect()->route('login.index');
     }
-
-    public function user_setting()
-    {
-        $data_log_activity = [
-            'user_id' => Auth::user()->id,
-            'page_title' => 'Pengaturan Profil',
-            'url' => URL::current(),
-        ];
-
-        LogActivity::create($data_log_activity);
-        
-        return view('back.manajemen_akun.pengaturan_akun');
-    }
-
-    public function update_account(Request $request, $id)
-    {
-        // dd($request->username);
-
-        $data = [
-            'nama_lengkap' => $request->nama_lengkap,
-            'username' => $request->username,
-            'email' => $request->email,
-        ];
-
-        User::where('id', $id)->first()->update($data);
-
-        Alert::success('Success', 'Profil telah berhasil di perbaharui!');
-
-        return redirect()->back();
-    }
-    
 
     /**
      * Show the form for creating a new resource.

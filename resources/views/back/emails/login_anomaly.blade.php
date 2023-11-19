@@ -52,36 +52,33 @@
                     <span>Device: <b>{{ $user_auth_info->device }}</b></span> <br>
                     <span>Alamat IP: <b>{{ $user_auth_info->ip_address }}</b></span> <br>
 
-                    {{-- <br>
-                    <span>Untuk melakukan aksi seperti menambah, memperbaharui, menghapus data, Anda dapat memasukkan kode berikut ini :</span> <br>
                     <br>
-                    <span>Kode : <b>1664484</b></span> <br>
-                    <br> --}}
+                    <span>Untuk konfirmasi akun anda klik tombol di bawah ini :</span> <br>
+                    <br>
 
-                    {{-- <div style="text-align:center">
-                        <a href="{{ route('activity.index') }}" style="
+                    <div style="text-align:center">
+                        <a href="{{ url('konfirmasi-akun', $user->id) }}" style="
                             display: inline-block;
                             font-weight: 400;
                             line-height: 1.5;
-                            color: #67757c;
+                            color: #fff;
                             text-align: center;
                             text-decoration: none;
                             vertical-align: middle;
                             cursor: pointer !important;
                             user-select: none;
-                            background-color: #15435A;
-                            border: 1px solid #15435A;
+                            background-color: #F4CF00;
+                            border: 1px solid #F4CF00;
                             display: block !important;
                             width: 100% !important;
                             box-shadow: none;
-                            color: #fff;
                             padding: 8px 14px;
                             cursor: pointer;
                             font-size: 0.9375rem;
                             border-radius: 4px;
                             transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-                        ">Detail</a>
-                    </div> --}}
+                        ">Konfirmasi Akun</a>
+                    </div>
                 </div>
             </td>
         </tr>

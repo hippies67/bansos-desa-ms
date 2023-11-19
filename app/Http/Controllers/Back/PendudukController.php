@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Penduduk;
+use App\Models\LogActivity;
+use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\UserAuthInfo;
+use Illuminate\Support\Facades\Request as RequestInfo;
+use Auth;
 
 class PendudukController extends Controller
 {
@@ -18,6 +23,16 @@ class PendudukController extends Controller
     {
         $data['penduduk'] = Penduduk::all();
 
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            $data_log_activity = [
+                'user_id' => Auth::user()->id,
+                'page_title' => 'Penduduk',
+                'url' => URL::current(),
+            ];
+
+            LogActivity::create($data_log_activity);
+        }
+        
         return view('back.penduduk.index', $data);
     }
 

@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\PenerimaBantuan;
 use App\Models\Penduduk;
 use App\Models\Bantuan;
+use App\Models\LogActivity;
+use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\UserAuthInfo;
+use Illuminate\Support\Facades\Request as RequestInfo;
+use Auth;
 
 class PenerimaBantuanController extends Controller
 {
@@ -21,6 +26,16 @@ class PenerimaBantuanController extends Controller
         $data['penerima_bantuan'] = PenerimaBantuan::all();
         $data['penduduk'] = Penduduk::all();
         $data['bantuan'] = Bantuan::all();
+
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            $data_log_activity = [
+                'user_id' => Auth::user()->id,
+                'page_title' => 'Penerima Bantuan',
+                'url' => URL::current(),
+            ];
+
+            LogActivity::create($data_log_activity);
+        }
 
         return view('back.penerima_bantuan.index', $data);
     }

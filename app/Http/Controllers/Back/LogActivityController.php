@@ -5,47 +5,21 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Penduduk;
-use App\Models\JenisBantuan;
-use App\Models\Bantuan;
-use App\Models\PenerimaBantuan;
 use App\Models\LogActivity;
-use Illuminate\Support\Facades\URL;
 use Auth;
-use Analytics;
-use App\Models\Contact;
-use Spatie\Analytics\Period;
-use Carbon\Carbon;
-use App\Models\UserAuthInfo;
-use Illuminate\Support\Facades\Request as RequestInfo;
 
-class DashboardController extends Controller
+class LogActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
     public function index()
     {
-        $data['total_akun'] = User::count();
-        $data['total_penduduk'] = Penduduk::count();
-        $data['total_jenis_bantuan'] = JenisBantuan::count();
-        $data['total_bantuan'] = Bantuan::count();
-        $data['total_penerima'] = PenerimaBantuan::count();
+        $data['users'] = User::all();
 
-        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
-            $data_log_activity = [
-                'user_id' => Auth::user()->id,
-                'page_title' => 'Dashboard',
-                'url' => URL::current(),
-            ];
-
-            LogActivity::create($data_log_activity);
-        }
-
-        return view('back.dashboard.data', $data);
+        return view('back.log_activity.index', $data);
     }
 
     /**
@@ -57,7 +31,6 @@ class DashboardController extends Controller
     {
         //
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -78,7 +51,9 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['log_activity'] = LogActivity::where('user_id', Auth::user()->id)->latest()->get();
+
+        return view('back.log_activity.show', $data);
     }
 
     /**

@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\LogActivity;
+use Illuminate\Support\Facades\URL;
+use App\Models\UserAuthInfo;
+use Illuminate\Support\Facades\Request as RequestInfo;
 use Hash;
 use Alert;
 use Auth;
@@ -21,6 +25,17 @@ class UserController extends Controller
     public function index()
     {
         $data['users'] = User::all();
+
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            $data_log_activity = [
+                'user_id' => Auth::user()->id,
+                'page_title' => 'Manajemen Akun',
+                'url' => URL::current(),
+            ];
+
+            LogActivity::create($data_log_activity);
+        }
+
         return view('back.manajemen_akun.user', $data);
     }
 

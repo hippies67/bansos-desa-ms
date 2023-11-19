@@ -98,12 +98,8 @@ Daftar Manajemen Akun
             <div class="card-header">
                 <h4 class="card-title">Data User</h4>
                 <div class="button-list">
-                    
-                    @php
-                        $user_atuh_info = App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->first();
-                    @endphp
-
-                    @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                
+                    @if(!App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                         <button type="button" onclick="loginAnomalyAlert()"
                             class="btn btn-primary btn-xs" data-animation="slide"
                             data-overlaySpeed="200" data-overlayColor="#36404a"><i class="fa fa-plus-circle mr-1"></i>
@@ -146,12 +142,12 @@ Daftar Manajemen Akun
                                 @endif
                             </td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->no_telp }}</td>
-                            <td>{{ $user->alamat }}</td>
+                            <td>{{ isset($user->no_telp) ? $user->no_telp : '-' }}</td>
+                            <td>{{ isset($user->alamat) ? $user->alamat : '-' }}</td>
                             <td>
                                 
                                 <div class="form-group" style="display: block;">
-                                    @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                                    @if(!App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                                         <button type="button" onclick="loginAnomalyAlert()" class="btn btn-warning btn-xs text-white"><i
                                             class="fa fa-edit mr-1"></i>
                                         Edit</button>
@@ -162,7 +158,7 @@ Daftar Manajemen Akun
                                         Edit</button>
                                     @endif
 
-                                    @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                                    @if(!App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                                         <button type="button"
                                             class="btn btn-danger btn-xs rounded waves-light waves-effect"
                                             onclick="loginAnomalyAlert()"><i class="fa fa-trash-o mr-1"></i> Hapus
@@ -180,7 +176,7 @@ Daftar Manajemen Akun
                                     @endif
                                 </div>
                                 <div class="form-group" style="display: block;">
-                                    @if($user_atuh_info->ip_address != Illuminate\Support\Facades\Request::ip())
+                                    @if(!App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                                         <a href="javascript:void(0)" onclick="loginAnomalyAlert()"
                                             class="btn btn-dark btn-xs waves-effect waves-light" id="update-password"><i
                                                 class="fa fa-key mr-1"></i> Ubah
