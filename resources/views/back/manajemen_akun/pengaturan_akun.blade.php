@@ -107,7 +107,8 @@
                                 Mengambil Foto <sup class="text-danger">*</sup> </button>
                             <button id="click-photo" style="display: none"
                                 class="btn btn-sm btn-outline-success mt-4">Klik untuk mendapatkan foto</button>
-                            <button id="toggle-camera" class="btn btn-sm btn-outline-secondary mt-4" type="button" style="display: none;">
+                            <button id="toggle-camera" class="btn btn-sm btn-outline-secondary mt-4" type="button"
+                                style="display: none;">
                                 Ganti Kamera</button>
                             <br><br>
                             <br><br>
@@ -156,6 +157,7 @@
             }
         });
     </script>
+    
     <script>
         let camera_button = document.querySelector("#start-camera");
         let video_play = document.querySelector("#video");
@@ -165,14 +167,26 @@
         let streamReference = null;
         let isFrontCamera = true;
 
-        async function startCamera() {
+        async function startCamera(constraints) {
             try {
+                stopStream(); // Stop the previous stream before starting a new one
                 const stream = await navigator.mediaDevices.getUserMedia(constraints);
                 handleSuccessCamera(stream);
                 camera_button.disabled = true;
             } catch (e) {
                 handleErrorCamera(e);
             }
+        }
+
+        function switchCamera() {
+            isFrontCamera = !isFrontCamera;
+            const updatedConstraints = {
+                audio: false,
+                video: {
+                    facingMode: isFrontCamera ? 'user' : 'environment'
+                }
+            };
+            startCamera(updatedConstraints);
         }
 
         const constraints = {
@@ -189,17 +203,10 @@
             e.preventDefault();
 
             clearPhoto(); // Clear the old photo
-            stopStream();
-            startCamera();
+            startCamera(constraints);
         });
 
-        document.getElementById('toggle-camera').addEventListener('click', function() {
-            isFrontCamera = !isFrontCamera;
-            stopStream();
-            constraints.video.facingMode = isFrontCamera ? 'user' : 'environment';
-            clearPhoto(); // Clear the old photo
-            startCamera();
-        });
+        document.getElementById('toggle-camera').addEventListener('click', switchCamera);
 
         function handleSuccessCamera(stream) {
             video_play.style.display = 'inline';
@@ -208,7 +215,7 @@
             camera_button.style.display = 'none';
             click_button.style.display = 'inline';
             click_button.style.margin = 'auto';
-            video.srcObject = stream;
+            video_play.srcObject = stream;
         }
 
         function handleErrorCamera(error) {
@@ -233,7 +240,7 @@
             const offsetX = 0;
             const offsetY = 0;
 
-            const videoAspectRatio = video.videoWidth / video.videoHeight;
+            const videoAspectRatio = video_play.videoWidth / video_play.videoHeight;
 
             let captureWidth, captureHeight;
             if (canvas.width / canvas.height > videoAspectRatio) {
@@ -247,7 +254,7 @@
             canvas.width = captureWidth;
             canvas.height = captureHeight;
 
-            canvas.getContext('2d').drawImage(video, offsetX, offsetY, captureWidth, captureHeight);
+            canvas.getContext('2d').drawImage(video_play, offsetX, offsetY, captureWidth, captureHeight);
 
             canvas.style.borderRadius = '20px';
 
@@ -280,7 +287,9 @@
         }
 
         // Initial start of the camera only when the button is clicked
-        document.getElementById('start-camera').addEventListener('click', startCamera);
+        document.getElementById('start-camera').addEventListener('click', function() {
+            startCamera(constraints);
+        });
     </script>
 
     <script>
