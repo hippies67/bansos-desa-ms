@@ -157,105 +157,115 @@
             }
         });
     </script>
-   
-   <script>
-    let camera_button_all = document.querySelector(".start-camera");
-    let camera_button = document.querySelector("#start-camera");
-    let video_play = document.querySelector("#video");
-    let click_button = document.querySelector("#click-photo");
-    let canvas = document.querySelector("#canvas");
-    let img_base64 = '';
-    let streamReference = null;
 
-    const constraints = {
-        audio: false,
-        video: { width: { ideal: 1280 }, height: { ideal: 720 } }
-    };
+    <script>
+        let camera_button_all = document.querySelector(".start-camera");
+        let camera_button = document.querySelector("#start-camera");
+        let video_play = document.querySelector("#video");
+        let click_button = document.querySelector("#click-photo");
+        let canvas = document.querySelector("#canvas");
+        let img_base64 = '';
+        let streamReference = null;
 
-    camera_button_all.addEventListener('click', async function(e) {
-        $(this).prop('disabled', true);
-        $(this).html('<i class="fa fa-spinner fa-spin"></i>');
+        const constraints = {
+            audio: false,
+            video: {
+                facingMode: {
+                    ideal: 'environment'
+                }, // Use 'user' for front camera, 'environment' for rear camera
+                width: {
+                    ideal: 1280
+                },
+                height: {
+                    ideal: 720
+                }
+            }
+        };
 
-        e.preventDefault();
-        if (img_base64) {
-            canvas.style.display = 'none';
-            click_button.style.display = 'inline';
-            camera_button.style.display = 'inline';
-        }
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia(constraints);
-            handleSuccessCamera(stream);
-            camera_button.disabled = true;
-        } catch (e) {
-            handleErrorCamera(e);
-        }
-    });
+        camera_button_all.addEventListener('click', async function(e) {
+            $(this).prop('disabled', true);
+            $(this).html('<i class="fa fa-spinner fa-spin"></i>');
 
-    function handleSuccessCamera(stream) {
-        video_play.style.display = 'inline';
-        let videoTracks = stream.getVideoTracks();
-        streamReference = stream; // Store the stream reference
-        camera_button.style.display = 'none';
-        click_button.style.display = 'inline';
-        click_button.style.margin = 'auto';
-        video.srcObject = stream;
-    }
-
-    function handleErrorCamera(error) {
-        if (error.name === 'OverconstrainedError') {
-            errorMsgCamera(`The resolution is not supported by your device.`);
-        } else if (error.name === 'NotAllowedError') {
-            errorMsgCamera('Permissions have not been granted to use your camera and ' +
-                'microphone, you need to allow the page access to your devices in ' +
-                'order for the demo to work.');
-        }
-        errorMsgCamera(`getUserMedia error: ${error.name}`, error);
-    }
-
-    click_button.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        const offsetX = 0;
-        const offsetY = 0;
-
-        const videoAspectRatio = video_play.videoWidth / video_play.videoHeight;
-
-        let captureWidth, captureHeight;
-        if (canvas.width / canvas.height > videoAspectRatio) {
-            captureHeight = canvas.height;
-            captureWidth = captureHeight * videoAspectRatio;
-        } else {
-            captureWidth = canvas.width;
-            captureHeight = captureWidth / videoAspectRatio;
-        }
-
-        canvas.width = captureWidth;
-        canvas.height = captureHeight;
-        canvas.getContext('2d').imageSmoothingQuality = 'high';
-        canvas.getContext('2d').drawImage(video_play, offsetX, offsetY, captureWidth, captureHeight);
-
-        canvas.style.borderRadius = '10px';
-
-        let image_data_url = canvas.toDataURL('image/jpeg', 0.9);
-        if (image_data_url) {
-            video_play.style.display = 'none';
-            canvas.style.display = 'inline';
-            click_button.style.display = 'none';
-            camera_button.innerHTML = 'Capture Again';
-            camera_button.style.display = 'inline';
-            camera_button.disabled = false;
-            img_base64 = image_data_url;
-        }
-    });
-
-    function stopStream() {
-        if (!streamReference) return;
-        streamReference.getVideoTracks().forEach(function(track) {
-            track.stop();
+            e.preventDefault();
+            if (img_base64) {
+                canvas.style.display = 'none';
+                click_button.style.display = 'inline';
+                camera_button.style.display = 'inline';
+            }
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                handleSuccessCamera(stream);
+                camera_button.disabled = true;
+            } catch (e) {
+                handleErrorCamera(e);
+            }
         });
-        streamReference = null;
-    }
-</script>
+
+        function handleSuccessCamera(stream) {
+            video_play.style.display = 'inline';
+            let videoTracks = stream.getVideoTracks();
+            streamReference = stream; // Store the stream reference
+            camera_button.style.display = 'none';
+            click_button.style.display = 'inline';
+            click_button.style.margin = 'auto';
+            video.srcObject = stream;
+        }
+
+        function handleErrorCamera(error) {
+            if (error.name === 'OverconstrainedError') {
+                errorMsgCamera(`The resolution is not supported by your device.`);
+            } else if (error.name === 'NotAllowedError') {
+                errorMsgCamera('Permissions have not been granted to use your camera and ' +
+                    'microphone, you need to allow the page access to your devices in ' +
+                    'order for the demo to work.');
+            }
+            errorMsgCamera(`getUserMedia error: ${error.name}`, error);
+        }
+
+        click_button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const offsetX = 0;
+            const offsetY = 0;
+
+            const videoAspectRatio = video_play.videoWidth / video_play.videoHeight;
+
+            let captureWidth, captureHeight;
+            if (canvas.width / canvas.height > videoAspectRatio) {
+                captureHeight = canvas.height;
+                captureWidth = captureHeight * videoAspectRatio;
+            } else {
+                captureWidth = canvas.width;
+                captureHeight = captureWidth / videoAspectRatio;
+            }
+
+            canvas.width = captureWidth;
+            canvas.height = captureHeight;
+            canvas.getContext('2d').imageSmoothingQuality = 'high';
+            canvas.getContext('2d').drawImage(video_play, offsetX, offsetY, captureWidth, captureHeight);
+
+            canvas.style.borderRadius = '10px';
+
+            let image_data_url = canvas.toDataURL('image/jpeg', 0.9);
+            if (image_data_url) {
+                video_play.style.display = 'none';
+                canvas.style.display = 'inline';
+                click_button.style.display = 'none';
+                camera_button.innerHTML = 'Capture Again';
+                camera_button.style.display = 'inline';
+                camera_button.disabled = false;
+                img_base64 = image_data_url;
+            }
+        });
+
+        function stopStream() {
+            if (!streamReference) return;
+            streamReference.getVideoTracks().forEach(function(track) {
+                track.stop();
+            });
+            streamReference = null;
+        }
+    </script>
 
     <script>
         function loginAnomalyAlert() {
