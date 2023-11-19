@@ -306,10 +306,10 @@ Daftar Manajemen Akun
                         <div class="col-12">
                             <label for="tanggal_lahir">Jenis Kelamin</label>
                             <select name="jenis_kelamin" class="form-control form-control-lg" id="jenis_kelamin">
-                            <option value="">Pilih Jenis Kelamin</option>
-                            <option value="laki_laki">Laki-Laki</option>
-                            <option value="perempuan">Perempuan</option>
-                        </select>
+                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="laki_laki">Laki-Laki</option>
+                                <option value="perempuan">Perempuan</option>
+                            </select>
                         </div>
                     </div>
             </div>

@@ -64,6 +64,10 @@ class ManajemenUserController extends Controller
             'nama_lengkap' => $request->nama_lengkap,
             'username' => $request->username,
             'email' => $request->email,
+            'no_telp' => $request->no_telp,
+            'tgl_lahir' => $request->tgl_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
         ];
 
         User::where('id', $id)->first()->update($data);
