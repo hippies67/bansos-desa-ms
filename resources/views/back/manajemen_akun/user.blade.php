@@ -122,6 +122,7 @@ Daftar Manajemen Akun
                             <th>Email</th>
                             <th>Nomor Hp</th>
                             <th>Alamat</th>
+                            <th>Role</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -144,6 +145,7 @@ Daftar Manajemen Akun
                             <td>{{ $user->email }}</td>
                             <td>{{ isset($user->no_telp) ? $user->no_telp : '-' }}</td>
                             <td>{{ isset($user->alamat) ? $user->alamat : '-' }}</td>
+                            <td>{{ isset($user->role) ? ucwords($user->role) : '-' }}</td>
                             <td>
                                 
                                 <div class="form-group" style="display: block;">
@@ -312,6 +314,17 @@ Daftar Manajemen Akun
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <div class="col-12">
+                            <label for="role">Role</label>
+                            <select name="role" class="form-control form-control-lg" id="role">
+                                <option value="">Pilih Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Tutup</button>
@@ -368,7 +381,7 @@ Daftar Manajemen Akun
                         <div class="col-12">
                             <label for="edit_no_telp">Nomor Hp</label>
                             <input class="form-control mb-1" type="number" id="edit_no_telp"
-                                placeholder="Masukkan No Hp" name="edit_no_telp" required>
+                                placeholder="Masukkan No Hp" name="edit_no_telp">
                             @error('edit_no_telp')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -380,7 +393,7 @@ Daftar Manajemen Akun
                             <label for="alamat">Alamat</label>
                             <input class="form-control mb-1 @error('edit_alamat') is-invalid @enderror" type="text"
                                 id="edit_alamat" placeholder="Masukkan Alamat" name="edit_alamat"
-                                value="{{ old('edit_alamat') }}" required>
+                                value="{{ old('edit_alamat') }}">
                             @error('edit_alamat')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -404,6 +417,17 @@ Daftar Manajemen Akun
                                     <option value="laki_laki">Laki-Laki</option>
                                     <option value="perempuan">Perempuan</option>
                                 </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-12">
+                            <label for="role">Role</label>
+                            <select name="edit_role" class="form-control form-control-lg" id="edit_role">
+                                <option value="">Pilih Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
                         </div>
                     </div>
 
@@ -458,21 +482,16 @@ Daftar Manajemen Akun
                     nama_lengkap: {
                         required: true,
                         minlength: 3,
-                        maxlength: 30,
                     },
                     email: {
                         required: true,
                         minlength: 3,
-                        maxlength: 30,
                         remote: {
                             url: "{{ route('manajemen-akun-user.checkEmail') }}",
                             type: "post",
                         }
                     },
-                    no_telp: {
-                        required: true
-                    },
-                    alamat: {
+                    role: {
                         required: true
                     },
                     password: {
@@ -488,20 +507,15 @@ Daftar Manajemen Akun
                     nama_lengkap: {
                         required: "Nama harus di isi",
                         minlength: "Nama tidak boleh kurang dari 3 karakter",
-                        maxlength: "Nama tidak boleh lebih dari 30 karakter"
                     },
                     email: {
                         required: "Email harus di isi",
                         email: "Email yang di isikan harus valid",
                         minlength: "Email tidak boleh kurang dari 3 karakter",
-                        maxlength: "Email tidak boleh lebih dari 30 karakter",
                         remote: "Email sudah tersedia"
                     },
-                    no_telp: {
-                        required: "Nomor Hp harus di isi"
-                    },
-                    alamat: {
-                        required: "Alamat harus di isi"
+                    role: {
+                        required: "Role harus di isi"
                     },
                     password: {
                         required: "Password harus di isi",
@@ -530,34 +544,13 @@ Daftar Manajemen Akun
                     edit_nama_lengkap: {
                         required: true,
                         minlength: 3,
-                        maxlength: 30,
                     },
-                    edit_no_telp: {
+                    edit_role: {
                         required: true
-                    },
-                    edit_alamat: {
-                        required: true
-                    },
-                    edit_username: {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 30,
-                        remote: {
-                            param: {
-                                url: "{{ route('manajemen-akun-user.checkEmail') }}",
-                                type: "post",
-                            },
-                            depends: function (element) {
-                                // compare name in form to hidden field
-                                return ($(element).val() !== $('#checkEmail').val());
-                            },
-
-                        }
                     },
                     edit_email: {
                         required: true,
                         minlength: 3,
-                        maxlength: 30,
                         remote: {
                             param: {
                                 url: "{{ route('manajemen-akun-user.checkEmail') }}",
@@ -575,19 +568,14 @@ Daftar Manajemen Akun
                     edit_nama: {
                         required: "Nama harus di isi",
                         minlength: "Nama tidak boleh kurang dari 3 karakter",
-                        maxlength: "Nama tidak boleh lebih dari 30 karakter"
                     },
-                    edit_no_telp: {
-                        required: "Nomor Hp harus di isi"
-                    },
-                    edit_alamat: {
-                        required: "Alamat harus di isi"
+                    edit_role: {
+                        required: "Role harus di isi"
                     },
                     edit_email: {
                         required: "Email harus di isi",
                         email: "Email yang di isikan harus valid",
                         minlength: "Email tidak boleh kurang dari 3 karakter",
-                        maxlength: "Email tidak boleh lebih dari 30 karakter",
                         remote: "Email sudah tersedia"
                     }
                 }
@@ -615,6 +603,7 @@ Daftar Manajemen Akun
             $('[name="edit_email"]').val(user.email);
             $('#edit_no_telp').val(user.no_telp);
             $('[name="edit_alamat"]').val(user.alamat);
+            $('[name="edit_role"]').val(user.role);
             // $('#edit_status').val(user.jenis_kelamin);
             $('#edit_tgl_lahir').val(user.tgl_lahir);
             $('#edit_jenis_kelamin').val([user.jenis_kelamin]).trigger('change');

@@ -111,8 +111,8 @@
                                         alt="" />
                                     @endif
                                     <div class="header-info">
-                                        <span class="text-black"><strong>{{ Auth::user()->username }}</strong></span>
-                                        <p class="fs-12 mb-0">Admin</p>
+                                        <span class="text-black"><strong>{{ Auth::user()->nama_lengkap }}</strong></span>
+                                        <p class="fs-12 mb-0">{{ ucwords(Auth::user()->role) }}</p>
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
@@ -211,14 +211,16 @@
                         </li>
                     @endif --}}
                     
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="bi bi-person-lines-fill"></i>
-                            <span class="nav-text">Manajemen Akun</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{ route('manajemen-akun-user.index') }}">User</a></li>
-                        </ul>
-                    </li>
+                    @if(Auth::user()->role == 'admin')
+                        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="bi bi-person-lines-fill"></i>
+                                <span class="nav-text">Manajemen Akun</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('manajemen-akun-user.index') }}">User</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

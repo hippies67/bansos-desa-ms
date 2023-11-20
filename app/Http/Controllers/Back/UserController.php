@@ -29,7 +29,11 @@ class UserController extends Controller
                 return redirect()->route('login.verifikasi-mfa');
             }
         }
-        
+
+        if(Auth::user()->role == 'user') {
+            return redirect()->back();
+        }
+
         $data['users'] = User::all();
 
         if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
@@ -70,6 +74,7 @@ class UserController extends Controller
             'alamat' => $request->alamat,
             'jenis_kelamin' => $request->jenis_kelamin,
             'tgl_lahir' => $request->tgl_lahir,
+            'role' => $request->role,
             'password' => Hash::make($request->password)
         ];
 
@@ -125,7 +130,8 @@ class UserController extends Controller
             'no_telp' => $request->edit_no_telp ? $request->edit_no_telp : $user->no_telp,
             'alamat' => $request->edit_alamat ? $request->edit_alamat : $user->alamat,
             'jenis_kelamin' => $request->edit_jenis_kelamin ? $request->edit_jenis_kelamin : $user->jenis_kelamin,
-            'tgl_lahir' => $request->edit_tgl_lahir ? $request->edit_tgl_lahir : $user->tgl_lahir
+            'tgl_lahir' => $request->edit_tgl_lahir ? $request->edit_tgl_lahir : $user->tgl_lahir,
+            'role' => $request->edit_role ? $request->edit_role : $user->role
         ];
 
         $user->update($data)

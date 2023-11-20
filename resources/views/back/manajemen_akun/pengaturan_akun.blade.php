@@ -40,11 +40,11 @@
                                 value="{{ Auth::user()->nama_lengkap }}" placeholder="Masukkan Nama Lengkap">
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="username">Username<span class="text-danger">*</span></label>
                             <input type="text" name="username" class="form-control" id="username"
                                 value="{{ Auth::user()->username }}" placeholder="Masukkan Username">
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label for="email">Email<span class="text-danger">*</span></label>
@@ -281,7 +281,7 @@
             $("#click-photo").css('display', 'none');
 
             $(this).prop('disabled', true);
-            $(this).html('<span>Memproses Kamera</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>');
+            $(this).html('<span>Proses Data Berlangsung, Mohon Sabar</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>');
 
             e.preventDefault();
             if (img_base64) {
