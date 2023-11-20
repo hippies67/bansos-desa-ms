@@ -275,14 +275,15 @@
     @yield('js')
 
     @stack('scripts')
-
+    
+{{-- 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script>
       const baseUrl = window.location.origin;
       tf.loadLayersModel(baseUrl + "/tfjs_model/model.json");
-    </script>
+    </script> --}}
 
 </body>
 
