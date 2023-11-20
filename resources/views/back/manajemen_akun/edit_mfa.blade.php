@@ -198,7 +198,7 @@
 
             $(this).prop('disabled', true);
             $(this).html(
-                '<span>Memproses Kamera</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>'
+                '<span>Proses Data Berlangsung, Mohon Sabar</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>'
             );
 
             e.preventDefault();
