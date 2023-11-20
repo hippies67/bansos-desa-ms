@@ -25,7 +25,8 @@ class User extends Authenticatable
         'alamat', 
         'tgl_lahir', 
         'no_telp', 
-        'jenis_kelamin'
+        'jenis_kelamin',
+        'mfa_objek'
     ];
 
     /**

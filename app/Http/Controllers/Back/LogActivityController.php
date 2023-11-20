@@ -17,6 +17,12 @@ class LogActivityController extends Controller
      */
     public function index()
     {
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            if(Auth::user()->mfa_objek != "") {
+                return redirect()->route('login.verifikasi-mfa');
+            }
+        }
+        
         $data['users'] = User::all();
 
         return view('back.log_activity.index', $data);

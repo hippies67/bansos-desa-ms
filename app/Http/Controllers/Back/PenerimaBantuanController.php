@@ -23,6 +23,12 @@ class PenerimaBantuanController extends Controller
      */
     public function index()
     {
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            if(Auth::user()->mfa_objek != "") {
+                return redirect()->route('login.verifikasi-mfa');
+            }
+        }
+        
         $data['penerima_bantuan'] = PenerimaBantuan::all();
         $data['penduduk'] = Penduduk::all();
         $data['bantuan'] = Bantuan::all();

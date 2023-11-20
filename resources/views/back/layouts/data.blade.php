@@ -199,7 +199,7 @@
                             <span class="nav-text">Penerimaan</span>
                         </a>
                     </li>
-                    
+{{--                     
                     @if(App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
                         <li class="{{ Request::routeIs('log-activity.*') ? 'mm-active active-no-child' : '' }}">
                             <a href="{{ route('log-activity.index') }}"
@@ -209,7 +209,7 @@
                                 <span class="nav-text">Log Activity</span>
                             </a>
                         </li>
-                    @endif
+                    @endif --}}
                     
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="bi bi-person-lines-fill"></i>
@@ -275,6 +275,14 @@
     @yield('js')
 
     @stack('scripts')
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+    <script>
+      const baseUrl = window.location.origin;
+      tf.loadLayersModel(baseUrl + "/tfjs_model/model.json");
+    </script>
 
 </body>
 

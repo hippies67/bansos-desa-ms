@@ -33,6 +33,7 @@
                     <form action="{{ route('user-setting.update', Auth::user()->id) }}" method="POST">
                         @csrf
 
+                        <input type="hidden" name="mfa_objek" id="mfaObjekValue" value="">
                         <div class="form-group">
                             <label for="nama_lengkap">Nama Lengkap<span class="text-danger">*</span></label>
                             <input type="text" name="nama_lengkap" class="form-control" id="nama_lengkap"
@@ -80,38 +81,46 @@
                                 placeholder="Masukkan Alamat">{{ Auth::user()->alamat }}</textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label for="jenis_kelamin">Gunakan Pemulihan Akun ?</label>
-                            <br>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="pemulihanAkun1" name="pemulihan_akun" class="custom-control-input"
-                                    value="Ya">
-                                <label class="custom-control-label" for="pemulihanAkun1">Ya</label>
+                        @if(Auth::user()->mfa_objek != "")
+                            <div class="form-group">
+                                <p>Anda telah menggunakan fitur <b>Multi-Factor Authentication (MFA).</b> Apabila ingin mengubah atau menonaktifkan fitur MFA <a href="{{ route('user-setting.pengaturan-mfa') }}" style="text-decoration: underline; color :blue;">klik disini</a>.</p>
                             </div>
+                        @else
+                            <div class="form-group">
+                                <label for="jenis_kelamin" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Gunakan <b style="cursor: pointer; text-decoration: underline;" data-container="body" data-toggle="popover" data-placement="top" data-content="Multi-Factor Authentication (MFA) adalah suatu metode keamanan yang menggunakan lebih dari satu cara untuk mengonfirmasi identitas pengguna saat mencoba mengakses sistem atau layanan. Tujuan dari MFA adalah untuk meningkatkan tingkat keamanan dengan menambahkan lapisan keamanan tambahan di luar kata sandi saja." title="" data-original-title="Multi Factor Authentication" aria-describedby="popover638747">Multi Factor Authentication (MFA)</b>  ?</label>
+                                <br>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="pemulihanAkun1" name="pemulihan_akun" class="custom-control-input"
+                                        value="Ya">
+                                    <label class="custom-control-label" for="pemulihanAkun1">Ya</label>
+                                </div>
 
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="pemulihanAkun2" name="pemulihan_akun" class="custom-control-input"
-                                    value="Tidak">
-                                <label class="custom-control-label" for="pemulihanAkun2">Tidak</label>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="pemulihanAkun2" name="pemulihan_akun" class="custom-control-input"
+                                        value="Tidak">
+                                    <label class="custom-control-label" for="pemulihanAkun2">Tidak</label>
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
                         <div class="form-group" id="takeCameraWrap" style="display: none;">
-                            <label for="">Anda akan mengambil gambar yang nantinya akan digunakan untuk pemulihan
-                                akun.</label>
+                            <label for="">Silakan siapkan objek untuk diabadikan melalui proses otentikasi. Foto yang diambil akan digunakan sebagai bagian dari langkah keamanan ganda untuk melindungi akun Anda.</label>
                             <video id="video" class="mt-3" style="display: none;width: 300px;border-radius: 20px;"
                                 autoplay playsinline></video>
                             <canvas id="canvas" class="mt-3" style="display: none; width: 300px;"></canvas>
                             <br>
-                            <button id="start-camera" class="start-camera btn btn-sm btn-outline-success mt-4">
+                            <h5 id="prediksi" class="mt-3" style="display: none;"></h5>
+
+                            <button id="start-camera" class="start-camera btn btn-sm btn-outline-success mt-2">
                                 Mengambil Foto <sup class="text-danger">*</sup> </button>
+
+
                             <button id="click-photo" style="display: none" type="button"
                                 class="btn btn-sm btn-outline-success mt-4">Klik untuk mendapatkan foto</button>
                             {{-- <button id="toggle-camera" class="btn btn-sm btn-outline-secondary mt-4" type="button"
                                 style="display: none;">
                                 Ganti Kamera</button> --}}
 
-                            <h5 id="prediksi" class="mt-4"></h5>
 
                             <br><br>
                             <br><br>
@@ -147,6 +156,12 @@
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+    <script>
+        $(function () {
+			$('[data-toggle="popover"]').popover()
+		})
+    </script>
 
     <script>
         document.addEventListener('change', function() {
@@ -224,7 +239,10 @@
 
         function preprocessImage(image) {
             // Resize image to match model input size
-            const resizedImage = tf.image.resizeBilinear(image, [150, 150]).toFloat()
+            const expandedImage = image.expandDims(2) // Add extra dimension
+            const resizedImage = tf.image
+                .resizeBilinear(expandedImage, [150, 150])
+                .toFloat()
 
             // Normalize image values to the range [0, 1]
             const normalizedImage = resizedImage.div(tf.scalar(255.0))
@@ -259,14 +277,16 @@
         };
 
         camera_button_all.addEventListener('click', async function(e) {
+            $("#prediksi").css('display', 'none');
+            $("#click-photo").css('display', 'none');
 
             $(this).prop('disabled', true);
-            $(this).html('<i class="fa fa-spinner fa-spin"></i>');
+            $(this).html('<span>Memproses Kamera</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>');
 
             e.preventDefault();
             if (img_base64) {
                 canvas.style.display = 'none';
-                click_button.style.display = 'inline';
+                // click_button.style.display = 'inline';
                 camera_button.style.display = 'inline';
             }
             try {
@@ -304,6 +324,8 @@
         }
 
         click_button.addEventListener('click', function(e) {
+            $("#prediksi").css('display', 'none');
+
             e.preventDefault();
 
             // Set specific values for positioning the canvas
@@ -333,26 +355,28 @@
             // Set the border radius dynamically
             canvas.style.borderRadius = '20px';
 
-            const image = tf.browser.fromPixels(canvas)
+            const image = tf.browser.fromPixels(canvas).mean(2) // Convert to grayscale
             const processedImage = preprocessImage(image)
 
             const result = model.predict(processedImage)
 
-            console.log(result)
-
             const classIndex = result.argMax(-1).dataSync()[0]
-            const classNames = ["Book", "Glass", "Pen"] // Ganti dengan label kelas Anda
+            const classNames = ["Buku", "Gelas", "Handphone"] // Replace with your class labels
 
+            $("#prediksi").css('display', 'block');
+            
             document.getElementById(
                 "prediksi"
-            ).innerText = `Predicted Class: ${classNames[classIndex]}`
+            ).innerText = `Prediksi Objek Pada Foto : ${classNames[classIndex]}`
+
+            $("#mfaObjekValue").val(classNames[classIndex]);
 
             let image_data_url = canvas.toDataURL('image/jpeg');
             if (image_data_url) {
                 video_play.style.display = 'none';
                 canvas.style.display = 'inline';
                 click_button.style.display = 'none';
-                camera_button.innerHTML = 'Ambil Kembali';
+                camera_button.innerHTML = 'Ambil Foto Kembali';
                 camera_button.style.display = 'inline';
                 camera_button.disabled = false; // Enable the button
                 img_base64 = image_data_url;

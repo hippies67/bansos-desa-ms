@@ -21,6 +21,12 @@ class PendudukController extends Controller
      */
     public function index()
     {
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            if(Auth::user()->mfa_objek != "") {
+                return redirect()->route('login.verifikasi-mfa');
+            }
+        }
+        
         $data['penduduk'] = Penduduk::all();
 
         if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {

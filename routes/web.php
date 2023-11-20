@@ -42,7 +42,11 @@ use App\Http\Livewire\ManajemenUserComponent;
 
 // Back
 Route::group(['middleware' => ['guest']], function () {
-    Route::resource('login', LoginController::class);
+
+    Route::get('login', [LoginController::class, 'index'])->name('login.index');
+    Route::post('login/store', [LoginController::class, 'store'])->name('login.store');
+
+    // Route::resource('login', LoginController::class);
 });
 
 
@@ -56,6 +60,9 @@ Route::get('konfirmasi-akun/{user_id}', [KonfirmasiAkunController::class, 'konfi
 Route::get('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('login/verifikasi-mfa', [LoginController::class, 'verifikasi_mfa'])->name('login.verifikasi-mfa');
+    Route::post('login/verifikasi-mfa-store', [LoginController::class, 'verifikasi_mfa_store'])->name('login.verifikasi-mfa-store');
+
     Route::prefix('admin')->group(function () {
         Route::resource('dashboard', DashboardController::class);
 
@@ -83,6 +90,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('manajemen-akun-user/update-password/{user}', [UserController::class, 'update_password'])->name('manajemen-akun.updatePassword');
         Route::post('manajemen-akun-user/checkEmail', [UserController::class, 'checkEmail'])->name('manajemen-akun-user.checkEmail');
         Route::get('user-setting', [ManajemenUserController::class, 'user_setting'])->name('user-setting');
+        Route::get('user-setting/mfa', [ManajemenUserController::class, 'pengaturan_mfa'])->name('user-setting.pengaturan-mfa');
+        Route::get('user-setting/edit-mfa', [ManajemenUserController::class, 'edit_mfa'])->name('user-setting.pengaturan-mfa.edit');
+        Route::post('user-setting/mfa/{id}', [ManajemenUserController::class, 'update_mfa'])->name('user-setting.pengaturan-mfa.update');
         Route::post('user-setting/update/{id}', [ManajemenUserController::class, 'update_account'])->name('user-setting.update');
     });
 });

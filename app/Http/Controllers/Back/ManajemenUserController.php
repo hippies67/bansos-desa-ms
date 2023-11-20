@@ -29,6 +29,12 @@ class ManajemenUserController extends Controller
     public function user()
     {
         if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            if(Auth::user()->mfa_objek != "") {
+                return redirect()->route('login.verifikasi-mfa');
+            }
+        }
+
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
 
             $data_log_activity = [
                 'user_id' => Auth::user()->id,
@@ -45,6 +51,12 @@ class ManajemenUserController extends Controller
 
     public function user_setting()
     {
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            if(Auth::user()->mfa_objek != "") {
+                return redirect()->route('login.verifikasi-mfa');
+            }
+        }
+
         $data_log_activity = [
             'user_id' => Auth::user()->id,
             'page_title' => 'Pengaturan Profil',
@@ -54,6 +66,29 @@ class ManajemenUserController extends Controller
         LogActivity::create($data_log_activity);
         
         return view('back.manajemen_akun.pengaturan_akun');
+    }
+
+    public function pengaturan_mfa() 
+    {
+
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            if(Auth::user()->mfa_objek != "") {
+                return redirect()->route('login.verifikasi-mfa');
+            }
+        }
+
+        return view('back.manajemen_akun.pengaturan_mfa');
+    }
+
+    public function edit_mfa() 
+    {
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            if(Auth::user()->mfa_objek != "") {
+                return redirect()->route('login.verifikasi-mfa');
+            }
+        } 
+
+        return view('back.manajemen_akun.edit_mfa');
     }
 
     public function update_account(Request $request, $id)
@@ -68,6 +103,7 @@ class ManajemenUserController extends Controller
             'tgl_lahir' => $request->tgl_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
+            'mfa_objek' => $request->mfa_objek,
         ];
 
         User::where('id', $id)->first()->update($data);
@@ -75,6 +111,28 @@ class ManajemenUserController extends Controller
         Alert::success('Success', 'Profil telah berhasil di perbaharui!');
 
         return redirect()->back();
+    }
+
+    public function update_mfa(Request $request, $id)
+    {
+        // dd($request->username);
+
+        if($request->mfa_objek_edit == "None") {
+            $data = [
+                'mfa_objek' => null,
+            ];
+        } else {
+            $data = [
+                'mfa_objek' => $request->mfa_objek_edit,
+            ];
+        }
+       
+
+        User::where('id', $id)->first()->update($data);
+
+        Alert::success('Success', 'MFA telah berhasil di perbaharui!');
+
+        return redirect()->route('user-setting');
     }
     
 

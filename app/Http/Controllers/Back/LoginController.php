@@ -31,6 +31,20 @@ class LoginController extends Controller
         return view('back.login.data');
     }
 
+    public function verifikasi_mfa() 
+    {
+        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+            // if(Auth::user()->mfa_objek != "") {
+            //     return redirect()->route('login.verifikasi-mfa');
+            // }
+        } else {
+            return redirect()->route('dashboard.index');
+        }
+
+
+        return view('back.login.verifikasi_mfa');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -81,35 +95,70 @@ class LoginController extends Controller
                         'status' => 'verified',
                     ]);
 
-                } 
-                
-                // else {
+                    return redirect()->route('dashboard.index');
 
-                //     $user_auth_info = UserAuthInfo::where('user_id', Auth::user()->id)->first();
+                } else {
+                        $user_auth_info = UserAuthInfo::where('user_id', Auth::user()->id)->first();
 
-                //     if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
-                //         try {
-                //             $user = User::where('id', Auth::user()->id)->first();
-    
-                //             Mail::to(Auth::user()->email)->queue(new LoginAnomalyMail($user));
-
-                //             Alert::html('Peringatan', 'Kami telah mendeteksi adanya <b>anomali</b> login pada akun Anda! Silahkan cek email untuk konfirmasi akun Anda.', 'info')
-                //             ->autoclose(false);
-
-                //         } catch (Throwable $e) {
-                //             Alert::error('Error', 'Terdapat error pada sistem! anda dapat mencoba untuk login kembali.');
-                //             return redirect()->back();
-                //         }
-                //     } 
-                    
-                // }
+                        if(!UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', RequestInfo::ip())->exists()) {
+                            if(Auth::user()->mfa_objek != "") {
+                        
+                                Alert::html('Peringatan', 'Kami telah mendeteksi adanya <b>anomali</b> login pada akun Anda! Silahkan verifikasi akun melalui <b>multi-factor authentication<b>.', 'info')
+                                ->autoclose(false);
+        
+                                return redirect()->route('login.verifikasi-mfa');
+                            } else {
+                                try {
+                                    $user = User::where('id', Auth::user()->id)->first();
             
-                return redirect()->route('dashboard.index');
+                                    Mail::to(Auth::user()->email)->queue(new LoginAnomalyMail($user));
+    
+                                    Auth::logout();
+                                    
+                                    Alert::html('Peringatan', 'Kami telah mendeteksi adanya <b>anomali</b> login pada akun Anda! Silahkan cek email untuk konfirmasi akun Anda.', 'info')
+                                    ->autoclose(false);
+    
+                                    return redirect()->back();
+    
+                                } catch (Throwable $e) {
+                                    Alert::error('Error', 'Terdapat error pada sistem! anda dapat mencoba untuk login kembali.');
+                                    return redirect()->back();
+                                }
+                            }
+                        }  else {
+                            return redirect()->route('dashboard.index');
+                        }
+                }
+            
             } else {
                 Alert::error('Error', 'Email atau Password salah!');
                 return redirect()->back();
             }
 
+    }
+
+    public function verifikasi_mfa_store(Request $request)
+    {
+        // Get browser information
+        $browser = Agent::browser();
+
+        // Get device information
+        $device = Agent::device();
+
+        // Accessing browser and device information
+        $browserName = $browser ?: 'Unknown Browser';
+        $deviceType = $device ?: 'Unknown Device';
+        $ipAddress = RequestInfo::ip();
+
+        UserAuthInfo::create([
+            'user_id' => Auth::user()->id,
+            'browser' => $browserName,
+            'device' => $deviceType,
+            'ip_address' => $ipAddress,
+            'status' => 'verified',
+        ]);
+
+        return response()->json('success');
     }
 
     /**
