@@ -121,10 +121,24 @@
         let streamReference = null;
         let mfa_objek_auth = "{{ Auth::user()->mfa_objek }}";
 
+        const cachedModel = localStorage.getItem('cachedModel');
+
         async function loadModel() {
             const baseUrl = window.location.origin;
 
-            model = await tf.loadLayersModel(baseUrl + "/tfjs_model/model.json");
+            // If the model is cached, load it from the cache
+            if (cachedModel) {
+                model = await tf.loadLayersModel('indexeddb://' + baseUrl + '/tfjs_model');
+            } else {
+                // If not cached, load it from the server and cache it
+                model = await tf.loadLayersModel(baseUrl + '/tfjs_model/model.json');
+
+                // Save the model to the cache
+                await model.save('indexeddb://' + baseUrl + '/tfjs_model');
+
+                // Mark that the model is cached
+                localStorage.setItem('cachedModel', 'true');
+            }
         }
 
         const constraints = {
@@ -138,7 +152,7 @@
 
             $(this).prop('disabled', true);
             $(this).html(
-                '<span>Memproses Kamera</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>'
+                '<span>Proses Data Berlangsung, Mohon Sabar</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>'
             );
 
             e.preventDefault();

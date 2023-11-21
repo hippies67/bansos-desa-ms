@@ -22,7 +22,6 @@ use App\Http\Controllers\Back\PendudukController;
 use App\Http\Controllers\Back\JenisBantuanController;
 use App\Http\Controllers\Back\BantuanController;
 use App\Http\Controllers\Back\PenerimaBantuanController;
-use App\Http\Controllers\Back\LogActivityController;
 use App\Http\Controllers\Back\KonfirmasiAkunController;
 use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Back\ManajemenUserController;
@@ -78,9 +77,6 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Penerimaan Bantuan
         Route::resource('penerima-bantuan', PenerimaBantuanController::class);
-
-        // Log Activity
-        Route::resource('log-activity', LogActivityController::class);
 
         // Konfirmasi Akun
         Route::resource('konfirmasi-akun', KonfirmasiAkunController::class);

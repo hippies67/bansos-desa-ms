@@ -81,30 +81,40 @@
                                 placeholder="Masukkan Alamat">{{ Auth::user()->alamat }}</textarea>
                         </div>
 
-                        @if(Auth::user()->mfa_objek != "")
+                        @if (Auth::user()->mfa_objek != '')
                             <div class="form-group">
-                                <p>Anda telah menggunakan fitur <b>Multi-Factor Authentication (MFA).</b> Apabila ingin mengubah atau menonaktifkan fitur MFA <a href="{{ route('user-setting.pengaturan-mfa') }}" style="text-decoration: underline; color :blue;">klik disini</a>.</p>
+                                <p>Anda telah menggunakan fitur <b>Multi-Factor Authentication (MFA).</b> Apabila ingin
+                                    mengubah atau menonaktifkan fitur MFA <a
+                                        href="{{ route('user-setting.pengaturan-mfa') }}"
+                                        style="text-decoration: underline; color :blue;">klik disini</a>.</p>
                             </div>
                         @else
                             <div class="form-group">
-                                <label for="jenis_kelamin" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Gunakan <b style="cursor: pointer; text-decoration: underline;" data-container="body" data-toggle="popover" data-placement="top" data-content="Multi-Factor Authentication (MFA) adalah suatu metode keamanan yang menggunakan lebih dari satu cara untuk mengonfirmasi identitas pengguna saat mencoba mengakses sistem atau layanan. Tujuan dari MFA adalah untuk meningkatkan tingkat keamanan dengan menambahkan lapisan keamanan tambahan di luar kata sandi saja." title="" data-original-title="Multi Factor Authentication" aria-describedby="popover638747">Multi Factor Authentication (MFA)</b>  ?</label>
+                                <label for="jenis_kelamin" data-toggle="tooltip" data-placement="top"
+                                    title="Tooltip on top">Gunakan <b style="cursor: pointer; text-decoration: underline;"
+                                        data-container="body" data-toggle="popover" data-placement="top"
+                                        data-content="Multi-Factor Authentication (MFA) adalah suatu metode keamanan yang menggunakan lebih dari satu cara untuk mengonfirmasi identitas pengguna saat mencoba mengakses sistem atau layanan. Tujuan dari MFA adalah untuk meningkatkan tingkat keamanan dengan menambahkan lapisan keamanan tambahan di luar kata sandi saja."
+                                        title="" data-original-title="Multi Factor Authentication"
+                                        aria-describedby="popover638747">Multi Factor Authentication (MFA)</b> ?</label>
                                 <br>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="pemulihanAkun1" name="pemulihan_akun" class="custom-control-input"
-                                        value="Ya">
+                                    <input type="radio" id="pemulihanAkun1" name="pemulihan_akun"
+                                        class="custom-control-input" value="Ya">
                                     <label class="custom-control-label" for="pemulihanAkun1">Ya</label>
                                 </div>
 
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="pemulihanAkun2" name="pemulihan_akun" class="custom-control-input"
-                                        value="Tidak">
+                                    <input type="radio" id="pemulihanAkun2" name="pemulihan_akun"
+                                        class="custom-control-input" value="Tidak">
                                     <label class="custom-control-label" for="pemulihanAkun2">Tidak</label>
                                 </div>
                             </div>
                         @endif
 
                         <div class="form-group" id="takeCameraWrap" style="display: none;">
-                            <label for="">Silakan siapkan objek untuk diabadikan melalui proses otentikasi. Foto yang diambil akan digunakan sebagai bagian dari langkah keamanan ganda untuk melindungi akun Anda.</label>
+                            <label for="">Silakan siapkan objek untuk diabadikan melalui proses otentikasi. Foto
+                                yang diambil akan digunakan sebagai bagian dari langkah keamanan ganda untuk melindungi akun
+                                Anda.</label>
                             <video id="video" class="mt-3" style="display: none;width: 300px;border-radius: 20px;"
                                 autoplay playsinline></video>
                             <canvas id="canvas" class="mt-3" style="display: none; width: 300px;"></canvas>
@@ -158,9 +168,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
     <script>
-        $(function () {
-			$('[data-toggle="popover"]').popover()
-		})
+        $(function() {
+            $('[data-toggle="popover"]').popover()
+        })
     </script>
 
     <script>
@@ -265,10 +275,24 @@
         let img_base64 = '';
         let streamReference = null;
 
+        const cachedModel = localStorage.getItem('cachedModel');
+
         async function loadModel() {
             const baseUrl = window.location.origin;
 
-            model = await tf.loadLayersModel(baseUrl + "/tfjs_model/model.json");
+            // If the model is cached, load it from the cache
+            if (cachedModel) {
+                model = await tf.loadLayersModel('indexeddb://' + baseUrl + '/tfjs_model');
+            } else {
+                // If not cached, load it from the server and cache it
+                model = await tf.loadLayersModel(baseUrl + '/tfjs_model/model.json');
+
+                // Save the model to the cache
+                await model.save('indexeddb://' + baseUrl + '/tfjs_model');
+
+                // Mark that the model is cached
+                localStorage.setItem('cachedModel', 'true');
+            }
         }
 
         const constraints = {
@@ -281,7 +305,9 @@
             $("#click-photo").css('display', 'none');
 
             $(this).prop('disabled', true);
-            $(this).html('<span>Proses Data Berlangsung, Mohon Sabar</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>');
+            $(this).html(
+                '<span>Proses Data Berlangsung, Mohon Sabar</span> <i class="fa fa-spinner fa-spin" style="margin-left: 5px !important;"></i>'
+                );
 
             e.preventDefault();
             if (img_base64) {
@@ -364,7 +390,7 @@
             const classNames = ["Buku", "Gelas", "Handphone"] // Replace with your class labels
 
             $("#prediksi").css('display', 'block');
-            
+
             document.getElementById(
                 "prediksi"
             ).innerText = `Prediksi Objek Pada Foto : ${classNames[classIndex]}`

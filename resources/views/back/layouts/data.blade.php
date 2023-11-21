@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
@@ -159,14 +159,6 @@
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    {{-- <li class="{{ Request::routeIs('web-profile.*') ? 'mm-active active-no-child' : '' }}">
-                        <a href="{{ route('web-profile.index') }}"
-                            class="ai-icon {{ Request::routeIs('web-profile.*') ? 'mm-active' : '' }}"
-                            aria-expanded="false">
-                            <i class="bi bi-gear-wide"></i>
-                            <span class="nav-text">Web Profile</span>
-                        </a>
-                    </li> --}}
                     <li class="{{ Request::routeIs('penduduk.*') ? 'mm-active active-no-child' : '' }}">
                         <a href="{{ route('penduduk.index') }}"
                             class="ai-icon {{ Request::routeIs('penduduk.*') ? 'mm-active' : '' }}"
@@ -199,17 +191,6 @@
                             <span class="nav-text">Penerimaan</span>
                         </a>
                     </li>
-{{--                     
-                    @if(App\Models\UserAuthInfo::where('user_id', Auth::user()->id)->where('ip_address', Illuminate\Support\Facades\Request::ip())->exists())
-                        <li class="{{ Request::routeIs('log-activity.*') ? 'mm-active active-no-child' : '' }}">
-                            <a href="{{ route('log-activity.index') }}"
-                                class="ai-icon {{ Request::routeIs('log-activity.*') ? 'mm-active' : '' }}"
-                                aria-expanded="false">
-                                <i class="bi bi-activity"></i>
-                                <span class="nav-text">Log Activity</span>
-                            </a>
-                        </li>
-                    @endif --}}
                     
                     @if(Auth::user()->role == 'admin')
                         <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -277,15 +258,6 @@
     @yield('js')
 
     @stack('scripts')
-    
-{{-- 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
-
-    <script>
-      const baseUrl = window.location.origin;
-      tf.loadLayersModel(baseUrl + "/tfjs_model/model.json");
-    </script> --}}
 
 </body>
 
